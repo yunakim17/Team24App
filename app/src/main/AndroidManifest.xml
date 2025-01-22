@@ -13,6 +13,27 @@
         android:theme="@style/Theme.Team24App"
         tools:targetApi="31">
         <activity
+            android:name=".Search"
+            android:exported="false" />
+        <activity
+            android:name=".AnotherProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ClickFeed"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
+            android:name=".Timer"
+            android:exported="false" />
+        <activity
+            android:name=".Signup"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
