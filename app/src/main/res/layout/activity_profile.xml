@@ -85,7 +85,7 @@
 
             <!-- 프로필 편집 버튼 -->
             <Button
-                android:id="@+id/btnEditProfile"
+                android:id="@+id/btnEdtProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

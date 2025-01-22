@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editLoginId"
+        android:id="@+id/edtLoginId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editLoginId" />
 
     <EditText
-        android:id="@+id/editLoginPw"
+        android:id="@+id/edtLoginPw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
