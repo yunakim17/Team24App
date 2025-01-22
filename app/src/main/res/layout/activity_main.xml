@@ -7,13 +7,56 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/mainLogoImageView"
+        android:layout_width="205dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="112dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/mainLogoImageView"
+        tools:layout_editor_absoluteX="0dp">
+
+        <Button
+            android:id="@+id/btnKakaoLogin"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="카카오로 로그인"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainLogoImageView" />
+
+        <Button
+            android:id="@+id/btnIdLogin"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="로그인"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnKakaoLogin" />
+
+        <Button
+            android:id="@+id/btnSignup"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="회원가입"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnIdLogin" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
