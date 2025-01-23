@@ -6,8 +6,7 @@
         android:title="Timer" />
     <item
         android:id="@+id/home"
-        android:title="Home"
-        android:tooltipText="home" />
+        android:title="Home" />
     <item
         android:id="@+id/profile"
         android:title="Profile"/>
