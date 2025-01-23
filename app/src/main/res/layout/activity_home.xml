@@ -45,7 +45,7 @@
                         android:layout_marginEnd="7dp"
                         android:hint="Search.." />
 
-                    <!--이미지 버튼으로 변경? 누르면 search 액티비티로 넘어가게 -->
+                    <!--누르면 search 액티비티로 넘어가게 -->
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
@@ -67,7 +67,7 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
