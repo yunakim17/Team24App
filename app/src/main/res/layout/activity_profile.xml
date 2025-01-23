@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".Profile">
 
+    <!-- NestedScrollView를 ConstraintLayout의 자식으로 배치 -->
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:fillViewport="true"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView">
+
+    <!-- 스크롤 가능 컨텐츠 레이아웃(하단 바 제외한 전체화면) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <!-- 상단 프로필 정보 -->
     <LinearLayout
         android:id="@+id/profileHeader"
@@ -42,9 +57,10 @@
                 android:id="@+id/ivProfileImage"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_marginEnd="16dp"
                 android:background="#E0E0E0"
                 android:scaleType="centerCrop"
-                android:layout_marginEnd="16dp" />
+                tools:srcCompat="@tools:sample/avatars" />
 
             <!-- 텍스트 정보 -->
             <LinearLayout
@@ -54,61 +70,59 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
+
                 <!-- 친구 수 -->
                 <TextView
                     android:id="@+id/tvFriendCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="16sp"
-                    android:gravity="center" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tvFriendLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="친구 수"
-                    android:textSize="14sp"
-                    android:gravity="center" />
+                    android:textSize="14sp" />
 
                 <!-- 소개 텍스트 -->
                 <TextView
                     android:id="@+id/tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="소개/ 공부하는 과목(텍스트)"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp" />
+                    android:textSize="14sp" />
 
+                <!-- 프로필 편집 버튼 -->
+                <Button
+                    android:id="@+id/btnEdtProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="프로필 편집" />
 
             </LinearLayout>
-
-            <!-- 프로필 편집 버튼 -->
-            <Button
-                android:id="@+id/btnEdtProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="프로필 편집" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- 내가 올린 피드 -->
 
     <!-- 피드 목록 -->
-
-    <!-- 하단 네비게이션 바 -->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPosts"
-        android:layout_width="411dp"
-        android:layout_height="462dp"
+        android:layout_width="412dp"
+        android:layout_height="450dp"
         android:background="#E0E0E0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileHeader" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
+    <!-- 하단 네비게이션 바 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -117,6 +131,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvPosts"
         app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
