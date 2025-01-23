@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@id/commentView">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/feedImage"
             android:layout_width="412dp"
             android:layout_height="289dp"
             tools:layout_editor_absoluteX="0dp"
@@ -59,7 +59,7 @@
 
 
         <ImageButton
-            android:id="@+id/imageView2"
+            android:id="@+id/btnlike"
             android:layout_width="35dp"
             android:layout_height="39dp"
             tools:srcCompat="@drawable/baseline_thumb_up_alt_24" />
@@ -72,7 +72,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/commentText"
             android:layout_width="match_parent"
             android:layout_height="228dp"
             android:text="게시물 코멘트 텍스트" />
