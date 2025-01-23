@@ -30,8 +30,8 @@ class Timer : AppCompatActivity() {
         tvsec = findViewById<TextView>(R.id.tvSeconds)
         ssbtn = findViewById<Button>(R.id.startStopButton)
 
-        var now = Date()
-        val dateFormat = SimpleDateFormat("yyyy/MM/dd")
+        val now = Date()
+        val dateFormat = SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
 
         tvdate.text = dateFormat.format(now)
 
