@@ -34,8 +34,10 @@ class Timer : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
 
         tvdate.text = dateFormat.format(now)
+        //오늘의 날짜 설정
 
         ssbtn.setOnClickListener {
+            //버튼 클릭 시 타이머 시작/멈춤
             isRunning=!isRunning
 
             if(isRunning){
@@ -55,6 +57,7 @@ class Timer : AppCompatActivity() {
             val hour = (time/60)/60
             val min = (time/60)%60
             val sec = time%60
+            //시분초 설정
 
             runOnUiThread {
                 tvhour.text="$hour"
