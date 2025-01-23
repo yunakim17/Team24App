@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ivPostImg"
-            android:src="@drawable/img"
+            android:src="@drawable/ic_launcher_background"
             android:padding="8dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
