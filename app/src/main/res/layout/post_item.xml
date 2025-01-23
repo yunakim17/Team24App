@@ -22,7 +22,7 @@
                 android:src="@drawable/img" />
 
             <TextView
-                android:id="@+id/tvFeedUserId"
+                android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -61,7 +61,7 @@
             android:text="좋아요 20"/>
 
         <TextView
-            android:id="@+id/tvDescription"
+            android:id="@+id/tvPostDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
