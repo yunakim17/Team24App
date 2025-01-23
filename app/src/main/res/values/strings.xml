@@ -2,4 +2,6 @@
     <string name="app_name">Team24App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">시작</string>
+    <string name="stop">정지</string>
 </resources>
