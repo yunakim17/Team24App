@@ -93,9 +93,6 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- 시작/멈춤 버튼 -->
-
-    <!-- 하단 네비게이션 바 -->
-
     <Button
         android:id="@+id/startStopButton"
         android:layout_width="123dp"
@@ -108,6 +105,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeContainer" />
 
+    <!-- 하단 네비게이션 바 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="412dp"
