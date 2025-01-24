@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="프로필 편집" />
+                android:text="포스트 작성" />
 
 
         </LinearLayout>
