@@ -112,16 +112,6 @@
                 android:layout_marginTop="8dp"
                 android:text="프로필 편집" />
 
-            <!-- 프로필 편집 버튼 -->
-            <Button
-                android:id="@+id/btnPostUpload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="포스트 작성" />
-
-
         </LinearLayout>
 
     </LinearLayout>
