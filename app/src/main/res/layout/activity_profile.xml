@@ -119,7 +119,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileHeader"
-            tools:listitem="@layout/feed_list"/>
+            tools:listitem="@layout/post_item"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 

@@ -36,7 +36,7 @@ class Search : AppCompatActivity() {
 
     private fun reSearch(){
         val search_id = edtSearch.text.toString()
-        val itemlist = ArrayList<Simple_Profile>()
+        val itemlist = ArrayList<User>()
 
         //테이블에서 아이디를 검색해 itemlist에 내용을 넣어야함
 

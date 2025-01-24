@@ -23,7 +23,7 @@ class Home : AppCompatActivity() {
         val search_id = edtSearch.text.toString()
         btnSearch = findViewById<ImageButton>(R.id.ivSearch)
         rvHome = findViewById<RecyclerView>(R.id.rvHomeFeed)
-        val itemlist = ArrayList<Feed>()
+        val itemlist = ArrayList<Post>()
 
         //이곳에 itemList에 친구의 피드 요소들을 더해 item을 늘림
         //feed의 구성이 완료되면 추가 예정

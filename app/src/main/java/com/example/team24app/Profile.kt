@@ -28,7 +28,7 @@ class Profile : AppCompatActivity() {
         description = findViewById<TextView>(R.id.tvDescription)
         btnProfile = findViewById<Button>(R.id.btnEdtProfile)
         rvPost = findViewById<RecyclerView>(R.id.rvPosts)
-        val itemlist = ArrayList<Feed>()
+        val itemlist = ArrayList<Post>()
 
 
         //테이블에서 유저 정보 가져와서 text 변경
