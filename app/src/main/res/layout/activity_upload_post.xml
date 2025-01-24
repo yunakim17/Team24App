@@ -98,42 +98,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text=":"
-            android:textSize="24sp" />
+            android:text="시간"
+            android:textSize="15sp" />
 
         <!-- 분 -->
         <TextView
             android:id="@+id/tvMinutes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:text="00"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text=":"
-            android:textSize="24sp" />
+            android:text="분"
+            android:textSize="15sp" />
 
         <!-- 초 -->
         <TextView
             android:id="@+id/tvSeconds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:text="00"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="초"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <EditText

@@ -53,7 +53,7 @@
             android:id="@+id/tvMinutes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:text="00"
             android:textSize="60sp"
             android:textStyle="bold" />
@@ -70,7 +70,7 @@
             android:id="@+id/tvSeconds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:text="00"
             android:textSize="60sp"
             android:textStyle="bold" />
