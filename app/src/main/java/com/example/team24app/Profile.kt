@@ -35,7 +35,7 @@ class Profile : AppCompatActivity() {
 
         //자신의 피드 목록의 디자인이 필요하다면 따로 제작 필요!!(임시로 feed_list.xml의 디자인을 가져옴)
 
-        val rv_adapter = RecyclerViewAdapter(itemlist)
+        val rv_adapter = FeedAdapter(itemlist)
         rv_adapter.notifyDataSetChanged()
         rvPost.adapter=rv_adapter
         rvPost.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

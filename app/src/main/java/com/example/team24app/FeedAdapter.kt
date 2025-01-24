@@ -6,17 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 //Feed라는 이름의 data class타입의 arrayList 사용
-class RecyclerViewAdapter(val itemList: ArrayList<Feed>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
+class FeedAdapter(val itemList: ArrayList<Feed>) : RecyclerView.Adapter<FeedAdapter.ViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerViewAdapter.ViewHolder {
+    ): FeedAdapter.ViewHolder {
         //뷰 생성
         val view = LayoutInflater.from(parent.context).inflate(R.layout.feed_list, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FeedAdapter.ViewHolder, position: Int) {
         // 뷰에 내용 입력(리사이클 될때마다 입력됨)
     }
 

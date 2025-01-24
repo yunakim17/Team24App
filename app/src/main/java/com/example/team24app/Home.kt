@@ -28,7 +28,7 @@ class Home : AppCompatActivity() {
         //이곳에 itemList에 친구의 피드 요소들을 더해 item을 늘림
         //feed의 구성이 완료되면 추가 예정
 
-        val rv_adapter = RecyclerViewAdapter(itemlist)
+        val rv_adapter = FeedAdapter(itemlist)
         rv_adapter.notifyDataSetChanged()
         //어댑터와 리사이클러뷰 갱신
 
