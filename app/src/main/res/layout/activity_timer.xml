@@ -37,7 +37,7 @@
             android:id="@+id/tvHours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="00"
             android:textSize="60sp"
             android:textStyle="bold" />
 
@@ -45,16 +45,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="시"
-            android:textSize="24sp" />
+            android:text=":"
+            android:textSize="60sp" />
 
         <!-- 분 -->
         <TextView
             android:id="@+id/tvMinutes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="0"
+            android:layout_marginStart="4dp"
+            android:text="00"
             android:textSize="60sp"
             android:textStyle="bold" />
 
@@ -62,26 +62,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="분"
-            android:textSize="24sp" />
+            android:text=":"
+            android:textSize="60sp" />
 
         <!-- 초 -->
         <TextView
             android:id="@+id/tvSeconds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="0"
+            android:layout_marginStart="4dp"
+            android:text="00"
             android:textSize="60sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="초"
-            android:textSize="24sp" />
     </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
@@ -92,10 +86,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/btnTimeShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="28dp"
+        android:text="공유"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <!-- 시작/멈춤 버튼 -->
-
-    <!-- 하단 네비게이션 바 -->
-
     <Button
         android:id="@+id/startStopButton"
         android:layout_width="123dp"
@@ -108,6 +111,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeContainer" />
 
+    <!-- 하단 네비게이션 바 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="412dp"
@@ -120,5 +124,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startStopButton"
         app:menu="@menu/bottom_nav_menu" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

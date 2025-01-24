@@ -58,9 +58,11 @@
             android:layout_marginEnd="8dp"
             android:text="사진 선택" />
 
-        <!-- 게시물 코멘트 작성란 -->
+
     </LinearLayout>
 
+
+    <!-- 게시물 코멘트 작성란 -->
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="125dp"
@@ -71,10 +73,80 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--공부한 시간 나타내는 텍스트뷰 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/edtComment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="116dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="24dp"
+            android:text="오늘 집중한 시간,"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="428dp" />
+
+        <!-- 시 -->
+        <TextView
+            android:id="@+id/tvHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="시간"
+            android:textSize="15sp" />
+
+        <!-- 분 -->
+        <TextView
+            android:id="@+id/tvMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="00"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="분"
+            android:textSize="15sp" />
+
+        <!-- 초 -->
+        <TextView
+            android:id="@+id/tvSeconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="00"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="초"
+            android:textSize="15sp" />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/edtComment"
-        android:layout_width="370dp"
-        android:layout_height="213dp"
+        android:layout_width="369dp"
+        android:layout_height="157dp"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
         android:layout_marginBottom="14dp"
