@@ -20,7 +20,7 @@ class Home : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         edtSearch = findViewById<EditText>(R.id.edtSearchBar)
-        var search_id = edtSearch.text.toString()
+        val search_id = edtSearch.text.toString()
         btnSearch = findViewById<ImageButton>(R.id.ivSearch)
         rvHome = findViewById<RecyclerView>(R.id.rvHomeFeed)
         val itemlist = ArrayList<Feed>()
