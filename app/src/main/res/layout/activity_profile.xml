@@ -95,16 +95,35 @@
                     android:text="소개/ 공부하는 과목(텍스트)"
                     android:textSize="14sp" />
 
-                <!-- 프로필 편집 버튼 -->
-                <Button
-                    android:id="@+id/btnEdtProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="프로필 편집" />
-
             </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- 프로필 편집 버튼 -->
+            <Button
+                android:id="@+id/btnEdtProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="프로필 편집" />
+
+            <!-- 프로필 편집 버튼 -->
+            <Button
+                android:id="@+id/btnPostUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="프로필 편집" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- 내가 올린 피드 -->

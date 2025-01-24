@@ -94,16 +94,17 @@
                     android:text="소개/ 공부하는 과목(텍스트)"
                     android:textSize="14sp"
                     android:layout_marginTop="8dp" />
-
-                <!-- 친구 추가 버튼 -->
-                <Button
-                    android:id="@+id/btnAddFriend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="친구 추가" />
             </LinearLayout>
         </LinearLayout>
+
+        <!-- 친구 추가 버튼 -->
+        <Button
+            android:id="@+id/btnAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="친구 추가" />
     </LinearLayout>
 
     <!-- 피드 목록 -->
