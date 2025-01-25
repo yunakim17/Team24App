@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/postUploadTitle" />
 
     <ImageButton
-        android:id="@+id/btnTimeShare"
+        android:id="@+id/btnPhoto"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
