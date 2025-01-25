@@ -38,9 +38,10 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="60dp"
         android:ems="10"
+        android:background="@drawable/custom_edtbox"
         android:inputType="text"
         android:text="Password"
-        android:textColor="#A09CAB"
+        android:textColor="@color/gray_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,10 +67,11 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="60dp"
+        android:background="@drawable/custom_edtbox"
         android:ems="10"
         android:inputType="text"
         android:text="Id"
-        android:textColor="#A09CAB"
+        android:textColor="@color/gray_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,11 +99,12 @@
         android:layout_marginEnd="60dp"
         android:background="@drawable/custom_button"
         android:text="로그인"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtLoginPw"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/edtLoginPw" />
 
 
 
