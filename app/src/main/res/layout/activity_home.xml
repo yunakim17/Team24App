@@ -25,12 +25,22 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+
+
+            >
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="111dp"
+                android:background="@drawable/home_top_bg">
+
+                <ImageView
+                    android:layout_width="171dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/home_logo" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -40,17 +50,23 @@
                     <!-- 사용자 아이디 서치바 -->
                     <EditText
                         android:id="@+id/edtSearchBar"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="334dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/searchbar_bg"
                         android:layout_marginEnd="7dp"
-                        android:hint="Search.." />
+                        android:paddingLeft="10dp"
+                        android:hint="Search.."
+                        android:textColorHint="@color/gray_text_color"
+                        android:textColor="@color/black"/>
 
                     <!--누르면 search 액티비티로 넘어가게 -->
                     <ImageButton
                         android:id="@+id/ivSearch"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/img"></ImageButton>
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/search_btn">
+
+                    </ImageButton>
 
 
                 </androidx.appcompat.widget.Toolbar>
