@@ -14,33 +14,31 @@
         android:id="@+id/bar">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <!--추후 뒤로가기 버튼 추가-->
-                
-                
-                
-                
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:layout_marginStart="16dp"
                     android:maxLines="1"
                     android:text="프로필 편집"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
-
         </androidx.appcompat.widget.Toolbar>
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
@@ -55,7 +53,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/img">
         </ImageView>
@@ -70,10 +68,34 @@
             android:layout_gravity="center"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="30dp">
+
+            <!--프로필 수정 완료 버튼-->
+            <Button
+                android:id="@+id/btnEdtProfilePic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="프로필 사진 변경" />
+
+            <!-- 아이디 변경 버튼 -->
+            <Button
+                android:id="@+id/btnPostUpload"
+                android:layout_width="146dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="아이디 변경" />
+
+        </LinearLayout>
         <!--바이오 수정-->
 
         <EditText
             android:paddingTop="50dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/edtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,11 +105,12 @@
         <!--프로필 수정 완료 버튼-->
         <Button
             android:id="@+id/btnSaveProfile"
-            android:layout_marginTop="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
+            android:layout_marginTop="90dp"
+            android:layout_gravity="center"
             android:text="프로필 저장" />
+
 
     </LinearLayout>
 </LinearLayout>
