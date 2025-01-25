@@ -43,16 +43,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- 상대 아이디 -->
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="상대 아이디"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_gravity="center" />
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerInside"
+                android:padding="5dp"
+                android:background="@null"
+                android:src="@drawable/arrow_back_ios_new"
+                />
+        <!-- 상대 아이디 -->
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="316dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="상대 아이디"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <!-- 프로필 정보 -->
         <LinearLayout
@@ -93,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="친구"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                      />
 
                     <TextView
@@ -113,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="소개/ 공부하는 과목(텍스트)"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     android:layout_marginTop="8dp" />
             </LinearLayout>
         </LinearLayout>

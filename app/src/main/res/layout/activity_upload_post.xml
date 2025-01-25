@@ -7,11 +7,21 @@
     android:layout_height="match_parent">
 
     <!-- 상단 제목 -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/post_upload_bg" />
+
     <TextView
         android:id="@+id/postUploadTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
         android:gravity="center"
         android:padding="16dp"
         android:text="새 게시물"
@@ -23,65 +33,65 @@
 
     <!-- 선택한 사진 영역 -->
 
-    <!-- 버튼과 댓글 작성란 -->
+
+    <!-- 사진 선택 창으로 넘어가는 버튼 -->
+
 
     <ImageView
         android:id="@+id/SelectedPhoto"
-        android:layout_width="411dp"
-        android:layout_height="275dp"
-        android:background="#D0D0D0"
+        android:layout_width="380dp"
+        android:layout_height="380dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_feed_pic"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postUploadTitle" />
 
-    <!-- 업로드 버튼 -->
-
-    <LinearLayout
-        android:id="@+id/btnPhotoView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:orientation="horizontal"
+    <ImageButton
+        android:id="@+id/btnTimeShare"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/custom_image_btn"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/image"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SelectedPhoto">
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- 사진 선택 창으로 넘어가는 버튼 -->
-        <Button
-            android:id="@+id/btnPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="8dp"
-            android:text="사진 선택" />
-
-
-    </LinearLayout>
-
-
-    <!-- 게시물 코멘트 작성란 -->
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="125dp"
         android:layout_height="47dp"
         android:layout_marginBottom="37dp"
+        android:background="@drawable/custom_button"
         android:text="업로드"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <!--공부한 시간 나타내는 텍스트뷰 -->
 
+    <!-- 게시물 코멘트 작성란 -->
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/edtComment"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -145,11 +155,11 @@
 
     <EditText
         android:id="@+id/edtComment"
-        android:layout_width="369dp"
-        android:layout_height="157dp"
+        android:layout_width="371dp"
+        android:layout_height="102dp"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="28dp"
         android:layout_weight="1"
         android:background="#FFFFFF"
         android:hint="게시물 코멘트 작성란"
@@ -157,5 +167,6 @@
         app:layout_constraintBottom_toTopOf="@+id/btnUpload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
