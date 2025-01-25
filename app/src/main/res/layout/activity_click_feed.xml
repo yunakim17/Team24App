@@ -15,6 +15,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+            <!--상단바 배경이미지 추가해야함-->
+
+
+
+
+
+
+
     <!-- 상단 게시물 텍스트뷰-->
     <TextView
         android:layout_width="match_parent"
@@ -27,10 +39,13 @@
         android:gravity="center"
         android:layout_gravity="center" />
 
+        </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
             <!--프로필 사진-->
@@ -39,6 +54,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
+
                 android:src="@drawable/img" />
 
             <!--사용자 id-->
@@ -56,80 +72,80 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
+                android:layout_marginStart="140dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="155dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="20dp">
 
                 <!--날짜 텍스트뷰-->
                 <TextView
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="2025/00/00"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textColor="@color/gray_text_color"
+                    android:textSize="15sp" />
 
                 <!--시간 텍스트뷰-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <!-- 시 -->
-                <TextView
-                    android:id="@+id/tvHours"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="00"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="시간"
-                    android:textSize="13sp" />
+                    <!-- 시 -->
+                    <TextView
+                        android:id="@+id/tvHours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                <!-- 분 -->
-                <TextView
-                    android:id="@+id/tvMinutes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="00"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="시간"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="분"
-                    android:textSize="13sp" />
+                    <!-- 분 -->
+                    <TextView
+                        android:id="@+id/tvMinutes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="00"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                <!-- 초 -->
-                <TextView
-                    android:id="@+id/tvSeconds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="00"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="분"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="초"
-                    android:textSize="13sp" />
+                    <!-- 초 -->
+                    <TextView
+                        android:id="@+id/tvSeconds"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="00"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="초"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -138,11 +154,11 @@
         <!--게시물 사진-->
         <ImageView
             android:id="@+id/ivPostImg"
-            android:layout_width="411dp"
-            android:layout_height="411dp"
-            android:background="@color/black"
+            android:layout_width="380dp"
+            android:layout_height="380dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_feed_pic"
             />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,18 +168,20 @@
             <!--좋아요 버튼-->
             <ImageButton
                 android:id="@+id/btnLike"
-                android:layout_width="35dp"
-                android:layout_height="39dp"
-                tools:srcCompat="@drawable/baseline_thumb_up_alt_24" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/like_btn"
+
+                />
 
             <!--좋아요 개수-->
             <TextView
                 android:id="@+id/tvLikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_gravity="center_vertical"
                 android:text="좋아요 20"
+                android:textSize="14dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -172,19 +190,22 @@
             android:id="@+id/tvPostDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:textSize="15dp"
             android:text="게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 "
             android:textColor="@color/black"
             android:textStyle="bold" />
 
     </LinearLayout>
 
+
     <!-- 하단 네비게이션 바 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        android:layout_width="412dp"
-        android:layout_height="87dp"
-        android:background="?android:attr/windowBackground"
+        android:layout_width="411dp"
+        android:layout_height="66dp"
+        android:background="@drawable/bottom_nav_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

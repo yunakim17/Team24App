@@ -33,19 +33,22 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/bar"
                 android:layout_width="match_parent"
-                android:layout_height="111dp"
-                android:background="@drawable/home_top_bg">
+                android:layout_height="120dp"
+                android:background="@drawable/home_top"
+               >
 
                 <ImageView
                     android:layout_width="171dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/home_logo" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
 
                     <!-- 사용자 아이디 서치바 -->
                     <EditText
@@ -54,7 +57,7 @@
                         android:layout_height="45dp"
                         android:background="@drawable/searchbar_bg"
                         android:layout_marginEnd="7dp"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="11dp"
                         android:hint="Search.."
                         android:textColorHint="@color/gray_text_color"
                         android:textColor="@color/black"/>
@@ -99,8 +102,8 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="411dp"
-        android:layout_height="86dp"
-        android:background="?android:attr/windowBackground"
+        android:layout_height="66dp"
+        android:background="@drawable/bottom_nav_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
