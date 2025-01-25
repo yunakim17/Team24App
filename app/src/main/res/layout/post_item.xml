@@ -12,6 +12,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
             <!--프로필 사진-->
@@ -20,6 +22,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
+
                 android:src="@drawable/img" />
 
             <!--사용자 id-->
@@ -37,7 +40,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="155dp"
+                android:layout_marginStart="140dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -50,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="2025/00/00"
+                    android:textColor="@color/gray_text_color"
                     android:textSize="15sp" />
 
                 <!--시간 텍스트뷰-->
@@ -132,18 +136,20 @@
             <!--좋아요 버튼-->
             <ImageButton
                 android:id="@+id/btnLike"
-                android:layout_width="35dp"
-                android:layout_height="39dp"
-                tools:srcCompat="@drawable/baseline_thumb_up_alt_24" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/like_btn"
+
+                 />
 
             <!--좋아요 개수-->
             <TextView
                 android:id="@+id/tvLikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_gravity="center_vertical"
                 android:text="좋아요 20"
+                android:textSize="14dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -152,7 +158,9 @@
             android:id="@+id/tvPostDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:textSize="15dp"
             android:text="게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 "
             android:textColor="@color/black"
             android:textStyle="bold" />
