@@ -5,123 +5,143 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/signup"
     android:orientation="vertical"
     android:paddingLeft="30dp"
     android:paddingTop="100dp"
     android:paddingRight="30dp"
     tools:context=".Signup">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="아이디"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="58dp" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/edtSignupId"
-            android:layout_width="190dp"
-            android:layout_height="50dp"
-            android:hint="id"
-            android:inputType="text"
-            tools:layout_editor_absoluteX="36dp"
-            tools:layout_editor_absoluteY="151dp" />
 
-        <Button
-            android:id="@+id/btnIdCheck"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="중복확인" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="30dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="이메일"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="58dp" />
-
-        <EditText
-            android:id="@+id/edtSignupEmail"
-            android:layout_width="327dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:hint="email"
-            android:inputType="text" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="30dp">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="비밀번호"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="58dp" />
-
-        <EditText
-            android:id="@+id/edtSignupPwd"
-            android:layout_width="327dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:hint="password"
-            android:inputType="text|textPassword" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="30dp">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="비밀번호 확인"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="58dp" />
-
-        <EditText
-            android:id="@+id/edtPwdCheck"
-            android:layout_width="327dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:hint="password"
-            android:inputType="text|textPassword" />
-
-        <Button
-            android:id="@+id/btnRegister"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:text="회원가입" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이디"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtSignupId"
+                    android:layout_width="190dp"
+                    android:layout_height="50dp"
+                    android:hint="id"
+                    android:inputType="text"
+                    tools:layout_editor_absoluteX="36dp"
+                    tools:layout_editor_absoluteY="151dp" />
+
+                <Button
+                    android:id="@+id/btnIdCheck"
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="중복확인" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="30dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="이메일"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <EditText
+                android:id="@+id/edtSignupEmail"
+                android:layout_width="327dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="email"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="30dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="비밀번호"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <EditText
+                android:id="@+id/edtSignupPwd"
+                android:layout_width="327dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="password"
+                android:inputType="text|textPassword" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="비밀번호 확인"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="58dp" />
+
+            <EditText
+                android:id="@+id/edtPwdCheck"
+                android:layout_width="327dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="password"
+                android:inputType="text|textPassword" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:text="회원가입" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </LinearLayout>
