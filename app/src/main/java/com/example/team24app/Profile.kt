@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class Profile : AppCompatActivity() {
-    lateinit var name : TextView
-    lateinit var profile : ImageView
+    lateinit var tvName : TextView
+    lateinit var ivProfile : ImageView
     lateinit var friend : TextView
-    lateinit var description : TextView
+    lateinit var tvDescrip : TextView
     lateinit var btnProfile : Button
     lateinit var rvPost : RecyclerView
     //db 불러오기 필수
@@ -22,10 +22,10 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        name = findViewById<TextView>(R.id.tvUserName)
-        profile = findViewById<ImageView>(R.id.ivProfileImage)
+        tvName = findViewById<TextView>(R.id.tvUserName)
+        ivProfile = findViewById<ImageView>(R.id.ivProfileImage)
         friend = findViewById<TextView>(R.id.tvFriendCount)
-        description = findViewById<TextView>(R.id.tvDescription)
+        tvDescrip = findViewById<TextView>(R.id.tvDescription)
         btnProfile = findViewById<Button>(R.id.btnEdtProfile)
         rvPost = findViewById<RecyclerView>(R.id.rvPosts)
         val itemlist = ArrayList<Post>()
