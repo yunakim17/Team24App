@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
@@ -29,7 +30,7 @@ class UploadPost : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_post)
         ivPhoto = findViewById<ImageView>(R.id.SelectedPhoto)
-        btnPhoto = findViewById<Button>(R.id.btnPhoto)
+        val btnPhoto = findViewById<ImageButton>(R.id.btnPhoto)
         tvHour = findViewById<TextView>(R.id.tvHours)
         tvMin = findViewById<TextView>(R.id.tvMinutes)
         tvSec = findViewById<TextView>(R.id.tvSeconds)
