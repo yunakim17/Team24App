@@ -10,8 +10,9 @@ class DBManager(context: Context,
                 version: Int
 ) : SQLiteOpenHelper(context, name, factory, version) {
     override fun onCreate(db: SQLiteDatabase?) {
-        db!!.execSQL("CREATE TABLE user (user_id VARCHAR(10) PRIMARY KEY, email VARCHAR(40), password VARCHAR(20), profile VARCHAR(10), friend_num INTEGER, intro TEXT)")
-        db!!.execSQL("CREATE TABLE feed (feed_id VARCHAR(10) PRIMARY KEY, user_id VARCHAR(10), picture VARCHAR(10), heart INTEGER, comment text, time INTEGER, foreign key(user_id) references user (user_id))")
+        db!!.execSQL("CREATE TABLE user (user_id VARCHAR(10) NOT NULL PRIMARY KEY, email VARCHAR(40) NOT NULL, password VARCHAR(20) NOT NULL, profile INTEGER, num_friend INTEGER, intro TEXT)")
+        db!!.execSQL("CREATE TABLE feed (feed_id INTEGER NOT NULL PRIMARY KEY, user_id VARCHAR(10) NOT NULL, picture INTEGER NOT NULL, num_like INTEGER NOT NULL, comment TEXT, time INTEGER NOT NULL, foreign key(user_id) references user (user_id))")
+        db!!.execSQL("CREATE TABLE friend (friend_id INTEGER NOT NULL, from_id VARCHAR(10) NOT NULL, to_id VARCHAR(10) NOT NULL)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
