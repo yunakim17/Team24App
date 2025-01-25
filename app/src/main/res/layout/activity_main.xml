@@ -10,18 +10,18 @@
 
 
     <!--        <Button-->
-        <!--            android:id="@+id/btnKakaoLogin"-->
-        <!--            android:layout_width="343dp"-->
-        <!--            android:layout_height="50dp"-->
-        <!--            android:background="@drawable/custom_button"-->
-        <!--            android:layout_marginTop="100dp"-->
-        <!--            android:text="카카오로 로그인"-->
-        <!--            android:textSize="16sp"-->
-        <!--            android:textColor="@color/white"-->
-        <!--            android:textStyle="bold"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/mainLogoImageView" />-->
+    <!--            android:id="@+id/btnKakaoLogin"-->
+    <!--            android:layout_width="343dp"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:background="@drawable/custom_button"-->
+    <!--            android:layout_marginTop="100dp"-->
+    <!--            android:text="카카오로 로그인"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/mainLogoImageView" />-->
 
 
     <TextView
@@ -40,55 +40,51 @@
         android:id="@+id/imageView"
         android:layout_width="273dp"
         android:layout_height="273dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/Logo"/>
-
-    <Button
-        android:id="@+id/btnIdLogin"
-        android:layout_width="343dp"
-        android:layout_height="50dp"
-        android:background="@drawable/custom_button"
-        android:text="로그인"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnSignup"
         android:layout_width="343dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/custom_button"
         android:backgroundTint="@color/view_holder_color"
         android:text="회원가입"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIdLogin"
-        app:layout_constraintVertical_bias="0.925" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIdLogin" />
+
+    <Button
+        android:id="@+id/btnIdLogin"
+        android:layout_width="343dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/custom_button"
+        android:text="로그인"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="아직 계정이 없으신가요?"
         android:textColor="@color/black"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74"></TextView>
+        app:layout_constraintStart_toStartOf="parent"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
