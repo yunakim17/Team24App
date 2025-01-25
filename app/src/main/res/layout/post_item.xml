@@ -40,7 +40,8 @@
                 android:layout_marginStart="155dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginEnd="20dp">
 
                 <!--날짜 텍스트뷰-->
                 <TextView

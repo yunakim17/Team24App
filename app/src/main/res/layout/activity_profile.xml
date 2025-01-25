@@ -82,20 +82,32 @@
                     android:orientation="vertical">
 
 
-                    <!-- 친구 수 -->
-                    <TextView
-                        android:id="@+id/tvFriendCount"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="16sp" />
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="center">
 
-                    <TextView
-                        android:id="@+id/tvFriendLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="친구 수"
-                        android:textSize="14sp" />
+                        <!-- 친구 수 -->
+                        <TextView
+                            android:id="@+id/tvFriendLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="친구"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvFriendCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="0"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
 
                     <!-- 소개 텍스트 -->
                     <TextView
@@ -146,8 +158,8 @@
     <!-- 피드 목록 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPosts"
-            android:layout_width="370dp"
-            android:layout_height="450dp"
+            android:layout_width="371dp"
+            android:layout_height="435dp"
             android:layout_gravity="center"
             android:background="#E0E0E0"
             app:layout_constraintEnd_toEndOf="parent"
@@ -164,7 +176,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="411dp"
-        android:layout_height="86dp"
+        android:layout_height="66dp"
         android:background="@drawable/bottom_nav_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
