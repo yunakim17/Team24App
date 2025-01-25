@@ -1,13 +1,12 @@
 package com.example.team24app
 
-import android.widget.ImageView
-import android.widget.TextView
+import java.io.Serializable
 
 //data class 상속은 추천되지 않아 따로 작성
 data class Post(
-    val userProfile : ImageView,
-    val userId : TextView,
-    val imgPost : ImageView,
-    val numLike : TextView,
-    val comment : TextView
-)
+    val profile : Int,
+    val id : String,
+    val img : Int,
+    val like : String,
+    val comment : String
+) : Serializable

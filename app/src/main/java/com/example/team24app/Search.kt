@@ -40,7 +40,7 @@ class Search : AppCompatActivity() {
 
         //테이블에서 아이디를 검색해 itemlist에 내용을 넣어야함
 
-        val rv_adapter = ProfileAdpater(itemlist)
+        val rv_adapter = ProfileAdpater(itemlist, this)
         rv_adapter.notifyDataSetChanged()
         rvProfile.adapter = rv_adapter
         rvProfile.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

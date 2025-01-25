@@ -1,10 +1,9 @@
 package com.example.team24app
 
-import android.widget.ImageView
-import android.widget.TextView
+import java.io.Serializable
 
 //profile_list의 구성을 넣아함
 data class User(
-    val userProfile : ImageView,
-    val userId : TextView,
-)
+    val profile : Int,
+    val id : String,
+) : Serializable
