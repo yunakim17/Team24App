@@ -18,10 +18,9 @@
         <activity
             android:name=".UploadPost"
             android:exported="false" />
-
         <activity
             android:name=".Search"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".AnotherProfile"
             android:exported="false" />
