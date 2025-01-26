@@ -5,13 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/profile_bg"
     tools:context=".Profile">
 
-            <!-- 스크롤 가능 컨텐츠 레이아웃(하단 바 제외한 전체화면) -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -19,168 +17,189 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <!-- 상단 프로필 정보 -->
-
-
-                <LinearLayout
-                    android:id="@+id/bar"
-                    android:layout_width="411dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginEnd="16dp"
-                        android:orientation="horizontal">
-
-                        <!--뒤로가기 버튼-->
-                        <ImageButton
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:background="@null"
-                            android:padding="5dp"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/arrow_back_ios_new" />
-
-                        <!-- 사용자 아이디 -->
-                        <TextView
-                            android:id="@+id/tvUserName"
-                            android:layout_width="319dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-
-                            android:text="아이디"
-                            android:textAlignment="center"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="223dp">
+                    android:layout_height="wrap_content">
 
-                    <!-- 프로필 헤더 레이아웃 -->
-                    <LinearLayout
-                        android:id="@+id/profileHeader"
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="410dp"
+                        android:layout_height="283dp"
+                        android:background="@drawable/profile_head"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- 상단 프로필 정보 -->
+                    <com.google.android.material.appbar.AppBarLayout
+                        android:id="@+id/bar"
                         android:layout_width="match_parent"
-                        android:layout_height="221dp"
-                        android:orientation="vertical"
-                        android:padding="16dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/top_nav_bar"
+                        android:elevation="0dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-
-                        <!-- 프로필 정보 (사진, 친구 수, 소개) -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="13dp"
+                            android:layout_marginEnd="16dp"
                             android:orientation="horizontal">
 
-                            <!-- 프로필 이미지 -->
-                            <ImageView
-                                android:id="@+id/ivProfileImage"
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:layout_marginEnd="16dp"
-                                android:background="#E0E0E0"
-                                android:scaleType="centerCrop"
-                                tools:srcCompat="@tools:sample/avatars" />
+                            <!--뒤로가기 버튼-->
+                            <ImageButton
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@null"
+                                android:padding="5dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/arrow_back_ios_new" />
 
-                            <!-- 텍스트 정보 -->
-                            <LinearLayout
-                                android:layout_width="0dp"
+                            <!-- 사용자 아이디 -->
+                            <TextView
+                                android:id="@+id/tvUserName"
+                                android:layout_width="319dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:layout_gravity="center"
+
+                                android:text="아이디"
+                                android:textAlignment="center"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+                    </com.google.android.material.appbar.AppBarLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="411dp"
+                        android:layout_height="246dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!-- 프로필 헤더 레이아웃 -->
+                        <LinearLayout
+                            android:id="@+id/profileHeader"
+                            android:layout_width="412dp"
+                            android:layout_height="204dp"
+                            android:layout_marginTop="60dp"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
 
+                            <!-- 프로필 정보 (사진, 친구 수, 소개) -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <!-- 프로필 이미지 -->
+                                <ImageView
+                                    android:id="@+id/ivProfileImage"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:background="#E0E0E0"
+                                    android:scaleType="centerCrop"
+                                    tools:srcCompat="@tools:sample/avatars" />
+
+                                <!-- 텍스트 정보 -->
                                 <LinearLayout
-                                    android:layout_width="100dp"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:orientation="horizontal">
+                                    android:orientation="vertical">
 
-                                    <!-- 친구 수 -->
+
+                                    <LinearLayout
+                                        android:layout_width="100dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="horizontal">
+
+                                        <!-- 친구 수 -->
+                                        <TextView
+                                            android:id="@+id/tvFriendLabel"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="친구"
+                                            android:textSize="15sp" />
+
+                                        <TextView
+                                            android:id="@+id/tvFriendCount"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="10dp"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textSize="20sp"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                    <!-- 소개 텍스트 -->
                                     <TextView
-                                        android:id="@+id/tvFriendLabel"
+                                        android:id="@+id/tvDescription"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="친구"
+                                        android:layout_marginTop="8dp"
+                                        android:text="소개/ 공부하는 과목(텍스트)"
                                         android:textSize="15sp" />
 
-                                    <TextView
-                                        android:id="@+id/tvFriendCount"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:gravity="center"
-                                        android:text="0"
-                                        android:textSize="20sp"
-                                        android:textStyle="bold" />
                                 </LinearLayout>
+                            </LinearLayout>
 
-                                <!-- 소개 텍스트 -->
-                                <TextView
-                                    android:id="@+id/tvDescription"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:text="소개/ 공부하는 과목(텍스트)"
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <!-- 프로필 편집 버튼 -->
+                                <Button
+                                    android:id="@+id/btnEdtProfile"
+                                    android:layout_width="122dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/custom_button"
+                                    android:text="프로필 편집"
+                                    android:textColor="@color/white"
+                                    android:textSize="15sp" />
+
+                                <!-- 게시물 작성 버튼 -->
+                                <Button
+                                    android:id="@+id/btnPostUpload"
+                                    android:layout_width="122dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginStart="16dp"
+                                    android:background="@drawable/custom_button"
+                                    android:text="게시물 작성"
+                                    android:textColor="@color/white"
                                     android:textSize="15sp" />
 
                             </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <!-- 프로필 편집 버튼 -->
-                            <Button
-                                android:id="@+id/btnEdtProfile"
-                                android:layout_width="122dp"
-                                android:layout_height="40dp"
-                                android:background="@drawable/custom_button"
-                                android:text="프로필 편집"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
-
-                            <!-- 게시물 작성 버튼 -->
-                            <Button
-                                android:id="@+id/btnPostUpload"
-                                android:layout_width="122dp"
-                                android:layout_height="40dp"
-                                android:layout_marginStart="16dp"
-                                android:background="@drawable/custom_button"
-                                android:text="게시물 작성"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
 
                         </LinearLayout>
 
-                    </LinearLayout>
-
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- 내가 올린 피드 -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPosts"
-                    android:layout_width="399dp"
-                    android:layout_height="447dp"
+                    android:layout_width="388dp"
+                    android:layout_height="448dp"
                     android:layout_gravity="center"
                     android:background="@null"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -195,8 +214,8 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="411dp"
-        android:layout_height="66dp"
-        android:background="@drawable/bottom_nav_view"
+        android:layout_height="74dp"
+        android:background="@drawable/bottom_nav_view_shadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
