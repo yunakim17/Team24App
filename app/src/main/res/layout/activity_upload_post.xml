@@ -19,15 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- 선택한 사진 영역 -->
-
-        <!-- 사진 선택 창으로 넘어가는 버튼 -->
-
-
-        <!--공부한 시간 나타내는 텍스트뷰 -->
-
-        <!-- 게시물 코멘트 작성란 -->
-
         <LinearLayout
             android:id="@+id/bar"
             android:layout_width="match_parent"
@@ -48,6 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <!-- 뒤로가기 버튼 -->
                 <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -74,6 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="405dp">
 
+
+            <!-- 선택한 사진 영역 -->
             <ImageView
                 android:id="@+id/SelectedPhoto"
                 android:layout_width="380dp"
@@ -105,6 +99,9 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!--공부한 시간 나타내는 텍스트뷰 -->
+
+        <!-- 게시물 코멘트 작성란 -->
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
