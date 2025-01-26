@@ -10,19 +10,13 @@
     tools:context=".UploadPost">
 
     <!-- 상단 제목 -->
-
-
-    <!-- 선택한 사진 영역 -->
-
-    <!-- 사진 선택 창으로 넘어가는 버튼 -->
-
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +29,7 @@
             android:padding="5dp"
             android:scaleType="centerInside"
             android:src="@drawable/arrow_back_ios_new" />
+
         <!-- 상대 아이디 -->
         <TextView
             android:id="@+id/postUploadTitle"
@@ -48,6 +43,7 @@
 
     </LinearLayout>
 
+    <!-- 선택한 사진 영역 -->
     <ImageView
         android:id="@+id/SelectedPhoto"
         android:layout_width="380dp"
@@ -61,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-    <!--업로드 버튼-->
+    <!-- 사진 선택 창으로 넘어가는 버튼 -->
     <ImageButton
         android:id="@+id/btnPhoto"
         android:layout_width="50dp"
@@ -78,6 +74,7 @@
         app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--업로드 버튼-->
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="125dp"
