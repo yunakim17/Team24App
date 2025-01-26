@@ -28,7 +28,7 @@
         <LinearLayout
             android:id="@+id/profileHeader"
             android:layout_width="match_parent"
-            android:layout_height="295dp"
+            android:layout_height="281dp"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,13 +43,12 @@
                 <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:scaleType="centerInside"
-                    android:padding="5dp"
                     android:background="@null"
-                    android:src="@drawable/arrow_back_ios_new"
-                    />
+                    android:padding="5dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_back_ios_new" />
 
-            <!-- 사용자 아이디 -->
+                <!-- 사용자 아이디 -->
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="319dp"
@@ -94,8 +93,8 @@
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <!-- 친구 수 -->
                         <TextView
@@ -103,18 +102,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="친구"
-                            android:textSize="15sp"
-                            />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/tvFriendCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
+                            android:gravity="center"
                             android:text="0"
                             android:textSize="20sp"
-                            android:gravity="center"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <!-- 소개 텍스트 -->
@@ -166,12 +164,11 @@
     <!-- 피드 목록 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPosts"
-            android:layout_width="371dp"
-            android:layout_height="435dp"
+            android:layout_width="399dp"
+            android:layout_height="443dp"
             android:layout_gravity="center"
-            android:background="#E0E0E0"
+            android:background="@null"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileHeader"
             tools:listitem="@layout/feed_square_item" />
