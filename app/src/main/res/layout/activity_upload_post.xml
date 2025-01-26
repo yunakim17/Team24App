@@ -12,37 +12,54 @@
     <!-- 상단 제목 -->
 
 
-    <TextView
-        android:id="@+id/postUploadTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="새 게시물"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <!-- 선택한 사진 영역 -->
-
 
     <!-- 사진 선택 창으로 넘어가는 버튼 -->
 
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:padding="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_back_ios_new" />
+        <!-- 상대 아이디 -->
+        <TextView
+            android:id="@+id/postUploadTitle"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="새 게시물"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/SelectedPhoto"
         android:layout_width="380dp"
         android:layout_height="380dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/custom_feed_pic"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postUploadTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <ImageButton
         android:id="@+id/btnPhoto"
@@ -60,6 +77,7 @@
         app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--업로드 버튼-->
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="125dp"
@@ -156,8 +174,10 @@
         android:layout_marginBottom="28dp"
         android:layout_weight="1"
         android:background="#FFFFFF"
-        android:hint="게시물 코멘트 작성란"
+        android:hint="공부한 내용에 대한 생각을 적어보세요."
         android:padding="8dp"
+        android:textColor="@color/gray_text_color"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnUpload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
