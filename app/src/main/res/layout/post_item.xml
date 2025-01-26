@@ -129,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
             android:padding="8dp">
 
             <!--좋아요 버튼-->
@@ -153,9 +153,9 @@
 
         <TextView
             android:id="@+id/tvPostDescription"
-            android:layout_width="356dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
             android:text="게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 "
             android:textColor="@color/black"
             android:textStyle="bold" />

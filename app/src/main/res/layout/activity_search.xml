@@ -21,7 +21,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -29,32 +29,41 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_top_bg">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
 
                     <!-- 사용자 아이디 서치바 -->
                     <EditText
                         android:id="@+id/edtSearchBar"
-                        android:layout_width="350dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="334dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/searchbar_bg"
                         android:layout_marginEnd="7dp"
-                        android:hint="Search.." />
+                        android:paddingLeft="11dp"
+                        android:hint="Search.."
+                        android:textColorHint="@color/gray_text_color"
+                        android:textColor="@color/black"
+                        />
 
                     <!--누르면 search 액티비티로 넘어가게 -->
                     <ImageButton
                         android:id="@+id/ivSearch"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/img"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/search_btn"
                         tools:ignore="SpeakableTextPresentCheck"
                         />
 
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.AppBarLayout>
+
+
 
         </LinearLayout>
 
@@ -83,8 +92,8 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="411dp"
-        android:layout_height="86dp"
-        android:background="?android:attr/windowBackground"
+        android:layout_height="66dp"
+        android:background="@drawable/bottom_nav_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
