@@ -25,6 +25,10 @@
         android:orientation="vertical">
 
     <!-- 상단 프로필 정보 -->
+
+        <!-- 내가 올린 피드 -->
+
+    <!-- 피드 목록 -->
         <LinearLayout
             android:id="@+id/profileHeader"
             android:layout_width="match_parent"
@@ -159,9 +163,6 @@
 
         </LinearLayout>
 
-    <!-- 내가 올린 피드 -->
-
-    <!-- 피드 목록 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPosts"
             android:layout_width="399dp"
