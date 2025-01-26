@@ -55,8 +55,8 @@
         <!--누르면 프로필 사진 수정가능 -->
         <ImageView
             android:id="@+id/ivProfileImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:src="@color/gray_text_color"
@@ -89,7 +89,7 @@
                 android:id="@+id/btnEdtProfilePic"
                 android:layout_width="140dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/custom_button"
                 android:text="프로필 사진 변경"
                 android:textColor="@color/white"
@@ -102,7 +102,7 @@
                 android:id="@+id/btnPostUpload"
                 android:layout_width="140dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="12dp"
                 android:background="@drawable/custom_button"
                 android:text="아이디 변경"
                 android:textColor="@color/white"
@@ -115,11 +115,12 @@
 
         <EditText
             android:id="@+id/edtDescription"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="80dp"
             android:layout_gravity="center"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:hint="소개를 입력하세요."
+            android:textSize="16sp"
             android:textColorHint="@color/gray_text_color"
             android:textColor="@color/black"
             />
@@ -129,10 +130,10 @@
             android:id="@+id/btnSaveProfile"
             android:layout_width="140dp"
             android:layout_height="50dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="120dp"
             android:layout_gravity="center"
             android:background="@drawable/custom_button"
-            android:text="아이디 변경"
+            android:text="프로필 저장"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"/>

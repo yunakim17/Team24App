@@ -139,9 +139,10 @@
             <!--좋아요 버튼-->
             <ImageButton
                 android:id="@+id/btnLike"
-                android:layout_width="35dp"
-                android:layout_height="39dp"
-                tools:srcCompat="@drawable/baseline_thumb_up_alt_24" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/like_btn"
+                />
 
             <!--좋아요 개수-->
             <TextView
