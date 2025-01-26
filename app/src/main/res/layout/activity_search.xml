@@ -71,7 +71,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white">
 
             <!--user_item을 넣을 리싸이클러 뷰-->
             <androidx.recyclerview.widget.RecyclerView

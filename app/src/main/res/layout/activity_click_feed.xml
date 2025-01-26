@@ -11,33 +11,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/bar"
             android:layout_width="match_parent"
-            android:layout_height="65dp">
-            <!--상단바 배경이미지 추가해야함-->
+            android:layout_height="67dp"
+            android:background="@drawable/feed_click_topbg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
+
+                <!--뒤로가기 버튼-->
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_back_ios_new"
+
+                    android:contentDescription="뒤로가기 버튼"
+                    />
 
 
+                <TextView
+                    android:layout_width="319dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="게시물"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-
-
-
-
-    <!-- 상단 게시물 텍스트뷰-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="게시물"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center"
-        android:layout_gravity="center" />
+            </LinearLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -74,9 +88,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="140dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_marginEnd="20dp">
+                android:orientation="vertical">
 
                 <!--날짜 텍스트뷰-->
                 <TextView
@@ -157,8 +171,8 @@
             android:layout_width="380dp"
             android:layout_height="380dp"
             android:layout_gravity="center"
-            android:background="@drawable/custom_feed_pic"
-            />
+            android:background="@drawable/custom_feed_pic" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -172,6 +186,7 @@
                 android:layout_height="48dp"
                 android:background="@drawable/like_btn"
 
+                android:contentDescription="좋아요 버튼"
                 />
 
             <!--좋아요 개수-->
@@ -181,8 +196,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="좋아요 20"
-                android:textSize="14dp"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -192,9 +207,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:textSize="15dp"
+
             android:text="게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 게시물 코멘트 "
             android:textColor="@color/black"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
     </LinearLayout>
