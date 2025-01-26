@@ -24,26 +24,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <!--뒤로가기 버튼-->
                 <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/btnBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@null"
-                    android:padding="5dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/arrow_back_ios_new"
-
+                    android:src="@drawable/arrow_back"
                     android:contentDescription="뒤로가기 버튼"
                     />
 
-
                 <TextView
-                    android:layout_width="319dp"
+                    android:layout_width="315dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="게시물"
@@ -68,8 +64,10 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-
-                android:src="@drawable/img" />
+                android:src="@color/gray_text_color"
+                android:background="@drawable/circle_profile_pic"
+                android:clipToOutline="true"
+                />
 
             <!--사용자 id-->
             <TextView

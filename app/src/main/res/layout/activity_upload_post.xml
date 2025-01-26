@@ -29,29 +29,30 @@
             <!-- 상단 제목 -->
             <LinearLayout
                 android:id="@+id/linearLayout4"
-                android:layout_width="380dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <!-- 뒤로가기 버튼 -->
+                <!--뒤로가기 버튼-->
                 <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/btnBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@null"
-                    android:padding="5dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/arrow_back_ios_new" />
+                    android:src="@drawable/arrow_back"
+                    android:contentDescription="뒤로가기 버튼"
+                    />
 
                 <!-- 상대 아이디 -->
                 <TextView
                     android:id="@+id/postUploadTitle"
-                    android:layout_width="320dp"
+                    android:layout_width="315dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
