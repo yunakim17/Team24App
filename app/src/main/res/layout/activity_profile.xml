@@ -178,19 +178,21 @@
                                 <Button
                                     android:id="@+id/btnEdtProfile"
                                     android:layout_width="122dp"
-                                    android:layout_height="45dp"
+                                    android:layout_height="50dp"
                                     android:background="@drawable/custom_button"
                                     android:text="프로필 편집"
                                     android:textColor="@color/white"
+                                    android:textStyle="bold"
                                     android:textSize="15sp" />
 
                                 <Button
                                     android:id="@+id/btnPostUpload"
                                     android:layout_width="122dp"
-                                    android:layout_height="45dp"
+                                    android:layout_height="50dp"
                                     android:layout_marginStart="16dp"
                                     android:background="@drawable/custom_button"
                                     android:text="게시물 작성"
+                                    android:textStyle="bold"
                                     android:textColor="@color/white"
                                     android:textSize="15sp" />
 

@@ -72,7 +72,7 @@
 
             <ImageView
                 android:id="@+id/SelectedPhoto"
-                android:layout_width="370dp"
+                android:layout_width="340dp"
                 android:layout_height="340dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
@@ -87,7 +87,7 @@
                 android:id="@+id/btnPhoto"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="304dp"
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/custom_image_btn_pic"
@@ -183,14 +183,14 @@
             <!-- 게시물 코멘트 작성란 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="111dp"
+                android:layout_height="103dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/edtComment"
                     android:layout_width="371dp"
-                    android:layout_height="95dp"
+                    android:layout_height="73dp"
                     android:layout_marginStart="21dp"
                     android:layout_marginEnd="21dp"
                     android:background="#FFFFFF"
@@ -217,6 +217,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/custom_button"
                     android:text="업로드"
+                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>

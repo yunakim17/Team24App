@@ -181,10 +181,11 @@
                         <Button
                             android:id="@+id/btnAddFriend"
                             android:layout_width="122dp"
-                            android:layout_height="45dp"
+                            android:layout_height="50dp"
                             android:background="@drawable/custom_button"
                             android:text="친구 추가"
                             android:textColor="@color/white"
+                            android:textStyle="bold"
                             android:textSize="15sp" />
 
                     </LinearLayout>

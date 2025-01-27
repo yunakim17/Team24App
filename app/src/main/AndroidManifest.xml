@@ -36,7 +36,6 @@
         <activity
             android:name=".Timer"
             android:exported="false" />
-
         <activity
             android:name=".Signup"
             android:exported="false" />

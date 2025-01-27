@@ -31,7 +31,7 @@ class Timer : AppCompatActivity() {
         ssbtn = findViewById<Button>(R.id.startStopButton)
 
         val now = Date()
-        val dateFormat = SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
+        val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", java.util.Locale.KOREA)
 
         tvdate.text = dateFormat.format(now)
         //오늘의 날짜 설정
