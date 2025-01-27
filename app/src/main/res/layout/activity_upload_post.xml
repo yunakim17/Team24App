@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/post_upload_bg"
+    android:fitsSystemWindows="true"
     android:padding="0dp"
     tools:context=".UploadPost">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,10 +45,9 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@null"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/arrow_back"
                     android:contentDescription="뒤로가기 버튼"
-                    />
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_back" />
 
                 <!-- 상대 아이디 -->
                 <TextView
@@ -65,16 +65,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="405dp">
+            android:layout_height="wrap_content">
 
 
             <!-- 선택한 사진 영역 -->
+
             <ImageView
                 android:id="@+id/SelectedPhoto"
-                android:layout_width="380dp"
-                android:layout_height="380dp"
+                android:layout_width="370dp"
+                android:layout_height="340dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/custom_feed_pic"
                 app:layout_constraintDimensionRatio="16:9"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,10 +88,12 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="308dp"
+                android:layout_marginTop="304dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/custom_image_btn"
-                android:padding="12dp"
+                android:background="@drawable/custom_image_btn_pic"
+                android:clipToOutline="true"
+                android:contentDescription="사진 선택 버튼"
+                android:padding="16dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/image"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,8 +104,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--공부한 시간 나타내는 텍스트뷰 -->
-
-        <!-- 게시물 코멘트 작성란 -->
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
@@ -175,45 +176,52 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="223dp"
+            android:layout_height="243dp"
             android:layout_gravity="center"
             android:orientation="vertical">
 
+            <!-- 게시물 코멘트 작성란 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="111dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtComment"
+                    android:layout_width="371dp"
+                    android:layout_height="95dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginEnd="21dp"
+                    android:background="#FFFFFF"
+                    android:gravity="top"
+                    android:hint="공부한 내용에 대한 생각을 적어보세요."
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_text_color"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
             <!--업로드 버튼-->
 
-            <EditText
-                android:id="@+id/edtComment"
-                android:layout_width="371dp"
-                android:layout_height="102dp"
-                android:layout_marginStart="21dp"
-                android:layout_marginEnd="21dp"
-                android:layout_marginBottom="28dp"
-                android:background="#FFFFFF"
-                android:hint="공부한 내용에 대한 생각을 적어보세요."
-                android:padding="8dp"
-                android:textColor="@color/gray_text_color"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/btnUpload"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnUpload"
-                android:layout_width="125dp"
-                android:layout_height="47dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="37dp"
-                android:background="@drawable/custom_button"
-                android:text="업로드"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <Button
+                    android:id="@+id/btnUpload"
+                    android:layout_width="125dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_button"
+                    android:text="업로드"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
         </LinearLayout>
-
-
     </LinearLayout>
 
 

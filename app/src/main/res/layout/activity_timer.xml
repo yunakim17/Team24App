@@ -8,120 +8,121 @@
     tools:context=".Timer">
 
     <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="456dp"
-            android:layout_height="376dp"
-            android:src="@drawable/timer_header_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <!-- 날짜 표시 -->
-
-        <!-- 시간 표시 영역 -->
-
-        <!-- 구분선 -->
-
-        <LinearLayout
-            android:id="@+id/linearLayout5"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="160dp"
-                android:text="2025년 00월 00일"
-                android:textColor="@color/black"
-                android:textSize="18sp"
+            <ImageView
+                android:layout_width="616dp"
+                android:layout_height="382dp"
+                android:src="@drawable/timer_header_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <!-- 날짜 표시 -->
+
+            <!-- 시간 표시 영역 -->
+
+            <!-- 구분선 -->
 
             <LinearLayout
-                android:id="@+id/timeContainer"
-                android:layout_width="wrap_content"
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDate">
-
-                <!-- 시 -->
-                <TextView
-                    android:id="@+id/tvHours"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="00"
-                    android:textColor="@color/black"
-                    android:textSize="55sp"
-                    android:textStyle="bold" />
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text=":"
+                    android:layout_marginTop="160dp"
+                    android:text="2025년 00월 00일"
                     android:textColor="@color/black"
-                    android:textSize="60sp" />
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- 분 -->
-                <TextView
-                    android:id="@+id/tvMinutes"
+                <LinearLayout
+                    android:id="@+id/timeContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="00"
-                    android:textColor="@color/black"
-                    android:textSize="55sp"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDate">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text=":"
-                    android:textColor="@color/black"
-                    android:textSize="60sp" />
+                    <!-- 시 -->
+                    <TextView
+                        android:id="@+id/tvHours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00"
+                        android:textColor="@color/black"
+                        android:textSize="60sp"
+                        android:textStyle="bold" />
 
-                <!-- 초 -->
-                <TextView
-                    android:id="@+id/tvSeconds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="00"
-                    android:textColor="@color/black"
-                    android:textSize="55sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text=":"
+                        android:textColor="@color/black"
+                        android:textSize="60sp" />
+
+                    <!-- 분 -->
+                    <TextView
+                        android:id="@+id/tvMinutes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="00"
+                        android:textColor="@color/black"
+                        android:textSize="60sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text=":"
+                        android:textColor="@color/black"
+                        android:textSize="60sp" />
+
+                    <!-- 초 -->
+                    <TextView
+                        android:id="@+id/tvSeconds"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="00"
+                        android:textColor="@color/black"
+                        android:textSize="60sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- 시작/멈춤 버튼 -->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- 시작/멈춤 버튼 -->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="206dp"
+            android:layout_height="148dp"
             android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +132,7 @@
             <Button
                 android:id="@+id/startStopButton"
                 android:layout_width="123dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:background="@drawable/custom_button"
                 android:text="@string/start"
                 android:textColor="@color/white"
@@ -145,7 +146,7 @@
         <LinearLayout
             android:id="@+id/shareLayout"
             android:layout_width="match_parent"
-            android:layout_height="76dp"
+            android:layout_height="52dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -153,13 +154,15 @@
 
             <TextView
                 android:layout_width="141dp"
-                android:layout_height="39dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="180dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="35dp"
                 android:text="오늘의 공부 시간을\n포스트로 공유해보세요."
                 android:textAlignment="center"
+                android:gravity="center_vertical"
                 android:textColor="@color/black"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
                 app:layout_constraintEnd_toStartOf="@+id/btnTimeShare" />
 
@@ -170,13 +173,10 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="28dp"
                 android:background="@drawable/custom_image_btn"
+                android:contentDescription="게시물로 공유 버튼"
                 android:padding="12dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/share"
-                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:src="@drawable/share" />
         </LinearLayout>
     </LinearLayout>
 
@@ -189,5 +189,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
         app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
