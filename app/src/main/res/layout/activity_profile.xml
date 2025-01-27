@@ -131,6 +131,7 @@
                                         android:layout_width="100dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
+                                        android:layout_marginTop="10dp"
                                         android:gravity="center"
                                         android:orientation="horizontal">
 
@@ -159,7 +160,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="8dp"
-                                        android:text="소개/ 공부하는 과목(텍스트)"
+                                        android:text="자기소개/ 공부하는 과목 등"
                                         android:textSize="15sp" />
 
                                 </LinearLayout>
