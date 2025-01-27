@@ -96,9 +96,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="2025/00/00"
+                    android:text="2025년 00월 00일"
                     android:textColor="@color/gray_text_color"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <!--시간 텍스트뷰-->
                 <LinearLayout
@@ -218,8 +218,11 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="411dp"
-        android:layout_height="66dp"
-        android:background="@drawable/bottom_nav_view"
+        android:layout_height="70dp"
+        android:background="@drawable/bottom_nav_view_shadow"
+        app:itemIconSize="45dp"
+        app:itemIconTint="@null"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
