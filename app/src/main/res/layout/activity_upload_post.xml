@@ -71,7 +71,7 @@
             <!-- 공부한 시간 나타내는 텍스트뷰 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="365dp">
 
                 <ImageView
                     android:id="@+id/SelectedPhoto"
@@ -90,17 +90,17 @@
                     android:id="@+id/btnPhoto"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="304dp"
+                    android:layout_marginTop="300dp"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/custom_image_btn_pic"
                     android:clipToOutline="true"
                     android:contentDescription="사진 선택 버튼"
+                    android:elevation="3dp"
                     android:padding="16dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/image"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.048"
+                    app:layout_constraintHorizontal_bias="0.01"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/SelectedPhoto" />
             </androidx.constraintlayout.widget.ConstraintLayout>
