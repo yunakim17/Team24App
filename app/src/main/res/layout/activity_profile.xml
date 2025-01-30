@@ -46,7 +46,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="2dp"
                             android:orientation="horizontal">
 
                             <!--뒤로가기 버튼-->
@@ -179,7 +179,7 @@
                                 <Button
                                     android:id="@+id/btnEdtProfile"
                                     android:layout_width="122dp"
-                                    android:layout_height="50dp"
+                                    android:layout_height="48dp"
                                     android:background="@drawable/custom_button"
                                     android:text="프로필 편집"
                                     android:textColor="@color/white"
@@ -189,7 +189,7 @@
                                 <Button
                                     android:id="@+id/btnPostUpload"
                                     android:layout_width="122dp"
-                                    android:layout_height="50dp"
+                                    android:layout_height="48dp"
                                     android:layout_marginStart="16dp"
                                     android:background="@drawable/custom_button"
                                     android:text="게시물 작성"
@@ -205,7 +205,7 @@
                 <!-- 내가 올린 피드 -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPosts"
-                    android:layout_width="388dp"
+                    android:layout_width="399dp"
                     android:layout_height="448dp"
                     android:layout_gravity="center"
                     android:background="@null"

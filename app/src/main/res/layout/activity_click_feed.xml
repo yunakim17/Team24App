@@ -217,8 +217,8 @@
     <!-- 하단 네비게이션 바 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        android:layout_width="411dp"
-        android:layout_height="70dp"
+        android:layout_width="410dp"
+        android:layout_height="74dp"
         android:background="@drawable/bottom_nav_view_shadow"
         app:itemIconSize="45dp"
         app:itemIconTint="@null"
@@ -227,6 +227,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
