@@ -42,6 +42,7 @@ class Login : AppCompatActivity() {
                     Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this, Home::class.java) //로그인 되면 Home으로 넘어감
+                    intent.putExtra("user_id", user) //로그인 계정 확인용 intent 데이터 전송 추가(신다령)
                     startActivity(intent)
                 }
                 else {
