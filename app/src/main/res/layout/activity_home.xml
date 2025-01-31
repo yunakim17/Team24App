@@ -8,95 +8,93 @@
     android:orientation="vertical"
     tools:context=".Home">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="625dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toStartOf="parent">
 
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <!--post_item을 넣을 리싸이클러 뷰-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHomeFeed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/post_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            >
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/bar"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:background="@drawable/home_top"
-               >
-
-                <ImageView
-                    android:layout_width="171dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/home_logo" />
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-
-                    <!-- 사용자 아이디 서치바 -->
-                    <EditText
-                        android:id="@+id/edtSearchBar"
-                        android:layout_width="334dp"
-                        android:layout_height="45dp"
-                        android:background="@drawable/searchbar_bg"
-                        android:layout_marginEnd="7dp"
-                        android:paddingLeft="11dp"
-                        android:hint="Search.."
-                        android:textColorHint="@color/gray_text_color"
-                        android:textColor="@color/black"/>
-
-                    <!--누르면 search 액티비티로 넘어가게 -->
-                    <ImageButton
-                        android:id="@+id/ivSearch"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/search_btn">
-
-                    </ImageButton>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
-                </androidx.appcompat.widget.Toolbar>
-            </com.google.android.material.appbar.AppBarLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="120dp"
+            android:background="@drawable/home_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <!--post_item을 넣을 리싸이클러 뷰-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvHomeFeed"
+            <ImageView
+                android:layout_width="171dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/home_logo" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                tools:listitem="@layout/post_item" />
+                android:layout_marginTop="5dp">
 
-        </LinearLayout>
+                <!-- 사용자 아이디 서치바 -->
+                <EditText
+                    android:id="@+id/edtSearchBar"
+                    android:layout_width="334dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="7dp"
+                    android:background="@drawable/searchbar_bg"
+                    android:hint="Search.."
+                    android:paddingStart="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_text_color" />
 
-    </LinearLayout>
+                <!--누르면 search 액티비티로 넘어가게 -->
+                <ImageButton
+                    android:id="@+id/ivSearch"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/search_btn">
+
+                </ImageButton>
+
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
 
     <!-- 하단 네비게이션 바 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -111,6 +109,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

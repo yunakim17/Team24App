@@ -7,87 +7,81 @@
     android:layout_height="match_parent"
     tools:context=".Search">
 
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
+        android:layout_height="655dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!--user_item을 넣을 리싸이클러 뷰-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearchUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/user_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/bar"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
+            android:background="@drawable/search_top_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/bar"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/search_top_bg">
+                android:layout_marginTop="10dp">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                <!-- 사용자 아이디 서치바 -->
+                <EditText
+                    android:id="@+id/edtSearchBar"
+                    android:layout_width="334dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="7dp"
+                    android:background="@drawable/searchbar_bg"
+                    android:hint="Search.."
+                    android:paddingStart="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_text_color" />
 
-                    <!-- 사용자 아이디 서치바 -->
-                    <EditText
-                        android:id="@+id/edtSearchBar"
-                        android:layout_width="334dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/searchbar_bg"
-                        android:layout_marginEnd="7dp"
-                        android:paddingLeft="11dp"
-                        android:hint="Search.."
-                        android:textColorHint="@color/gray_text_color"
-                        android:textColor="@color/black"
-                        />
+                <!--누르면 search 액티비티로 넘어가게 -->
+                <ImageButton
+                    android:id="@+id/ivSearch"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/search_btn"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
-                    <!--누르면 search 액티비티로 넘어가게 -->
-                    <ImageButton
-                        android:id="@+id/ivSearch"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/search_btn"
-                        tools:ignore="SpeakableTextPresentCheck"
-                        />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
-                </androidx.appcompat.widget.Toolbar>
-            </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-        </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/white">
-
-            <!--user_item을 넣을 리싸이클러 뷰-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvSearchUser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                tools:listitem="@layout/user_item"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
     <!-- 하단 네비게이션 바 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
