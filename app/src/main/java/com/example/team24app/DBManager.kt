@@ -3,7 +3,7 @@ package com.example.team24app
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import androidx.core.content.contentValuesOf
+import android.content.ContentValues
 
 class DBManager(context: Context,
                 name: String?,
@@ -22,7 +22,7 @@ class DBManager(context: Context,
 
     fun insertUser(user_id: String, email: String, password: String): Boolean {
         val db = this.writableDatabase
-        val contentValues = contentValuesOf()
+        val contentValues = ContentValues()
         contentValues.put("user_id", user_id)
         contentValues.put("email", email)
         contentValues.put("password", password)
@@ -35,7 +35,7 @@ class DBManager(context: Context,
     fun checkUser(id: String?): Boolean {
         val db = this.readableDatabase
         var res = true
-        val cursor = db.rawQuery("Select * from users where id =?", arrayOf(id))
+        val cursor = db.rawQuery("Select * from user where id =?", arrayOf(id))
         if (cursor.count <= 0) res = false
         return res
     }
@@ -45,7 +45,7 @@ class DBManager(context: Context,
         val db = this.writableDatabase
         var res = true
         val cursor = db.rawQuery(
-            "Select * from users where id = ? and password = ?",
+            "Select * from user where id = ? and password = ?",
             arrayOf(id, password)
         )
         if (cursor.count <= 0) res = false
