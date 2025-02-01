@@ -1,16 +1,12 @@
 package com.example.team24app
 
 import android.content.Intent
-import java.util.regex.Pattern
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import java.util.regex.Pattern
 
 class Signup : AppCompatActivity() {
 
@@ -21,7 +17,7 @@ class Signup : AppCompatActivity() {
     lateinit var edtSignupEmail: EditText
     lateinit var edtSignupPwd: EditText
     lateinit var edtPwdCheck: EditText
-    lateinit var btnRegister: ImageButton
+    lateinit var btnRegister: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,22 +31,17 @@ class Signup : AppCompatActivity() {
         btnRegister = findViewById(R.id.btnRegister)
         btnIdCheck = findViewById(R.id.btnIdCheck)
 
-
-        // 아이디 중복 학인 버튼
+        // 아이디 중복 확인
         btnIdCheck.setOnClickListener {
             val user = edtSignupId.text.toString()
             val idPattern = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{6,15}$"
 
-            if (user == "") {
-                Toast.makeText(
-                    this@Signup,
-                    "아이디를 입력해주세요.",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (user.isEmpty()) {
+                Toast.makeText(this@Signup, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
                 if (Pattern.matches(idPattern, user)) {
                     val checkUsername = DB!!.checkUser(user)
-                    if (checkUsername == false) {
+                    if (!checkUsername) {
                         IdCheck = true
                         Toast.makeText(this@Signup, "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
                     } else {
@@ -62,71 +53,43 @@ class Signup : AppCompatActivity() {
             }
         }
 
-        // 정보 입력 후 회원가입 버튼 클릭
+        // 회원가입 버튼 클릭
         btnRegister.setOnClickListener {
             val user = edtSignupId.text.toString()
             val pass = edtSignupPwd.text.toString()
             val repass = edtPwdCheck.text.toString()
             val email = edtSignupEmail.text.toString()
             val pwPattern = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,15}$"
-            // 입력란이 비었을 경우
-            if (user == "" || pass == "" || repass == "" || email == "") Toast.makeText(
-                this@Signup,
-                "회원정보를 모두 입력해주세요.",
-                Toast.LENGTH_SHORT
-            ).show()
-            else {
-                // 아이디 중복 확인이 완료 되었을 경우
-                if (IdCheck == true) {
-                    // 비밀번호 형식이 맞을 경우
+
+            if (user.isEmpty() || pass.isEmpty() || repass.isEmpty() || email.isEmpty()) {
+                Toast.makeText(this@Signup, "회원정보를 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                if (IdCheck) {
                     if (Pattern.matches(pwPattern, pass)) {
-                        // 비밀번호 재확인 성공
                         if (pass == repass) {
-                            val insert = DB!!.insertUser(user, pass, email)
-                            // 가입 성공
-                            if (insert == true) {
-                                Toast.makeText(
-                                    this@Signup,
-                                    "가입되었습니다.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                            val insert = DB!!.insertUser(user, email, pass)
+                            if (insert) {
+                                Toast.makeText(this@Signup, "가입되었습니다.", Toast.LENGTH_SHORT).show()
+
+                                // ✅ 회원가입 후 자동 로그인 설정
+                                UserId.saveUserId(this, user)
+
                                 val intent = Intent(applicationContext, Home::class.java)
                                 startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this@Signup, "가입에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                             }
-                            // 가입 실패
-                            else {
-                                Toast.makeText(
-                                    this@Signup,
-                                    "가입에 실패하였습니다.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
+                        } else {
+                            Toast.makeText(this@Signup, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                         }
-                        // 비밀번호 재확인 실패
-                        else {
-                            Toast.makeText(
-                                this@Signup,
-                                "비밀번호가 일치하지 않습니다.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                    } else {
+                        Toast.makeText(this@Signup, "비밀번호 형식이 옳지 않습니다.", Toast.LENGTH_SHORT).show()
                     }
-                    // 비밀번호 형식이 맞지 않을 경우
-                    else {
-                        Toast.makeText(
-                            this@Signup,
-                            "비밀번호 형식이 옳지 않습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-                // 아이디 중복확인 실패
-                else {
-                    Toast.makeText(this@Signup, "아이디 중복확인을 해주세요.", Toast.LENGTH_SHORT)
-                        .show()
+                } else {
+                    Toast.makeText(this@Signup, "아이디 중복확인을 해주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
     }
 }
