@@ -108,6 +108,5 @@ class Profile : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Toast.makeText(this," 뻐킹", Toast.LENGTH_SHORT).show()
     }
 }
