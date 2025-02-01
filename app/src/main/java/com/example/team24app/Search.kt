@@ -1,5 +1,7 @@
 package com.example.team24app
 
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
@@ -11,7 +13,8 @@ class Search : AppCompatActivity() {
     lateinit var edtSearch : EditText
     lateinit var btnSearch : ImageButton
     lateinit var rvProfile : RecyclerView
-    //유저 테이블에서 자료 들고와야함
+    lateinit var dbManager: DBManager
+    lateinit var sqlitedb: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +25,7 @@ class Search : AppCompatActivity() {
         rvProfile = findViewById<RecyclerView>(R.id.rvSearchUser)
 
         val intent = intent
-        edtSearch.setText(intent.getStringExtra("Search_id").toString())
+        edtSearch.setText(intent.getStringExtra("Search_id"))
         //홈 화면에서 검색한 아이디를 edt에 삽입
 
         reSearch()
@@ -35,10 +38,23 @@ class Search : AppCompatActivity() {
     }
 
     private fun reSearch(){
+        dbManager = DBManager(this, "appDB", null, 1)
+        sqlitedb = dbManager.readableDatabase
         val search_id = edtSearch.text.toString()
         val itemlist = ArrayList<User>()
+        var cursor : Cursor
+        cursor = sqlitedb.rawQuery("SELECT user_id, profile FROM user WHERE user_id like '%"+search_id+"%';", null)
 
-        //테이블에서 아이디를 검색해 itemlist에 내용을 넣어야함
+        if(cursor.moveToNext()){
+            val user_id = cursor.getString(cursor.getColumnIndexOrThrow("user_id"))
+            val profile = cursor.getInt(cursor.getColumnIndexOrThrow("profile"))
+            val item = User(profile, user_id)
+            itemlist.add(item)
+        }
+        cursor.close()
+        sqlitedb.close()
+        dbManager.close()
+        //테이블에서 아이디를 검색해 itemlist에 내용을 넣음
 
         val rv_adapter = ProfileAdpater(itemlist, this)
         rv_adapter.notifyDataSetChanged()

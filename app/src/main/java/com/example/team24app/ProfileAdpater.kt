@@ -38,7 +38,7 @@ class ProfileAdpater(val itemList: ArrayList<User>, val context : Context) : Rec
             //뷰 클릭 리스너(프로필 터치 시, 상대 프로필이 뜸)
             itemView.setOnClickListener {
                 val intent = Intent(context, AnotherProfile::class.java)
-                intent.putExtra("user", itemList[adapterPosition])
+                intent.putExtra("user_id", itemList[adapterPosition].id)
                 context.startActivity(intent)
             }
         }

@@ -1,7 +1,9 @@
 package com.example.team24app
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
@@ -14,7 +16,8 @@ class Timer : AppCompatActivity() {
     lateinit var tvhour : TextView
     lateinit var tvmin : TextView
     lateinit var tvsec : TextView
-    lateinit var ssbtn : Button
+    lateinit var btnss : Button
+    lateinit var btnupload : ImageButton
 
     var time = 0
     private var timerTask: Timer? = null
@@ -28,7 +31,8 @@ class Timer : AppCompatActivity() {
         tvhour = findViewById<TextView>(R.id.tvHours)
         tvmin = findViewById<TextView>(R.id.tvMinutes)
         tvsec = findViewById<TextView>(R.id.tvSeconds)
-        ssbtn = findViewById<Button>(R.id.startStopButton)
+        btnss = findViewById<Button>(R.id.startStopButton)
+        btnupload = findViewById<ImageButton>(R.id.btnTimeShare)
 
         val now = Date()
         val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", java.util.Locale.KOREA)
@@ -36,7 +40,7 @@ class Timer : AppCompatActivity() {
         tvdate.text = dateFormat.format(now)
         //오늘의 날짜 설정
 
-        ssbtn.setOnClickListener {
+        btnss.setOnClickListener {
             //버튼 클릭 시 타이머 시작/멈춤
             isRunning=!isRunning
 
@@ -47,10 +51,18 @@ class Timer : AppCompatActivity() {
             }
         }
 
+        btnupload.setOnClickListener {
+            val intent = Intent(this, UploadPost::class.java)
+            intent.putExtra("date", tvdate.text.toString())
+            intent.putExtra("hour", tvhour.text.toString().toInt())
+            intent.putExtra("minute", tvmin.text.toString().toInt())
+            intent.putExtra("hour", tvsec.text.toString().toInt())
+            startActivity(intent)
+        }
     }
 
     private fun start(){
-        ssbtn.text = getString(R.string.stop)
+        btnss.text = getString(R.string.stop)
         timerTask = timer(period=1000){
             time++
 
@@ -68,7 +80,7 @@ class Timer : AppCompatActivity() {
     }
 
     private fun pause(){
-        ssbtn.text=getString(R.string.start)
+        btnss.text=getString(R.string.start)
         timerTask?.cancel()
     }
 }
