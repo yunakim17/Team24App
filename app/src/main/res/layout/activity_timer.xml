@@ -133,6 +133,7 @@
                 android:id="@+id/startStopButton"
                 android:layout_width="123dp"
                 android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/custom_button"
                 android:text="@string/start"
                 android:textColor="@color/white"
@@ -140,7 +141,24 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="443dp" />
+                tools:layout_editor_absoluteY="443dp"
+                />
+
+
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="123dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/custom_button"
+                android:text="@string/reset"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="443dp"
+                />
 
         </LinearLayout>
 
@@ -166,7 +184,8 @@
                 android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
                 app:layout_constraintEnd_toStartOf="@+id/btnTimeShare"
-                tools:ignore="RtlCompat" />
+                tools:ignore="RtlCompat"
+                />
 
             <ImageButton
                 android:id="@+id/btnTimeShare"
@@ -177,7 +196,9 @@
                 android:contentDescription="게시물로 공유 버튼"
                 android:padding="12dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/share" />
+                android:src="@drawable/share"
+                />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -194,5 +215,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

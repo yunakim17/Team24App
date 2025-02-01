@@ -183,7 +183,6 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/like_btn"
-
                 android:contentDescription="좋아요 버튼"
                 />
 
@@ -193,9 +192,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="좋아요 20"
+                android:text="20"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
