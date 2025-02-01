@@ -2,6 +2,7 @@ package com.example.team24app
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,20 +23,24 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
 
     override fun onBindViewHolder(holder: PostAdapter.ViewHolder, position: Int) {
         // 뷰에 내용 입력(리사이클 될때마다 입력됨)
-        val like = "좋아요 "+itemList[position].like
-        val hour = (itemList[position].hour).toString()
-        val minute = (itemList[position].minute).toString()
-        val second = (itemList[position].second).toString()
 
-        holder.ivProfile.setImageResource(itemList[position].profile)
+        if(itemList[position].profile!="tmp"){
+            val uri_profile = Uri.parse(itemList[position].profile)
+            holder.ivProfile.setImageURI(uri_profile)
+        }else{
+            holder.ivProfile.setImageResource(R.drawable.img)
+        }
+
+        val uri_picture = Uri.parse(itemList[position].picture)
+
         holder.tvName.text = itemList[position].id
-        holder.ivPicture.setImageResource(itemList[position].picture)
-        holder.tvLike.text = like
+        holder.ivPicture.setImageURI(uri_picture)
+        holder.tvLike.text = "${itemList[position].like}"
         holder.tvDescrip.text = itemList[position].comment
         holder.tvDate.text = itemList[position].date
-        holder.tvHour.text = hour
-        holder.tvMin.text = minute
-        holder.tvSec.text = second
+        holder.tvHour.text = "${itemList[position].hour}"
+        holder.tvMin.text = "${itemList[position].minute}"
+        holder.tvSec.text = "${itemList[position].second}"
     }
 
     override fun getItemCount(): Int {

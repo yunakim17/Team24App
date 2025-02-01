@@ -4,10 +4,10 @@ import java.io.Serializable
 
 //data class 상속은 추천되지 않아 따로 작성
 data class Post(
-    val profile : Int,
+    val profile : String,
     val id : String,
     val post_id : Int,
-    val picture : Int,
+    val picture : String,
     val like : Int,
     val comment : String,
     val date : String,

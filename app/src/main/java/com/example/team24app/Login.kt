@@ -17,7 +17,7 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        DB = DBManager(this, "Login", null, 1)
+        DB = DBManager(this, "appDB", null, 1)
 
         edtLoginId = findViewById(R.id.edtLoginId)
         edtLoginPw = findViewById(R.id.edtLoginPw)

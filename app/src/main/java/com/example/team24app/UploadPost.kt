@@ -13,12 +13,14 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 class UploadPost : AppCompatActivity() {
+    lateinit var btnBack : ImageButton
     lateinit var ivPhoto : ImageView
     lateinit var btnPhoto : ImageButton
     lateinit var tvHour : TextView
@@ -53,20 +55,36 @@ class UploadPost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_post)
-        ivPhoto = findViewById<ImageView>(R.id.SelectedPhoto)
-        btnPhoto = findViewById<ImageButton>(R.id.btnPhoto)
-        tvHour = findViewById<TextView>(R.id.tvHours)
-        tvMin = findViewById<TextView>(R.id.tvMinutes)
-        tvSec = findViewById<TextView>(R.id.tvSeconds)
-        edtComment = findViewById<EditText>(R.id.edtComment)
-        btnUpload = findViewById<Button>(R.id.btnUpload)
+        btnBack = findViewById(R.id.btnBack)
+        ivPhoto = findViewById(R.id.SelectedPhoto)
+        btnPhoto = findViewById(R.id.btnPhoto)
+        tvHour = findViewById(R.id.tvHours)
+        tvMin = findViewById(R.id.tvMinutes)
+        tvSec = findViewById(R.id.tvSeconds)
+        edtComment = findViewById(R.id.edtComment)
+        btnUpload = findViewById(R.id.btnUpload)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.writableDatabase
 
         val readImagePermission = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) android.Manifest.permission.READ_MEDIA_IMAGES
         else android.Manifest.permission.READ_EXTERNAL_STORAGE
+        //권한 습득
+
+        val hour = Time.hour
+        val minute = Time.minute
+        val second = Time.second
+        tvHour.text = "$hour"
+        tvMin.text = "$minute"
+        tvSec.text = "$second"
+        //타이머에서 설정한 시간/날짜 설정
+
+        btnBack.setOnClickListener {
+            //뒤로가기 버튼
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         btnPhoto.setOnClickListener {
+            //사진 업로드
             if(ContextCompat.checkSelfPermission(this, readImagePermission)==PackageManager.PERMISSION_GRANTED){
                 //권한 확인 성공시 갤러리 오픈
                 openGallery()
@@ -76,26 +94,42 @@ class UploadPost : AppCompatActivity() {
             }
         }
 
-        val intent = intent
-        val user_id = "tmp"
-        //시간 업로드는 타이머 버튼시 intent로 전달 예정
-
-
-
         btnUpload.setOnClickListener {
-            val cursor_num : Cursor
-            cursor_num = sqlitedb.rawQuery("SELECT count(*) FROM feed;", null)
-            val num = cursor_num.getInt(0) + 1
+            //업로드 버튼
+            var num = 0
+            val user_id = UserId.userId
+            val picture = imageUri.toString()
+            val comment = edtComment.text.toString()
+            val date = Time.date
+            if(picture=="null"){
+                //사진이 비었는지 확인
+                Toast.makeText(this, "사진이 설정되지 않았습니다. 사진을 설정해주세요.",Toast.LENGTH_SHORT).show()
+            }else{
+                val cursor_num : Cursor
+                cursor_num = sqlitedb.rawQuery("SELECT count(*) as cnt FROM post;", null)
+                //post_id 설정
 
-            sqlitedb.execSQL("INSERT INTO feed VALUES ();")
+                if (cursor_num.moveToNext()){
+                    num = cursor_num.getInt(cursor_num.getColumnIndexOrThrow("cnt")) + 1
+                }
+                cursor_num.close()
+
+                sqlitedb.execSQL("INSERT INTO post VALUES ("+num+", '"+user_id+"', '"+picture+"', 0, '"+comment+"', '"+date+"', "+hour+", "+minute+", "+second+");")
+                onBackPressedDispatcher.onBackPressed()
+            }
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        sqlitedb.close()
+        dbManager.close()
+    }
+
     private fun openGallery(){
-        val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        val gallery = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         pickImageLauncher.launch(gallery)
         //갤러리를 열기 위해 intent 생성, 갤러리 액티비티 실행
     }
-
 
 }

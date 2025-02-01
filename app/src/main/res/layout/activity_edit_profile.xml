@@ -63,6 +63,20 @@
             >
         </ImageView>
 
+        <EditText
+            android:id="@+id/edtUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="userID"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:inputType="text"
+            />
+
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
@@ -97,7 +111,7 @@
 
             <!-- 아이디 변경 버튼 -->
             <Button
-                android:id="@+id/btnPostUpload"
+                android:id="@+id/btnEdtUserId"
                 android:layout_width="140dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="12dp"

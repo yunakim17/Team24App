@@ -22,33 +22,39 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        edtSearch = findViewById<EditText>(R.id.edtSearchBar)
-        btnSearch = findViewById<ImageButton>(R.id.ivSearch)
-        rvHome = findViewById<RecyclerView>(R.id.rvHomeFeed)
+        edtSearch = findViewById(R.id.edtSearchBar)
+        btnSearch = findViewById(R.id.ivSearch)
+        rvHome = findViewById(R.id.rvHomeFeed)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.readableDatabase
-        val intent = intent
-        val user = intent.getStringExtra("user_id").toString()
-        //user_id 전역 사용 문의..
 
-        val search_id = edtSearch.text.toString()
+        val user_id = UserId.userId
         val itemlist = ArrayList<Post>()
 
         var cursor_friend : Cursor
-        cursor_friend = sqlitedb.rawQuery("SELECT to_id FROM friend WHERE from_id = '" + user + "';", null)
-        //유저의 팔로우 목록 가져옴
+        cursor_friend = sqlitedb.rawQuery("SELECT to_id FROM friend WHERE from_id = '${user_id}';", null)
+        //유저의 친구 목록 가져옴
 
         while(cursor_friend.moveToNext()){
+            //친구 목록 탐색
             val friend_id = cursor_friend.getString((cursor_friend.getColumnIndexOrThrow("to_id"))).toString()
+
+            var profile = ""
             var cursor_user : Cursor
+            cursor_user = sqlitedb.rawQuery("SELECT profile FROM user WHERE user_id = '${friend_id}';", null)
+            //프로필 먼저 추출
+
+            if (cursor_user.moveToNext()){
+                profile = cursor_user.getString(cursor_user.getColumnIndexOrThrow("profile"))
+            }
+            cursor_user.close()
+
             var cursor_post : Cursor
-            cursor_user = sqlitedb.rawQuery("SELECT profile FROM user WHERE user_id = '" +friend_id+ "';", null)
-            cursor_post = sqlitedb.rawQuery("SELECT * FROM post WHERE user_id = '" + friend_id + "';", null)
+            cursor_post = sqlitedb.rawQuery("SELECT * FROM post WHERE user_id = '${friend_id}';", null)
 
             while (cursor_post.moveToNext()){
-                val profile = cursor_user.getInt(cursor_user.getColumnIndexOrThrow("profile"))
                 val post_id = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("post_id"))
-                val picture = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("picture"))
+                val picture = cursor_post.getString(cursor_post.getColumnIndexOrThrow("picture"))
                 val like = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("num_like"))
                 val comment = cursor_post.getString(cursor_post.getColumnIndexOrThrow("comment"))
                 val date = cursor_post.getString(cursor_post.getColumnIndexOrThrow("date"))
@@ -57,12 +63,11 @@ class Home : AppCompatActivity() {
                 val second = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("second"))
                 val item = Post(profile, friend_id, post_id, picture, like, comment, date, hour, minute, second)
                 itemlist.add(item)
+                //itemList에 친구의 피드 요소들을 더해 item을 늘림
             }
-            cursor_user.close()
             cursor_post.close()
         }
         cursor_friend.close()
-        //itemList에 친구의 피드 요소들을 더해 item을 늘림
 
         val rv_adapter = PostAdapter(itemlist, this)
         rv_adapter.notifyDataSetChanged()
@@ -76,8 +81,10 @@ class Home : AppCompatActivity() {
         dbManager.close()
 
         btnSearch.setOnClickListener{
+            val search_id = edtSearch.text.toString()
+            edtSearch.setText("")
             val intent = Intent(this, Search::class.java)
-            intent.putExtra("Search_id", search_id)
+            intent.putExtra("search_id", search_id)
             startActivity(intent)
             //검색 화면으로 전환
         }

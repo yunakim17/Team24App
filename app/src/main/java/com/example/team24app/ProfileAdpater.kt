@@ -2,6 +2,7 @@ package com.example.team24app
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-//Simple_Profile라는 이름의 data class타입의 arrayList 사용
 class ProfileAdpater(val itemList: ArrayList<User>, val context : Context) : RecyclerView.Adapter<ProfileAdpater.ViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -22,7 +22,13 @@ class ProfileAdpater(val itemList: ArrayList<User>, val context : Context) : Rec
 
     override fun onBindViewHolder(holder: ProfileAdpater.ViewHolder, position: Int) {
         // 테이블에서 가져와 kt로 전달된 데이터를 이곳에서 입력
-        holder.ivProfile.setImageResource(itemList[position].profile)
+        if(itemList[position].profile != "tmp"){
+            val uri = Uri.parse(itemList[position].profile)
+            holder.ivProfile.setImageURI(uri)
+        }else{
+            holder.ivProfile.setImageResource(R.drawable.img)
+        }
+
         holder.tvName.text = itemList[position].id
     }
 

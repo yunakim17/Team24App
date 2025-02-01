@@ -4,6 +4,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.content.ContentValues
+import android.net.Uri
+import java.io.InputStream
 
 class DBManager(context: Context,
                 name: String?,
@@ -11,8 +13,8 @@ class DBManager(context: Context,
                 version: Int
 ) : SQLiteOpenHelper(context, name, factory, version) {
     override fun onCreate(db: SQLiteDatabase?) {
-        db!!.execSQL("CREATE TABLE user (user_id VARCHAR(10) NOT NULL PRIMARY KEY, email VARCHAR(40) NOT NULL, password VARCHAR(20) NOT NULL, profile INTEGER, num_friend INTEGER, intro TEXT)")
-        db!!.execSQL("CREATE TABLE post (post_id INTEGER NOT NULL PRIMARY KEY, user_id VARCHAR(10) NOT NULL, picture INTEGER NOT NULL, num_like INTEGER NOT NULL, comment TEXT, date VARCHAR(15) NOT NULL, hour INTEGER NOT NULL, minute INTEGER NOT NULL, second INTEGER NOT NULL, foreign key(user_id) references user (user_id))")
+        db!!.execSQL("CREATE TABLE user (user_id VARCHAR(10) NOT NULL PRIMARY KEY, email VARCHAR(40) NOT NULL, password VARCHAR(20) NOT NULL, profile TEXT NOT NULL, num_friend INTEGER NOT NULL, intro TEXT NOT NULL)")
+        db!!.execSQL("CREATE TABLE post (post_id INTEGER NOT NULL PRIMARY KEY, user_id VARCHAR(10) NOT NULL, picture TEXT NOT NULL, num_like INTEGER NOT NULL, comment TEXT NOT NULL, date VARCHAR(15) NOT NULL, hour INTEGER NOT NULL, minute INTEGER NOT NULL, second INTEGER NOT NULL, foreign key(user_id) references user (user_id))")
         db!!.execSQL("CREATE TABLE friend (from_id VARCHAR(10) NOT NULL, to_id VARCHAR(10) NOT NULL, PRIMARY KEY (from_id, to_id), foreign key(from_id) references user (user_id), foreign key(to_id) references user (user_id))")
     }
 
@@ -26,6 +28,9 @@ class DBManager(context: Context,
         contentValues.put("user_id", user_id)
         contentValues.put("email", email)
         contentValues.put("password", password)
+        contentValues.put("profile", "tmp")
+        contentValues.put("num_friend", 0)
+        contentValues.put("intro", "")
         val result = db.insert("user", null, contentValues)
         db.close()
         return result != -1L // return if (result == -1L) false else true 삽입 성공 여부 반환
@@ -51,6 +56,4 @@ class DBManager(context: Context,
         if (cursor.count <= 0) res = false
         return res
     }
-
-
 }

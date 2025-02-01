@@ -23,7 +23,7 @@ class Signup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        DB = DBManager(this, "Login", null, 1)
+        DB = DBManager(this, "appDB", null, 1)
         edtSignupId = findViewById(R.id.edtSignupId)
         edtSignupEmail = findViewById(R.id.edtSignupEmail)
         edtSignupPwd = findViewById(R.id.edtSignupPwd)
