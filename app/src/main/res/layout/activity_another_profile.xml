@@ -199,17 +199,17 @@
         <!-- 피드 목록 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPosts"
-            android:layout_width="399dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@null"
+            android:contentDescription="게시물 목록"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileHeader"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
-            tools:listitem="@layout/feed_square_item"
-            android:contentDescription="게시물 목록"/>
+            tools:listitem="@layout/feed_square_item" />
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>

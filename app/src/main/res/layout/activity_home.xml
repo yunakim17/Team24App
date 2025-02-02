@@ -47,6 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:background="@drawable/home_top"
+            android:elevation="0dp"
+            android:outlineProvider="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
