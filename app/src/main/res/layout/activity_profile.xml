@@ -46,20 +46,10 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:layout_marginTop="2dp"
-                            android:orientation="horizontal">
-
-                            <!--뒤로가기 버튼-->
-                            <ImageButton
-                                android:id="@+id/btnBack"
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:background="@null"
-                                android:scaleType="centerInside"
-                                android:src="@drawable/arrow_back"
-                                android:contentDescription="뒤로가기 버튼"
-                                />
+                            android:orientation="horizontal"
+                            android:gravity="center">
 
                             <!-- 사용자 아이디 -->
                             <TextView
@@ -67,7 +57,6 @@
                                 android:layout_width="315dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-
                                 android:text="아이디"
                                 android:textAlignment="center"
                                 android:textSize="20sp"
@@ -181,9 +170,10 @@
                                 <Button
                                     android:id="@+id/btnEdtProfile"
                                     android:layout_width="122dp"
-                                    android:layout_height="48dp"
+                                    android:layout_height="46dp"
                                     android:background="@drawable/custom_button"
                                     android:text="프로필 편집"
+                                    android:padding="4dp"
                                     android:textColor="@color/white"
                                     android:textSize="15sp"
                                     android:textStyle="bold" />
@@ -191,7 +181,8 @@
                                 <Button
                                     android:id="@+id/btnPostUpload"
                                     android:layout_width="122dp"
-                                    android:layout_height="48dp"
+                                    android:layout_height="46dp"
+                                    android:padding="4dp"
                                     android:layout_marginStart="16dp"
                                     android:background="@drawable/custom_button"
                                     android:text="게시물 작성"

@@ -182,7 +182,8 @@
                         <Button
                             android:id="@+id/btnAddFriend"
                             android:layout_width="122dp"
-                            android:layout_height="48dp"
+                            android:layout_height="46dp"
+                            android:padding="4dp"
                             android:background="@drawable/custom_button"
                             android:text="@string/follow"
                             android:textColor="@color/white"
