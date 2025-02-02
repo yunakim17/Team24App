@@ -2,6 +2,7 @@ package com.example.team24app
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -11,9 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.StringTokenizer
 import java.util.Timer
 import kotlin.concurrent.timer
+import kotlin.math.min
 
 class Timer : AppCompatActivity() {
     lateinit var tvdate : TextView
@@ -23,13 +24,13 @@ class Timer : AppCompatActivity() {
     lateinit var btnss : Button
     lateinit var btnReset : Button
     lateinit var btnupload : ImageButton
-
-    //하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
-
     val time_format = DecimalFormat("00")
+    var hour = 0
+    var minute = 0
+    var second = 0
+    var time = 0
 
-    //var time = 0
     private var timerTask: Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +45,6 @@ class Timer : AppCompatActivity() {
         btnReset = findViewById(R.id.resetButton)
         btnupload = findViewById(R.id.btnTimeShare)
 
-        //하단네비뷰 연결
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         setBottomNavigationView()
 
@@ -55,32 +55,18 @@ class Timer : AppCompatActivity() {
         tvdate.text = timerFormat.format(now)
         //오늘의 날짜 설정
 
-        if(Time.backRunning==false){
-            //처음 실행할때
-            Time.backRunning=true
-        }else{
-            tvhour.text=time_format.format(Time.hour)
-            tvmin.text=time_format.format(Time.minute)
-            tvsec.text=time_format.format(Time.second)
-            Toast.makeText(this, "$Time.time", Toast.LENGTH_SHORT).show()
-            if(Time.isRunning){
-                //시작
-                btnss.text = getString(R.string.stop)
-                timerTask = timer(period=1000){
-                    Time.hour = (Time.time/60)/60
-                    Time.minute = (Time.time/60)%60
-                    Time.second = Time.time%60
-                    //시분초 설정
+        Log.d("time 확인", "${Time.backRunning}")
+        if(Time.backRunning == true){
+            //타이머의 기록이 존재함
+            Log.d("time 확인", "$time")
+            tvhour.text = time_format.format(Time.hour)
+            tvmin.text = time_format.format(Time.minute)
+            tvsec.text = time_format.format(Time.second)
 
-                    runOnUiThread {
-                        tvhour.text=time_format.format(Time.hour)
-                        tvmin.text=time_format.format(Time.minute)
-                        tvsec.text=time_format.format(Time.second)
-                    }
-                }
-            }else{
-                //정지
-                Stop()
+            if(Time.isRunning == true){
+                //타이머가 작동중이었음
+                Time.timerTask?.cancel()
+                Start()
             }
         }
 
@@ -99,10 +85,11 @@ class Timer : AppCompatActivity() {
 
         btnReset.setOnClickListener {
             //시간 초기화
-            timerTask?.cancel()
-            Time.time = 0
+            Stop()
             Time.isRunning=false
-            btnss.text=getString(R.string.start)
+            Time.backRunning=false
+
+            Time.time = 0
             Time.hour = 0
             Time.minute = 0
             Time.second = 0
@@ -113,34 +100,11 @@ class Timer : AppCompatActivity() {
 
         btnupload.setOnClickListener {
             //업로드 화면 전환
-            timerTask?.cancel()
             Stop()
+            Time.isRunning=false
             val intent = Intent(this, UploadPost::class.java)
             startActivity(intent)
         }
-    }
-
-    fun Start(){
-        btnss.text = getString(R.string.stop)
-        timerTask = timer(period=1000){
-            Time.time++
-
-            Time.hour = (Time.time/60)/60
-            Time.minute = (Time.time/60)%60
-            Time.second = Time.time%60
-            //시분초 설정
-
-            runOnUiThread {
-                tvhour.text=time_format.format(Time.hour)
-                tvmin.text=time_format.format(Time.minute)
-                tvsec.text=time_format.format(Time.second)
-            }
-        }
-    }
-
-    fun Stop(){
-        btnss.text=getString(R.string.start)
-        timerTask?.cancel()
     }
 
     //하단 네비게이션바 기능 추가
@@ -169,6 +133,56 @@ class Timer : AppCompatActivity() {
 
             }
 
+        }
+    }
+    fun Start() {
+        btnss.text = getString(R.string.stop)
+        timerTask = timer(period = 1000) {
+            //time++
+            Time.time++
+            Log.d("time 확인", "${Time.time}")
+            Time.hour = (Time.time / 60) / 60
+            Time.minute = (Time.time / 60) % 60
+            Time.second = Time.time % 60
+            //시분초 설정
+
+            runOnUiThread {
+                tvhour.text = time_format.format(Time.hour)
+                tvmin.text = time_format.format(Time.minute)
+                tvsec.text = time_format.format(Time.second)
+
+            }
+        }
+    }
+
+    fun Stop(){
+        btnss.text=getString(R.string.start)
+        timerTask?.cancel()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("time 확인", "Stop")
+        if(Time.time != 0){
+            Time.backRunning = true
+            //Time.time = time
+            Time.hour = (Time.time / 60) / 60
+            Time.minute = (Time.time / 60) % 60
+            Time.second = Time.time % 60
+            if(Time.isRunning == true){
+                timerTask?.cancel()
+                Time.timerTask = timer(period = 1000){
+                    Time.time++
+                    Time.hour = (Time.time / 60) / 60
+                    Time.minute = (Time.time / 60) % 60
+                    Time.second = Time.time % 60
+                }
+            }
         }
     }
 }

@@ -10,4 +10,5 @@ object Time {
     var time = 0
     var backRunning = false
     var isRunning = false
+    var timerTask : Timer? = null
 }
