@@ -35,7 +35,7 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        btnBack = findViewById(R.id.btnBack)
+        //btnBack = findViewById(R.id.btnBack)
         tvName = findViewById(R.id.tvUserName)
         ivProfile = findViewById(R.id.ivProfileImage)
         friend = findViewById(R.id.tvFriendCount)
@@ -98,10 +98,10 @@ class Profile : AppCompatActivity() {
         rvPost.layoutManager= GridLayoutManager(this, 3)
         //리사이클러뷰 어댑터 연결 완료
 
-        btnBack.setOnClickListener {
+        //btnBack.setOnClickListener {
             //뒤로가기 버튼
-            onBackPressedDispatcher.onBackPressed()
-        }
+            //onBackPressedDispatcher.onBackPressed()
+        //}
 
         btnProfile.setOnClickListener {
             //프로필 편집 화면으로 전환
