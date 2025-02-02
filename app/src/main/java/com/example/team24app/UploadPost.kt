@@ -18,6 +18,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class UploadPost : AppCompatActivity() {
     lateinit var btnBack : ImageButton
@@ -80,6 +82,8 @@ class UploadPost : AppCompatActivity() {
 
         btnBack.setOnClickListener {
             //뒤로가기 버튼
+            sqlitedb.close()
+            dbManager.close()
             onBackPressedDispatcher.onBackPressed()
         }
 
@@ -100,10 +104,14 @@ class UploadPost : AppCompatActivity() {
             val user_id = UserId.userId
             val picture = imageUri.toString()
             val comment = edtComment.text.toString()
-            val date = Time.date
+
+            val now = Date()
+            val dateFormat= SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
+            val date = dateFormat.format(now)
+
             if(picture=="null"){
                 //사진이 비었는지 확인
-                Toast.makeText(this, "사진이 설정되지 않았습니다. 사진을 설정해주세요.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "사진이 설정되지 않았습니다.\n사진을 설정해주세요.",Toast.LENGTH_SHORT).show()
             }else{
                 val cursor_num : Cursor
                 cursor_num = sqlitedb.rawQuery("SELECT count(*) as cnt FROM post;", null)
@@ -115,15 +123,12 @@ class UploadPost : AppCompatActivity() {
                 cursor_num.close()
 
                 sqlitedb.execSQL("INSERT INTO post VALUES ("+num+", '"+user_id+"', '"+picture+"', 0, '"+comment+"', '"+date+"', "+hour+", "+minute+", "+second+");")
-                onBackPressedDispatcher.onBackPressed()
+                sqlitedb.close()
+                dbManager.close()
+                val intent = Intent(this, Profile::class.java)
+                startActivity(intent)
             }
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sqlitedb.close()
-        dbManager.close()
     }
 
     private fun openGallery(){

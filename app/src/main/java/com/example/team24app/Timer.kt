@@ -43,8 +43,6 @@ class Timer : AppCompatActivity() {
 
         val now = Date()
         val timerFormat = SimpleDateFormat("yyyy년 MM월 dd일", java.util.Locale.KOREA)
-        val postFormat= SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
-        Time.date = postFormat.format(now)
         tvdate.text = timerFormat.format(now)
         //오늘의 날짜 설정
 

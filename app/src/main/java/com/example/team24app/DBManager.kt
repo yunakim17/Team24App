@@ -4,8 +4,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.content.ContentValues
-import android.net.Uri
-import java.io.InputStream
 
 class DBManager(context: Context,
                 name: String?,
@@ -20,6 +18,8 @@ class DBManager(context: Context,
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("drop Table if exists user")
+        db!!.execSQL("drop Table if exists post")
+        db!!.execSQL("drop Table if exists friend")
     }
 
     fun insertUser(user_id: String, email: String, password: String): Boolean {
