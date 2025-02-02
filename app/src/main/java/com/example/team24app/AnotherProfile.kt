@@ -1,9 +1,11 @@
 package com.example.team24app
 
+import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -11,6 +13,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AnotherProfile : AppCompatActivity() {
     lateinit var btnBack : ImageButton
@@ -22,6 +25,9 @@ class AnotherProfile : AppCompatActivity() {
     lateinit var rvPost : RecyclerView
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
+
+    //하단네비뷰
+    lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +42,10 @@ class AnotherProfile : AppCompatActivity() {
         rvPost = findViewById(R.id.rvPosts)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.writableDatabase
+
+        //하단네비뷰 연결
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        setBottomNavigationView()
 
         val itemlist = ArrayList<Feed_Square>()
         val user_id = UserId.userId
@@ -108,6 +118,35 @@ class AnotherProfile : AppCompatActivity() {
             friend.text = "${num_friend}"
             btnAdd.text = getString(R.string.following)
             btnAdd.isEnabled=false
+        }
+    }
+
+    //하단 네비게이션바 기능 추가
+    fun setBottomNavigationView() {
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    val intent = Intent(this, Home::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.timer -> {
+                    val intent = Intent(this, com.example.team24app.Timer::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.profile -> {
+                    val intent = Intent(this, Profile::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+
+            }
+
         }
     }
 

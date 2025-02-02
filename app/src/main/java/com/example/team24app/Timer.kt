@@ -2,10 +2,12 @@ package com.example.team24app
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -21,6 +23,10 @@ class Timer : AppCompatActivity() {
     lateinit var btnss : Button
     lateinit var btnReset : Button
     lateinit var btnupload : ImageButton
+
+    //하단네비뷰
+    lateinit var bottomNavigationView: BottomNavigationView
+
     val time_format = DecimalFormat("00")
     var hour = 0
     var minute = 0
@@ -41,6 +47,10 @@ class Timer : AppCompatActivity() {
         btnss = findViewById(R.id.startStopButton)
         btnReset = findViewById(R.id.resetButton)
         btnupload = findViewById(R.id.btnTimeShare)
+
+        //하단네비뷰 연결
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        setBottomNavigationView()
 
         val now = Date()
         val timerFormat = SimpleDateFormat("yyyy년 MM월 dd일", java.util.Locale.KOREA)
@@ -117,5 +127,38 @@ class Timer : AppCompatActivity() {
         Time.hour = time_format.format(hour).toInt()
         Time.minute = time_format.format(minute).toInt()
         Time.second = time_format.format(second).toInt()
+    }
+
+
+
+
+
+    //하단 네비게이션바 기능 추가
+    fun setBottomNavigationView() {
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    val intent = Intent(this, Home::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+//                R.id.timer -> {
+////                    val intent = Intent(this, com.example.team24app.Timer::class.java)
+////                    startActivity(intent)
+//                    true
+//                }
+
+                R.id.profile -> {
+                    val intent = Intent(this, Profile::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+
+            }
+
+        }
     }
 }
