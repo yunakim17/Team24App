@@ -4,11 +4,14 @@ import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Home : AppCompatActivity() {
     lateinit var edtSearch : EditText
@@ -16,6 +19,8 @@ class Home : AppCompatActivity() {
     lateinit var rvHome : RecyclerView
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
+    //하단네비뷰
+    lateinit var bottomNavigationView: BottomNavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +32,10 @@ class Home : AppCompatActivity() {
         rvHome = findViewById(R.id.rvHomeFeed)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.readableDatabase
+
+        //하단네비뷰 연결
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        setBottomNavigationView()
 
         val user_id = UserId.userId
         val itemlist = ArrayList<Post>()
@@ -89,4 +98,37 @@ class Home : AppCompatActivity() {
             //검색 화면으로 전환
         }
     }
+
+    //하단 네비게이션바 기능 추가
+    fun setBottomNavigationView() {
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+//                R.id.home -> {
+////                    val intent = Intent(this, Home::class.java)
+////                    startActivity(intent)
+//                    true
+//                }
+
+                R.id.timer -> {
+                    val intent = Intent(this, Timer::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.profile -> {
+                    val intent = Intent(this, Profile::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+
+            }
+
+        }
+    }
+
+
+
+
 }

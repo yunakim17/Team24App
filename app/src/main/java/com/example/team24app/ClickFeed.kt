@@ -1,13 +1,16 @@
 package com.example.team24app
 
+import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ClickFeed : AppCompatActivity() {
     lateinit var btnBack : ImageButton
@@ -23,6 +26,9 @@ class ClickFeed : AppCompatActivity() {
     lateinit var tvSec : TextView
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
+
+    //하단네비뷰
+    lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +47,10 @@ class ClickFeed : AppCompatActivity() {
         tvSec = findViewById(R.id.tvSeconds)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.writableDatabase
+
+        //하단네비뷰 연결
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        setBottomNavigationView()
 
         val intent = intent
         val post_id = intent.getIntExtra("post_id", 0)
@@ -96,6 +106,36 @@ class ClickFeed : AppCompatActivity() {
             sqlitedb.execSQL("UPDATE post SET num_like = "+like+" WHERE post_id = '"+post_id+"';")
             tvLike.text = "$like"
             btnLike.isEnabled=false
+        }
+    }
+
+
+    //하단 네비게이션바 기능 추가
+    fun setBottomNavigationView() {
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    val intent = Intent(this, Home::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.timer -> {
+                    val intent = Intent(this, com.example.team24app.Timer::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.profile -> {
+                    val intent = Intent(this, Profile::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+
+            }
+
         }
     }
 
