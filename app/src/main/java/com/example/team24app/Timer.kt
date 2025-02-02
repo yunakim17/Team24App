@@ -108,14 +108,4 @@ class Timer : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-    override fun onStop() {
-        super.onStop()
-        timerTask?.cancel()
-        isRunning=false
-        btnss.text=getString(R.string.start)
-        Time.hour = time_format.format(hour).toInt()
-        Time.minute = time_format.format(minute).toInt()
-        Time.second = time_format.format(second).toInt()
-    }
 }
