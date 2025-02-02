@@ -144,48 +144,44 @@
                 tools:layout_editor_absoluteY="443dp"
                 />
 
-
-            <Button
-                android:id="@+id/resetButton"
-                android:layout_width="123dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/custom_button"
-                android:text="@string/reset"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="443dp"
-                />
-
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/shareLayout"
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="58dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/custom_image_btn"
+                android:text="@string/reset"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="443dp" />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginStart="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="35dp"
-                android:gravity="center_vertical"
+                android:layout_gravity="center"
                 android:text="오늘의 공부 시간을\n포스트로 공유해보세요."
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
                 app:layout_constraintEnd_toStartOf="@+id/btnTimeShare"
-                tools:ignore="RtlCompat"
-                />
+                tools:ignore="RtlCompat" />
 
             <ImageButton
                 android:id="@+id/btnTimeShare"
@@ -196,8 +192,7 @@
                 android:contentDescription="게시물로 공유 버튼"
                 android:padding="12dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/share"
-                />
+                android:src="@drawable/share" />
 
         </LinearLayout>
     </LinearLayout>
