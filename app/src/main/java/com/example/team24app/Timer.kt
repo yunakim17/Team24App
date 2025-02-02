@@ -2,11 +2,9 @@ package com.example.team24app
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.DecimalFormat
@@ -14,7 +12,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Timer
 import kotlin.concurrent.timer
-import kotlin.math.min
 
 class Timer : AppCompatActivity() {
     lateinit var tvdate : TextView
@@ -26,10 +23,6 @@ class Timer : AppCompatActivity() {
     lateinit var btnupload : ImageButton
     lateinit var bottomNavigationView: BottomNavigationView
     val time_format = DecimalFormat("00")
-    var hour = 0
-    var minute = 0
-    var second = 0
-    var time = 0
 
     private var timerTask: Timer? = null
 
@@ -55,10 +48,8 @@ class Timer : AppCompatActivity() {
         tvdate.text = timerFormat.format(now)
         //오늘의 날짜 설정
 
-        Log.d("time 확인", "${Time.backRunning}")
         if(Time.backRunning == true){
             //타이머의 기록이 존재함
-            Log.d("time 확인", "$time")
             tvhour.text = time_format.format(Time.hour)
             tvmin.text = time_format.format(Time.minute)
             tvsec.text = time_format.format(Time.second)
@@ -140,7 +131,6 @@ class Timer : AppCompatActivity() {
         timerTask = timer(period = 1000) {
             //time++
             Time.time++
-            Log.d("time 확인", "${Time.time}")
             Time.hour = (Time.time / 60) / 60
             Time.minute = (Time.time / 60) % 60
             Time.second = Time.time % 60
@@ -167,7 +157,6 @@ class Timer : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        Log.d("time 확인", "Stop")
         if(Time.time != 0){
             Time.backRunning = true
             //Time.time = time
