@@ -5,19 +5,17 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Profile : AppCompatActivity() {
-    lateinit var btnBack : ImageButton
     lateinit var tvName : TextView
     lateinit var ivProfile : ImageView
     lateinit var friend : TextView
@@ -98,11 +96,6 @@ class Profile : AppCompatActivity() {
         rvPost.layoutManager= GridLayoutManager(this, 3)
         //리사이클러뷰 어댑터 연결 완료
 
-        //btnBack.setOnClickListener {
-            //뒤로가기 버튼
-            //onBackPressedDispatcher.onBackPressed()
-        //}
-
         btnProfile.setOnClickListener {
             //프로필 편집 화면으로 전환
             val intent = Intent(this, EditProfile::class.java)
@@ -146,9 +139,5 @@ class Profile : AppCompatActivity() {
             }
 
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 }

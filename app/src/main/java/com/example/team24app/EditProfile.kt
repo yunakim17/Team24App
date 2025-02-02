@@ -132,6 +132,8 @@ class EditProfile : AppCompatActivity() {
                 sqlitedb.execSQL("UPDATE user SET user_id = '"+change_id+"' WHERE user_id = '"+user_id+"';")
             }
             Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
         }
     }
 

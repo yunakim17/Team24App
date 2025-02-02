@@ -150,11 +150,6 @@ class Timer : AppCompatActivity() {
         timerTask?.cancel()
     }
 
-    override fun onStart() {
-        super.onStart()
-
-    }
-
     override fun onStop() {
         super.onStop()
         if(Time.time != 0){

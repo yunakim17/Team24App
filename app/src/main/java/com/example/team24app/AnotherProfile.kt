@@ -113,11 +113,12 @@ class AnotherProfile : AppCompatActivity() {
 
         btnAdd.setOnClickListener {
             //친구추가 버튼
-            sqlitedb.execSQL("INSERT INTO friend VALUES ('"+user_id+"', '"+other_id+"');")
             num_friend++
             friend.text = "${num_friend}"
             btnAdd.text = getString(R.string.following)
             btnAdd.isEnabled=false
+            sqlitedb.execSQL("INSERT INTO friend VALUES ('"+user_id+"', '"+other_id+"');")
+            sqlitedb.execSQL("UPDATE user SET num_friend = "+num_friend+" WHERE user_id = '"+other_id+"';")
         }
     }
 
