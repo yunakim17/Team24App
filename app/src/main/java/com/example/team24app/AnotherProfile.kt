@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -27,6 +28,10 @@ class AnotherProfile : AppCompatActivity() {
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
 
+    //피드에 아이템이 없을 때 보이는 텍스트뷰/이미지뷰
+    lateinit var emptyViewAp: TextView
+    lateinit var emptyImageAp: ImageView
+
     //하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
 
@@ -44,6 +49,10 @@ class AnotherProfile : AppCompatActivity() {
         rvPost = findViewById(R.id.rvPosts)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.writableDatabase
+
+        //텍스트,이미지뷰 연결
+        emptyViewAp = findViewById(R.id.noItemTextAp)
+        emptyImageAp = findViewById(R.id.noItemImageAp)
 
         //하단네비뷰 연결
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
@@ -67,7 +76,7 @@ class AnotherProfile : AppCompatActivity() {
                 val uri = Uri.fromFile(File(profile))
                 ivProfile.setImageURI(uri)
             }else{
-                ivProfile.setImageResource(R.drawable.img)
+                ivProfile.setImageResource(R.drawable.default_profile)
             }
 
             num_follow = cursor_user.getInt(cursor_user.getColumnIndexOrThrow("num_follow"))
@@ -96,6 +105,9 @@ class AnotherProfile : AppCompatActivity() {
         rvPost.adapter=rv_adapter
         rvPost.layoutManager= GridLayoutManager(this, 3)
         //리사이클러뷰 적용
+
+        checkIfRecyclerViewIsEmpty(rv_adapter)
+        //메서드 호출
 
         btnBack.setOnClickListener {
             //뒤로가기 버튼
@@ -137,6 +149,17 @@ class AnotherProfile : AppCompatActivity() {
         super.onStop()
         sqlitedb.close()
         dbManager.close()
+    }
+
+    //리사이클러뷰 아이템x 메서드
+    private fun checkIfRecyclerViewIsEmpty(adapter: RecyclerView.Adapter<*>){
+        if(adapter.itemCount == 0){
+            emptyViewAp.visibility = View.VISIBLE
+            emptyImageAp.visibility = View.VISIBLE
+        }else{
+            emptyViewAp.visibility = View.GONE
+            emptyImageAp.visibility = View.GONE
+        }
     }
 
     //하단 네비게이션바 기능 추가

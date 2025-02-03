@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,6 +26,10 @@ class Profile : AppCompatActivity() {
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
 
+    //피드에 아이템이 없을 때 보이는 텍스트뷰/이미지뷰
+    lateinit var emptyViewPf: TextView
+    lateinit var emptyImagePf: ImageView
+
     //하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
 
@@ -41,6 +46,10 @@ class Profile : AppCompatActivity() {
         rvPost = findViewById(R.id.rvPosts)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.readableDatabase
+
+        //텍스트,이미지뷰 연결
+        emptyViewPf = findViewById(R.id.noItemText)
+        emptyImagePf = findViewById(R.id.noItemImage)
 
         //하단네비뷰 연결
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
@@ -63,7 +72,7 @@ class Profile : AppCompatActivity() {
                 val uri = Uri.fromFile(File(profile))
                 ivProfile.setImageURI(uri)
             }else{
-                ivProfile.setImageResource(R.drawable.img)
+                ivProfile.setImageResource(R.drawable.default_profile)
             }
 
             tvFollow.text = "${cursor_user.getInt(cursor_user.getColumnIndexOrThrow("num_follow"))}"
@@ -94,6 +103,10 @@ class Profile : AppCompatActivity() {
         rvPost.layoutManager= GridLayoutManager(this, 3)
         //리사이클러뷰 어댑터 연결 완료
 
+        checkIfRecyclerViewIsEmpty(rv_adapter)
+        //메서드 호출
+
+
         btnProfile.setOnClickListener {
             //프로필 편집 화면으로 전환
             val intent = Intent(this, EditProfile::class.java)
@@ -109,7 +122,17 @@ class Profile : AppCompatActivity() {
 
     }
 
-    
+    //리사이클러뷰 아이템x 메서드
+    private fun checkIfRecyclerViewIsEmpty(adapter: RecyclerView.Adapter<*>){
+        if(adapter.itemCount == 0){
+            emptyViewPf.visibility = View.VISIBLE
+            emptyImagePf.visibility = View.VISIBLE
+        }else{
+            emptyViewPf.visibility = View.GONE
+            emptyImagePf.visibility = View.GONE
+        }
+    }
+
    //하단 네비게이션바 기능 추가
     fun setBottomNavigationView() {
         bottomNavigationView.setOnItemSelectedListener { item ->

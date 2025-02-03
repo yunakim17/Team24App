@@ -4,8 +4,11 @@ import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +19,11 @@ class Home : AppCompatActivity() {
     lateinit var edtSearch : EditText
     lateinit var btnSearch : ImageButton
     lateinit var rvHome : RecyclerView
+
+    //피드에 아이템이 없을 때 보이는 텍스트뷰/이미지뷰
+    lateinit var emptyViewH: TextView
+    lateinit var emptyImageH: ImageView
+
     //하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
 
@@ -27,6 +35,10 @@ class Home : AppCompatActivity() {
         edtSearch = findViewById(R.id.edtSearchBar)
         btnSearch = findViewById(R.id.ivSearch)
         rvHome = findViewById(R.id.rvHomeFeed)
+
+        //텍스트,이미지뷰 연결
+        emptyViewH = findViewById(R.id.noItemTextHome)
+        emptyImageH = findViewById(R.id.noItemImageHome)
 
         //하단네비뷰 연결
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
@@ -96,8 +108,22 @@ class Home : AppCompatActivity() {
         rvHome.layoutManager=LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         //어댑터를 연결해 레이아웃 매니저를 설정(리사이클러뷰 설정 완료)
 
+        checkIfRecyclerViewIsEmpty(rv_adapter)
+        //리사이클러뷰에 아이템 없을 경우 텍스트, 이미지 보이도록 하는 메서드 호출
+
         sqlitedb.close()
         dbManager.close()
+    }
+
+    //리사이클러뷰 아이템x 메서드
+    private fun checkIfRecyclerViewIsEmpty(adapter: RecyclerView.Adapter<*>){
+        if(adapter.itemCount == 0){
+            emptyViewH.visibility = View.VISIBLE
+            emptyImageH.visibility = View.VISIBLE
+        }else{
+            emptyViewH.visibility = View.GONE
+            emptyImageH.visibility = View.GONE
+        }
     }
 
     //하단 네비게이션바 기능 추가

@@ -92,7 +92,7 @@ class EditProfile : AppCompatActivity() {
                 profile=uri.toString()
                 ivProfile.setImageURI(uri)
             }else{
-                ivProfile.setImageResource(R.drawable.img)
+                ivProfile.setImageResource(R.drawable.default_profile)
             }
 
             edtDescrip.setText(cursor.getString(cursor.getColumnIndexOrThrow("intro")))
