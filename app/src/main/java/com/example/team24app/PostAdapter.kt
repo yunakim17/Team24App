@@ -2,10 +2,12 @@ package com.example.team24app
 
 import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +44,19 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
         holder.tvHour.text = "${itemList[position].hour}"
         holder.tvMin.text = "${itemList[position].minute}"
         holder.tvSec.text = "${itemList[position].second}"
+
+        holder.btnLike.setOnClickListener {
+            val dbManager = DBManager(context, "appDB", null, 1)
+            val sqlitedb = dbManager.writableDatabase
+
+            itemList[position].like++
+            sqlitedb.execSQL("UPDATE post SET num_like = ${itemList[position].like} WHERE post_id = ${itemList[position].post_id};")
+            holder.tvLike.text = "${itemList[position].like}"
+            holder.btnLike.isEnabled=false
+
+            sqlitedb.close()
+            dbManager.close()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -58,6 +73,7 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
         var tvHour = itemView.findViewById<TextView>(R.id.tvHours)
         var tvMin = itemView.findViewById<TextView>(R.id.tvMinutes)
         var tvSec = itemView.findViewById<TextView>(R.id.tvSeconds)
+        var btnLike = itemView.findViewById<ImageButton>(R.id.btnLike)
 
         init {
             //뷰 클릭 리스너

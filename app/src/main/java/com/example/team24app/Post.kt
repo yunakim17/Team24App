@@ -8,7 +8,7 @@ data class Post(
     val id : String,
     val post_id : Int,
     val picture : String,
-    val like : Int,
+    var like : Int,
     val comment : String,
     val date : String,
     val hour : Int,
