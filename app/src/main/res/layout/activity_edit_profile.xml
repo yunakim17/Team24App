@@ -67,7 +67,6 @@
             android:id="@+id/edtUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="userID"
             android:visibility="gone"
             android:textSize="20sp"
@@ -80,7 +79,7 @@
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginTop="10dp"
             android:text="userID"
             android:textSize="20sp"
@@ -94,7 +93,7 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="20dp">
 
             <!--프로필 사진 수정 버튼-->
             <Button
