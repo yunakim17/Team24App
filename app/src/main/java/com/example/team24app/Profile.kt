@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -118,7 +119,7 @@ class Profile : AppCompatActivity() {
 
     }
 
-
+    
    //하단 네비게이션바 기능 추가
     fun setBottomNavigationView() {
         bottomNavigationView.setOnItemSelectedListener { item ->

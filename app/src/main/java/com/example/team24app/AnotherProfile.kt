@@ -1,11 +1,13 @@
 package com.example.team24app
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -28,6 +30,7 @@ class AnotherProfile : AppCompatActivity() {
 
     //하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
