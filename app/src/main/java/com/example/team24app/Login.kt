@@ -1,5 +1,6 @@
 package com.example.team24app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -23,14 +24,10 @@ class Login : AppCompatActivity() {
         edtLoginPw = findViewById(R.id.edtLoginPw)
         btnLogin = findViewById(R.id.btnLogin)
 
-        // 앱 실행 시 자동 로그인 확인
-        UserId.loadUserId(this)
-        if (UserId.userId != null) {
-            Toast.makeText(this, "자동 로그인: ${UserId.userId}", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-            finish()
-        }
+        // 저장된 아이디 불러오기
+        val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val savedUserId = sharedPreferences.getString("saved_user_id", "")
+        edtLoginId.setText(savedUserId)  // 아이디 입력 필드에 자동 입력
 
         btnLogin.setOnClickListener {
             val user = edtLoginId.text.toString()
@@ -44,8 +41,13 @@ class Login : AppCompatActivity() {
                 if (checkUserpass) {
                     Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
 
-                    // 로그인한 user_id 전역 저장 (자동 로그인 기능)
-                    UserId.saveUserId(this, user)
+                    // 로그인 아이디 저장
+                    val editor = sharedPreferences.edit()
+                    editor.putString("saved_user_id", user)
+                    editor.apply()
+
+                    //UserId.clearUserId(this) // 기존 로그인 정보 초기화
+                    UserId.saveUserId(this, user) // 로그인한 유저 정보만 저장
 
                     val intent = Intent(this, Home::class.java)
                     startActivity(intent)
@@ -55,5 +57,6 @@ class Login : AppCompatActivity() {
                 }
             }
         }
+
     }
 }

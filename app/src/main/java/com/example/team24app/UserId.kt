@@ -15,18 +15,6 @@ object UserId {
         dbHelper.saveUser(id)
     }
 
-    // 저장된 user_id 불러오기 (앱 실행 시 자동 로그인 가능)
-    fun loadUserId(context: Context) {
-        val dbHelper = UserIdDBHelper(context)
-        userId = dbHelper.getUser()
-    }
-
-    // 로그아웃 시 user_id 삭제 (로그아웃 후 자동로그인이 되지 않게함, DB에는 정보 남아있음)
-    fun clearUserId(context: Context) {
-        userId = null
-        val dbHelper = UserIdDBHelper(context)
-        dbHelper.clearUser()
-    }
 }
 
 // user_id 저장 & 불러오기 (로그인 유지 기능)
@@ -52,24 +40,4 @@ class UserIdDBHelper(context: Context) :
         db.close()
     }
 
-    // 저장된 user_id 불러오기
-    fun getUser(): String? {
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT user_id FROM logged_user LIMIT 1", null)
-        var userId: String? = null
-
-        if (cursor.moveToFirst()) {
-            userId = cursor.getString(0)
-        }
-        cursor.close()
-        db.close()
-        return userId
-    }
-
-    // 로그아웃 시 user_id 삭제
-    fun clearUser() {
-        val db = this.writableDatabase
-        db.execSQL("DELETE FROM logged_user")
-        db.close()
-    }
 }

@@ -10,6 +10,7 @@ class DBManager(context: Context,
                 factory: SQLiteDatabase.CursorFactory?,
                 version: Int
 ) : SQLiteOpenHelper(context, name, factory, version) {
+
     override fun onCreate(db: SQLiteDatabase?) {
         db!!.execSQL("CREATE TABLE user (user_id VARCHAR(10) NOT NULL PRIMARY KEY, email VARCHAR(40) NOT NULL, password VARCHAR(20) NOT NULL, profile TEXT NOT NULL, num_follow INTEGER NOT NULL, intro TEXT NOT NULL)")
         db!!.execSQL("CREATE TABLE post (post_id INTEGER NOT NULL PRIMARY KEY, user_id VARCHAR(10) NOT NULL, picture TEXT NOT NULL, num_like INTEGER NOT NULL, comment TEXT NOT NULL, date VARCHAR(15) NOT NULL, hour INTEGER NOT NULL, minute INTEGER NOT NULL, second INTEGER NOT NULL, foreign key(user_id) references user (user_id))")
@@ -45,7 +46,7 @@ class DBManager(context: Context,
         return res
     }
 
-    // 해당 id, password가 있는지 확인, 없다면 false
+    // 해당 아이디, 비밀번호가 존재하면 true, 없다면 false
     fun checkUserpass(id: String, password: String) : Boolean {
         val db = this.writableDatabase
         var res = true
@@ -56,4 +57,5 @@ class DBManager(context: Context,
         if (cursor.count <= 0) res = false
         return res
     }
+
 }
