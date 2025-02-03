@@ -101,9 +101,9 @@
 
             <!--공부 시간 나타내는 텍스트뷰 레이아웃-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="140dp"
+                android:layout_marginStart="130dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
@@ -138,7 +138,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="2dp"
                         android:text="시간"
                         android:textSize="13sp" />
 
@@ -155,7 +155,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="2dp"
                         android:text="분"
                         android:textSize="13sp" />
 
@@ -172,7 +172,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="2dp"
                         android:text="초"
                         android:textSize="13sp" />
 
