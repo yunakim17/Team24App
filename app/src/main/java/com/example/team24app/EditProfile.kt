@@ -32,6 +32,9 @@ class EditProfile : AppCompatActivity() {
     private var imageUri : Uri? = null
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
+    lateinit var change_id : String
+    var isCliecked = false
+    var isChecked = false
 
     private val requestPermissionLauncher : ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
@@ -95,6 +98,8 @@ class EditProfile : AppCompatActivity() {
 
         btnBack.setOnClickListener {
             //뒤로가기 버튼
+            sqlitedb.close()
+            dbManager.close()
             onBackPressedDispatcher.onBackPressed()
         }
 
@@ -110,9 +115,17 @@ class EditProfile : AppCompatActivity() {
 
         btnID.setOnClickListener {
             //id변경 버튼
-            edtName.visibility = View.VISIBLE
-            tvName.visibility = View.GONE
-            btnID.isEnabled=false
+            if(isCliecked == false){
+                change()
+                isCliecked = true
+            }else if(isCliecked == true && isChecked == false){
+                change_id = edtName.text.toString()
+                if(change_id == user_id){
+                    Toast.makeText(this, "아이디가 동일합니다.", Toast.LENGTH_SHORT).show()
+                }else{
+                    check()
+                }
+            }
         }
 
         btnSave.setOnClickListener {
@@ -127,18 +140,37 @@ class EditProfile : AppCompatActivity() {
                 sqlitedb.execSQL("UPDATE user SET intro = '"+intro+"' WHERE user_id = '"+user_id+"';")
             }
 
-            val change_id = edtName.text.toString()
-            if(user_id != change_id){
+            if(isChecked){
+                sqlitedb.execSQL("UPDATE post SET user_id = '"+change_id+"' WHERE user_id = '"+user_id+"';")
+                sqlitedb.execSQL("UPDATE friend SET from_id = '"+change_id+"' WHERE from_id = '"+user_id+"';")
+                sqlitedb.execSQL("UPDATE friend SET to_id = '"+change_id+"' WHERE to_id = '"+user_id+"';")
                 sqlitedb.execSQL("UPDATE user SET user_id = '"+change_id+"' WHERE user_id = '"+user_id+"';")
+                UserId.userId = change_id
             }
             Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+            sqlitedb.close()
+            dbManager.close()
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        sqlitedb.close()
-        dbManager.close()
+    fun change(){
+        edtName.visibility = View.VISIBLE
+        tvName.visibility = View.GONE
+        btnID.text = getString(R.string.check)
+    }
+
+    fun check(){
+        val checkUsername = dbManager!!.checkUser(change_id)
+        if (!checkUsername) {
+            isChecked = true
+            btnID.text = getString(R.string.end)
+            btnID.isEnabled=false
+            Toast.makeText(this, "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun openGallery(){
