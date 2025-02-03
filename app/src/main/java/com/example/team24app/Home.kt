@@ -16,8 +16,6 @@ class Home : AppCompatActivity() {
     lateinit var edtSearch : EditText
     lateinit var btnSearch : ImageButton
     lateinit var rvHome : RecyclerView
-    lateinit var dbManager: DBManager
-    lateinit var sqlitedb: SQLiteDatabase
     //하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
 
@@ -29,12 +27,25 @@ class Home : AppCompatActivity() {
         edtSearch = findViewById(R.id.edtSearchBar)
         btnSearch = findViewById(R.id.ivSearch)
         rvHome = findViewById(R.id.rvHomeFeed)
-        dbManager = DBManager(this, "appDB", null, 1)
-        sqlitedb = dbManager.readableDatabase
 
         //하단네비뷰 연결
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         setBottomNavigationView()
+
+        btnSearch.setOnClickListener{
+            val search_id = edtSearch.text.toString()
+            edtSearch.setText("")
+            val intent = Intent(this, Search::class.java)
+            intent.putExtra("search_id", search_id)
+            startActivity(intent)
+            //검색 화면으로 전환
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val dbManager = DBManager(this, "appDB", null, 1)
+        val sqlitedb = dbManager.readableDatabase
 
         val user_id = UserId.userId
         val itemlist = ArrayList<Post>()
@@ -87,15 +98,6 @@ class Home : AppCompatActivity() {
 
         sqlitedb.close()
         dbManager.close()
-
-        btnSearch.setOnClickListener{
-            val search_id = edtSearch.text.toString()
-            edtSearch.setText("")
-            val intent = Intent(this, Search::class.java)
-            intent.putExtra("search_id", search_id)
-            startActivity(intent)
-            //검색 화면으로 전환
-        }
     }
 
     //하단 네비게이션바 기능 추가
@@ -126,8 +128,4 @@ class Home : AppCompatActivity() {
 
         }
     }
-
-
-
-
 }
