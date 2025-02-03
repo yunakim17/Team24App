@@ -18,6 +18,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import java.io.File
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -33,6 +35,7 @@ class UploadPost : AppCompatActivity() {
     private var imageUri : Uri? = null
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
+    val user_id = UserId.userId
 
     private val requestPermissionLauncher : ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
@@ -100,19 +103,11 @@ class UploadPost : AppCompatActivity() {
 
         btnUpload.setOnClickListener {
             //업로드 버튼
-            var num = 0
-            val user_id = UserId.userId
-            val picture = imageUri.toString()
-            val comment = edtComment.text.toString()
-
-            val now = Date()
-            val dateFormat= SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
-            val date = dateFormat.format(now)
-
-            if(picture=="null"){
+            if(imageUri == null){
                 //사진이 비었는지 확인
                 Toast.makeText(this, "사진이 설정되지 않았습니다.\n사진을 설정해주세요.",Toast.LENGTH_SHORT).show()
             }else{
+                var num = 0
                 val cursor_num : Cursor
                 cursor_num = sqlitedb.rawQuery("SELECT count(*) as cnt FROM post;", null)
                 //post_id 설정
@@ -122,9 +117,16 @@ class UploadPost : AppCompatActivity() {
                 }
                 cursor_num.close()
 
+                val picture = saveImage(imageUri!!, num)
+                val comment = edtComment.text.toString()
+                val now = Date()
+                val dateFormat= SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
+                val date = dateFormat.format(now)
+
                 sqlitedb.execSQL("INSERT INTO post VALUES ("+num+", '"+user_id+"', '"+picture+"', 0, '"+comment+"', '"+date+"', "+hour+", "+minute+", "+second+");")
                 sqlitedb.close()
                 dbManager.close()
+
                 val intent = Intent(this, Profile::class.java)
                 startActivity(intent)
             }
@@ -137,4 +139,17 @@ class UploadPost : AppCompatActivity() {
         //갤러리를 열기 위해 intent 생성, 갤러리 액티비티 실행
     }
 
+    fun saveImage(uri : Uri, num : Int):String{
+        val inputStream : InputStream? = contentResolver.openInputStream(uri)
+        val file = File(filesDir, "${user_id}_post_image_${num}.jpg")
+
+        file.outputStream().use{ fileOutput ->
+            inputStream?.copyTo(fileOutput)
+        }
+        //프로필 사진 내부 저장소에 저장
+
+        inputStream?.close()
+        return file.absolutePath
+        //내부 저장소의 절대경로 복사
+    }
 }

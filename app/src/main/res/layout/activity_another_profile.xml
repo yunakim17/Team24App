@@ -142,14 +142,14 @@
 
                                 <!-- 친구 수 -->
                                 <TextView
-                                    android:id="@+id/tvFriendLabel"
+                                    android:id="@+id/tvFollowLabel"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="팔로잉"
                                     android:textSize="15sp" />
 
                                 <TextView
-                                    android:id="@+id/tvFriendCount"
+                                    android:id="@+id/tvFollowCount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
@@ -180,7 +180,7 @@
 
                         <!-- 친구 추가 버튼 -->
                         <Button
-                            android:id="@+id/btnAddFriend"
+                            android:id="@+id/btnAddFollow"
                             android:layout_width="122dp"
                             android:layout_height="46dp"
                             android:padding="4dp"

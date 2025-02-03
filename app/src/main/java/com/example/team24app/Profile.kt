@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.File
 
 class Profile : AppCompatActivity() {
     lateinit var tvName : TextView
@@ -31,10 +32,9 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        //btnBack = findViewById(R.id.btnBack)
         tvName = findViewById(R.id.tvUserName)
         ivProfile = findViewById(R.id.ivProfileImage)
-        tvFollow = findViewById(R.id.tvFriendCount)
+        tvFollow = findViewById(R.id.tvFollowCount)
         tvDescrip = findViewById(R.id.tvDescription)
         btnProfile = findViewById(R.id.btnEdtProfile)
         btnUpload = findViewById(R.id.btnPostUpload)
@@ -60,7 +60,7 @@ class Profile : AppCompatActivity() {
             //this.contentResolver.takePersistableUriPermission(uri, takeFlags)
             val profile = cursor_user.getString(cursor_user.getColumnIndexOrThrow("profile"))
             if(profile != "tmp"){
-                val uri = Uri.parse(profile)
+                val uri = Uri.fromFile(File(profile))
                 ivProfile.setImageURI(uri)
             }else{
                 ivProfile.setImageResource(R.drawable.img)

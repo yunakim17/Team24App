@@ -13,13 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.File
 
 class AnotherProfile : AppCompatActivity() {
     lateinit var btnBack : ImageButton
-    lateinit var name : TextView
-    lateinit var profile : ImageView
-    lateinit var follow : TextView
-    lateinit var description : TextView
+    lateinit var tvName : TextView
+    lateinit var ivProfile : ImageView
+    lateinit var tvFollow : TextView
+    lateinit var tvDesc : TextView
     lateinit var btnAdd : Button
     lateinit var rvPost : RecyclerView
     lateinit var dbManager: DBManager
@@ -34,11 +35,11 @@ class AnotherProfile : AppCompatActivity() {
         setContentView(R.layout.activity_another_profile)
 
         btnBack = findViewById(R.id.btnBack)
-        name = findViewById(R.id.tvUserName)
-        profile = findViewById(R.id.ivProfileImage)
-        follow = findViewById(R.id.tvFriendCount)
-        description = findViewById(R.id.tvDescription)
-        btnAdd = findViewById(R.id.btnAddFriend)
+        tvName = findViewById(R.id.tvUserName)
+        ivProfile = findViewById(R.id.ivProfileImage)
+        tvFollow = findViewById(R.id.tvFollowCount)
+        tvDesc = findViewById(R.id.tvDescription)
+        btnAdd = findViewById(R.id.btnAddFollow)
         rvPost = findViewById(R.id.rvPosts)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.writableDatabase
@@ -60,19 +61,19 @@ class AnotherProfile : AppCompatActivity() {
         //아이디를 이용해 해당 유저의 데이터 가져옴
 
         if(cursor_user.moveToNext()){
-            val pro_string = cursor_user.getString(cursor_user.getColumnIndexOrThrow("profile"))
-            if(pro_string != "tmp"){
-                val uri = Uri.parse(pro_string)
-                profile.setImageURI(uri)
+            val profile = cursor_user.getString(cursor_user.getColumnIndexOrThrow("profile"))
+            if(profile != "tmp"){
+                val uri = Uri.fromFile(File(profile))
+                ivProfile.setImageURI(uri)
             }else{
-                profile.setImageResource(R.drawable.img)
+                ivProfile.setImageResource(R.drawable.img)
             }
 
             num_follow = cursor_user.getInt(cursor_user.getColumnIndexOrThrow("num_follow"))
 
-            name.text = other_id
-            follow.text = "${num_follow}"
-            description.text = cursor_user.getString(cursor_user.getColumnIndexOrThrow("intro"))
+            tvName.text = other_id
+            tvFollow.text = "${num_follow}"
+            tvDesc.text = cursor_user.getString(cursor_user.getColumnIndexOrThrow("intro"))
             //테이블에서 상대 프로필 정보를 끌고옴
         }
         cursor_user.close()
@@ -114,7 +115,7 @@ class AnotherProfile : AppCompatActivity() {
         btnAdd.setOnClickListener {
             //친구추가 버튼
             num_follow++
-            follow.text = "${num_follow}"
+            tvFollow.text = "${num_follow}"
             btnAdd.text = getString(R.string.following)
             btnAdd.isEnabled=false
             sqlitedb.execSQL("INSERT INTO follow VALUES ('"+user_id+"', '"+other_id+"');")

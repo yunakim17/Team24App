@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.File
 
 class ClickFeed : AppCompatActivity() {
     lateinit var btnBack : ImageButton
@@ -72,7 +73,7 @@ class ClickFeed : AppCompatActivity() {
             if (cursor_user.moveToNext()){
                 val profile = cursor_user.getString(cursor_user.getColumnIndexOrThrow("profile"))
                 if(profile != "tmp"){
-                    val uri_profile = Uri.parse(profile)
+                    val uri_profile = Uri.fromFile(File(profile))
                     ivProfile.setImageURI(uri_profile)
                 }else{
                     ivProfile.setImageResource(R.drawable.img)
@@ -80,7 +81,8 @@ class ClickFeed : AppCompatActivity() {
             }
             cursor_user.close()
 
-            val uri_picture = Uri.parse(cursor_feed.getString(cursor_feed.getColumnIndexOrThrow("picture")))
+            val picture = cursor_feed.getString(cursor_feed.getColumnIndexOrThrow("picture"))
+            val uri_picture = Uri.fromFile(File(picture))
             like = cursor_feed.getInt(cursor_feed.getColumnIndexOrThrow("num_like"))
 
             ivPost.setImageURI(uri_picture)

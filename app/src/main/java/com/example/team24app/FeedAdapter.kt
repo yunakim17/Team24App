@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import java.io.File
 
 class FeedAdapter(val itemList: ArrayList<Feed_Square>, val context : Context) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
@@ -21,9 +22,7 @@ class FeedAdapter(val itemList: ArrayList<Feed_Square>, val context : Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //picture 적용
-        //val flag = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        val uri = Uri.parse(itemList[position].picture)
-        //context.contentResolver.takePersistableUriPermission(uri, flag)
+        val uri = Uri.fromFile(File(itemList[position].picture))
         holder.ivPicture.setImageURI(uri)
     }
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.io.File
 
 class ProfileAdpater(val itemList: ArrayList<User>, val context : Context) : RecyclerView.Adapter<ProfileAdpater.ViewHolder>(){
     override fun onCreateViewHolder(
@@ -23,7 +24,7 @@ class ProfileAdpater(val itemList: ArrayList<User>, val context : Context) : Rec
     override fun onBindViewHolder(holder: ProfileAdpater.ViewHolder, position: Int) {
         // 테이블에서 가져와 kt로 전달된 데이터를 이곳에서 입력
         if(itemList[position].profile != "tmp"){
-            val uri = Uri.parse(itemList[position].profile)
+            val uri = Uri.fromFile(File(itemList[position].profile))
             holder.ivProfile.setImageURI(uri)
         }else{
             holder.ivProfile.setImageResource(R.drawable.img)

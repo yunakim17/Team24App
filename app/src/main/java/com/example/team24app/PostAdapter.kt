@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.io.File
 
 //Feed라는 이름의 data class타입의 arrayList 사용
 class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : RecyclerView.Adapter<PostAdapter.ViewHolder>(){
@@ -25,13 +26,13 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
         // 뷰에 내용 입력(리사이클 될때마다 입력됨)
 
         if(itemList[position].profile!="tmp"){
-            val uri_profile = Uri.parse(itemList[position].profile)
+            val uri_profile = Uri.fromFile(File(itemList[position].profile))
             holder.ivProfile.setImageURI(uri_profile)
         }else{
             holder.ivProfile.setImageResource(R.drawable.img)
         }
 
-        val uri_picture = Uri.parse(itemList[position].picture)
+        val uri_picture = Uri.fromFile(File(itemList[position].picture))
 
         holder.tvName.text = itemList[position].id
         holder.ivPicture.setImageURI(uri_picture)

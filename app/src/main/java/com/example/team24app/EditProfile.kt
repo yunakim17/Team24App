@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +20,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 
 class EditProfile : AppCompatActivity() {
     lateinit var btnBack : ImageButton
@@ -35,6 +39,7 @@ class EditProfile : AppCompatActivity() {
     lateinit var change_id : String
     var isCliecked = false
     var isChecked = false
+    val user_id = UserId.userId
 
     private val requestPermissionLauncher : ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
@@ -74,7 +79,6 @@ class EditProfile : AppCompatActivity() {
         else android.Manifest.permission.READ_EXTERNAL_STORAGE
 
         var profile = "tmp"
-        val user_id = UserId.userId
         tvName.text = user_id
         edtName.setText(user_id)
 
@@ -131,7 +135,7 @@ class EditProfile : AppCompatActivity() {
         btnSave.setOnClickListener {
             //변경 저장 버튼
             if(imageUri != null){
-                profile = imageUri.toString()
+                profile = saveImage(imageUri!!)
                 sqlitedb.execSQL("UPDATE user SET profile = '"+profile+"' WHERE user_id = '"+user_id+"';")
             }
 
@@ -177,5 +181,19 @@ class EditProfile : AppCompatActivity() {
         val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         pickImageLauncher.launch(gallery)
         //갤러리를 열기 위해 intent 생성, 갤러리 액티비티 실행
+    }
+
+    fun saveImage(uri : Uri):String{
+        val inputStream : InputStream? = contentResolver.openInputStream(uri)
+        val file = File(filesDir, "${user_id}_profile_image.jpg")
+
+        file.outputStream().use{ fileOutput ->
+            inputStream?.copyTo(fileOutput)
+        }
+        //프로필 사진 내부 저장소에 저장
+
+        inputStream?.close()
+        return file.absolutePath
+        //내부 저장소의 절대경로 복사
     }
 }
