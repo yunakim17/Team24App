@@ -5,7 +5,7 @@
     <string name="start">시작</string>
     <string name="stop">정지</string>
     <string name="follow">팔로우 추가</string>
-    <string name="following">팔로우 중</string>
+    <string name="cancel">팔로우 취소</string>
     <string name="reset">초기화</string>
     <string name="change">아이디 변경</string>
     <string name="check">중복 확인</string>

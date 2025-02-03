@@ -78,17 +78,6 @@ class AnotherProfile : AppCompatActivity() {
         }
         cursor_user.close()
 
-        val cursor_follow : Cursor
-        cursor_follow = sqlitedb.rawQuery("SELECT * FROM follow WHERE from_id = '"+user_id+"' AND to_id = '"+other_id+"';", null)
-        //친구 관계 확인
-
-        if(cursor_follow.moveToNext()){
-            btnAdd.isEnabled=false
-            btnAdd.text = getString(R.string.following)
-            //친구 관계라면 버튼 비활성화
-        }
-        cursor_follow.close()
-
         var cursor_feed : Cursor
         cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = '"+other_id+"';", null)
         //사각형 피드 데이터 가져옴
@@ -112,15 +101,40 @@ class AnotherProfile : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        btnAdd.setOnClickListener {
-            //친구추가 버튼
-            num_follow++
-            tvFollow.text = "${num_follow}"
-            btnAdd.text = getString(R.string.following)
-            btnAdd.isEnabled=false
-            sqlitedb.execSQL("INSERT INTO follow VALUES ('"+user_id+"', '"+other_id+"');")
-            sqlitedb.execSQL("UPDATE user SET num_follow = "+num_follow+" WHERE user_id = '"+other_id+"';")
+        var isFollow = false
+        val cursor_follow : Cursor
+        cursor_follow = sqlitedb.rawQuery("SELECT * FROM follow WHERE from_id = '"+user_id+"' AND to_id = '"+other_id+"';", null)
+        if(cursor_follow.moveToNext()){
+            isFollow = true
+            btnAdd.text=getString(R.string.cancel)
         }
+        //팔로우 관계 확인
+        cursor_follow.close()
+
+        btnAdd.setOnClickListener {
+            //팔로우 버튼
+            if(!isFollow){
+                //팔로우가 아닐때
+                num_follow++
+                tvFollow.text = "${num_follow}"
+                btnAdd.text = getString(R.string.cancel)
+                sqlitedb.execSQL("INSERT INTO follow VALUES ('"+user_id+"', '"+other_id+"');")
+                sqlitedb.execSQL("UPDATE user SET num_follow = "+num_follow+" WHERE user_id = '"+other_id+"';")
+            }else{
+                //팔로우일 때
+                num_follow--
+                tvFollow.text = "${num_follow}"
+                btnAdd.text = getString(R.string.follow)
+                sqlitedb.execSQL("DELETE FROM follow WHERE from_id = '${user_id}' AND to_id = '${other_id}';")
+                sqlitedb.execSQL("UPDATE user SET num_follow = "+num_follow+" WHERE user_id = '"+other_id+"';")
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        sqlitedb.close()
+        dbManager.close()
     }
 
     //하단 네비게이션바 기능 추가
@@ -150,11 +164,5 @@ class AnotherProfile : AppCompatActivity() {
             }
 
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sqlitedb.close()
-        dbManager.close()
     }
 }
