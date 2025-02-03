@@ -31,7 +31,7 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
             val uri_profile = Uri.fromFile(File(itemList[position].profile))
             holder.ivProfile.setImageURI(uri_profile)
         }else{
-            holder.ivProfile.setImageResource(R.drawable.img)
+            holder.ivProfile.setImageResource(R.drawable.default_profile)
         }
 
         val uri_picture = Uri.fromFile(File(itemList[position].picture))
