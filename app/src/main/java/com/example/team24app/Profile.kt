@@ -82,7 +82,7 @@ class Profile : AppCompatActivity() {
         cursor_user.close()
 
         val cursor_feed : Cursor
-        cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = '${user_id}';", null)
+        cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = '${user_id}' ORDER BY post_id DESC;", null)
         //사각형 피드를 위한 데이터를 가져옴
 
         while (cursor_feed.moveToNext()){

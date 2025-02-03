@@ -89,7 +89,7 @@ class AnotherProfile : AppCompatActivity() {
         cursor_user.close()
 
         var cursor_feed : Cursor
-        cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = '"+other_id+"';", null)
+        cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = '"+other_id+"' ORDER BY post_id DESC;", null)
         //사각형 피드 데이터 가져옴
 
         while (cursor_feed.moveToNext()){

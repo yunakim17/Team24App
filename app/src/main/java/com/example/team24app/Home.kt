@@ -112,6 +112,7 @@ class Home : AppCompatActivity() {
         }
         cursor_follow.close()
 
+        itemlist.sortByDescending { it.post_id }
         val rv_adapter = PostAdapter(itemlist, this)
         rv_adapter.notifyDataSetChanged()
         //어댑터와 리사이클러뷰 갱신
