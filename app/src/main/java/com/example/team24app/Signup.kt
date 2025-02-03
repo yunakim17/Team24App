@@ -36,7 +36,7 @@ class Signup : AppCompatActivity() {
         // 아이디 중복 확인
         btnIdCheck.setOnClickListener {
             val user = edtSignupId.text.toString()
-            val idPattern = "^[A-Za-z0-9]{5,15}$"  //영문 + 숫자 조합 허용, 최소 5자 이상
+            val idPattern = "^[A-Za-z0-9]{5,10}$"  // 영문 + 숫자 허용, 최소 5자 ~ 최대 10자
 
             if (user.isEmpty()) {
                 Toast.makeText(this@Signup, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -50,7 +50,7 @@ class Signup : AppCompatActivity() {
                         Toast.makeText(this@Signup, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@Signup, "3-15자 아이디를 설정해주세요.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Signup, "5-10자 아이디를 설정해주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
