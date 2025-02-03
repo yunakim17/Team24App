@@ -79,6 +79,7 @@
                     android:layout_height="340dp"
                     android:layout_gravity="center"
                     android:background="@drawable/rounded_corner"
+                    android:scaleType="centerCrop"
                     android:clipToOutline="true"
                     app:layout_constraintDimensionRatio="16:9"
                     app:layout_constraintEnd_toEndOf="parent"

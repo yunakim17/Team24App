@@ -9,6 +9,7 @@
         android:layout_height="120dp"
         android:background="@drawable/custom_feed_pic"
         android:clipToOutline="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_foreground"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
