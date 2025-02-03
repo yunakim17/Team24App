@@ -27,7 +27,7 @@ class ProfileAdpater(val itemList: ArrayList<User>, val context : Context) : Rec
             val uri = Uri.fromFile(File(itemList[position].profile))
             holder.ivProfile.setImageURI(uri)
         }else{
-            holder.ivProfile.setImageResource(R.drawable.img)
+            holder.ivProfile.setImageResource(R.drawable.default_profile)
         }
 
         holder.tvName.text = itemList[position].id

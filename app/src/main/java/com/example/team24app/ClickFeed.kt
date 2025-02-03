@@ -5,9 +5,11 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
@@ -57,17 +59,17 @@ class ClickFeed : AppCompatActivity() {
         var like = 0
         //인텐트로 포스트id 가져옴
 
-        val cursor_feed : Cursor
-        cursor_feed = sqlitedb.rawQuery("SELECT * FROM post WHERE post_id = '"+post_id+"';", null)
+        val cursor_post : Cursor
+        cursor_post = sqlitedb.rawQuery("SELECT * FROM post WHERE post_id = '"+post_id+"';", null)
         //post_id로 포스트 값 가져옴
 
-        if(cursor_feed.moveToNext()){
-            val user_id = cursor_feed.getString(cursor_feed.getColumnIndexOrThrow("user_id"))
-            tvName.text = user_id
+        if(cursor_post.moveToNext()){
+            val owner_id = cursor_post.getString(cursor_post.getColumnIndexOrThrow("user_id"))
+            tvName.text = owner_id
             //user_id 별도로 먼저 추출
 
             val cursor_user : Cursor
-            cursor_user = sqlitedb.rawQuery("SELECT profile FROM user WHERE user_id = '"+ user_id +"';", null)
+            cursor_user = sqlitedb.rawQuery("SELECT profile FROM user WHERE user_id = '"+ owner_id +"';", null)
             //user_id로 프로필 가져옴
 
             if (cursor_user.moveToNext()){
@@ -81,32 +83,59 @@ class ClickFeed : AppCompatActivity() {
             }
             cursor_user.close()
 
-            val picture = cursor_feed.getString(cursor_feed.getColumnIndexOrThrow("picture"))
+            val picture = cursor_post.getString(cursor_post.getColumnIndexOrThrow("picture"))
             val uri_picture = Uri.fromFile(File(picture))
-            like = cursor_feed.getInt(cursor_feed.getColumnIndexOrThrow("num_like"))
+            like = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("num_like"))
 
             ivPost.setImageURI(uri_picture)
             tvLike.text = "$like"
-            tvDescrip.text = cursor_feed.getString(cursor_feed.getColumnIndexOrThrow("comment"))
-            tvDate.text = cursor_feed.getString(cursor_feed.getColumnIndexOrThrow("date"))
-            tvHour.text = "${cursor_feed.getInt(cursor_feed.getColumnIndexOrThrow("hour"))}"
-            tvMin.text = "${cursor_feed.getInt(cursor_feed.getColumnIndexOrThrow("minute"))}"
-            tvSec.text = "${cursor_feed.getInt(cursor_feed.getColumnIndexOrThrow("second"))}"
+            tvDescrip.text = cursor_post.getString(cursor_post.getColumnIndexOrThrow("comment"))
+            tvDate.text = cursor_post.getString(cursor_post.getColumnIndexOrThrow("date"))
+            tvHour.text = "${cursor_post.getInt(cursor_post.getColumnIndexOrThrow("hour"))}"
+            tvMin.text = "${cursor_post.getInt(cursor_post.getColumnIndexOrThrow("minute"))}"
+            tvSec.text = "${cursor_post.getInt(cursor_post.getColumnIndexOrThrow("second"))}"
             //받아온 피드 정보를 입력
         }
-        cursor_feed.close()
+        cursor_post.close()
 
         btnBack.setOnClickListener {
             //뒤로가기 버튼
             onBackPressedDispatcher.onBackPressed()
         }
 
+        val user_id = UserId.userId
+        var isClieked = false
+        val cursor_like : Cursor
+        cursor_like = sqlitedb.rawQuery("SELECT isClicked FROM clickLike WHERE user_id = '${user_id}' AND post_id = ${post_id}", null)
+        if(!cursor_like.moveToNext()){
+            sqlitedb.execSQL("INSERT INTO clickLike VALUES ('${user_id}', ${post_id}, 0);")
+        }else{
+            if(cursor_like.getInt(cursor_like.getColumnIndexOrThrow("isClicked"))==1){
+                isClieked = true
+                btnLike.setBackgroundResource(R.drawable.baseline_thumb_up_alt_24)
+            }
+        }
+        cursor_like.close()
+        Log.d("확인", "create")
+
+
         btnLike.setOnClickListener {
             //좋아요 버튼
-            like++
-            sqlitedb.execSQL("UPDATE post SET num_like = "+like+" WHERE post_id = '"+post_id+"';")
-            tvLike.text = "$like"
-            btnLike.isEnabled=false
+            Toast.makeText(this, "${isClieked}", Toast.LENGTH_SHORT).show()
+            isClieked = !isClieked
+            if(isClieked){
+                like++
+                sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
+                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 1 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
+                tvLike.text = "$like"
+                btnLike.setBackgroundResource(R.drawable.baseline_thumb_up_alt_24)
+            }else{
+                like--
+                sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
+                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 0 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
+                tvLike.text = "$like"
+                btnLike.setBackgroundResource(R.drawable.like_btn)
+            }
         }
     }
 
