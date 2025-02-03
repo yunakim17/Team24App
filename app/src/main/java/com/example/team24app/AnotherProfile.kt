@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -112,8 +113,9 @@ class AnotherProfile : AppCompatActivity() {
         cursor_follow.close()
 
         btnAdd.setOnClickListener {
+            isFollow = !isFollow
             //팔로우 버튼
-            if(!isFollow){
+            if(isFollow){
                 //팔로우가 아닐때
                 num_follow++
                 tvFollow.text = "${num_follow}"
