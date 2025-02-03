@@ -11,15 +11,15 @@ class DBManager(context: Context,
                 version: Int
 ) : SQLiteOpenHelper(context, name, factory, version) {
     override fun onCreate(db: SQLiteDatabase?) {
-        db!!.execSQL("CREATE TABLE user (user_id VARCHAR(10) NOT NULL PRIMARY KEY, email VARCHAR(40) NOT NULL, password VARCHAR(20) NOT NULL, profile TEXT NOT NULL, num_friend INTEGER NOT NULL, intro TEXT NOT NULL)")
+        db!!.execSQL("CREATE TABLE user (user_id VARCHAR(10) NOT NULL PRIMARY KEY, email VARCHAR(40) NOT NULL, password VARCHAR(20) NOT NULL, profile TEXT NOT NULL, num_follow INTEGER NOT NULL, intro TEXT NOT NULL)")
         db!!.execSQL("CREATE TABLE post (post_id INTEGER NOT NULL PRIMARY KEY, user_id VARCHAR(10) NOT NULL, picture TEXT NOT NULL, num_like INTEGER NOT NULL, comment TEXT NOT NULL, date VARCHAR(15) NOT NULL, hour INTEGER NOT NULL, minute INTEGER NOT NULL, second INTEGER NOT NULL, foreign key(user_id) references user (user_id))")
-        db!!.execSQL("CREATE TABLE friend (from_id VARCHAR(10) NOT NULL, to_id VARCHAR(10) NOT NULL, PRIMARY KEY (from_id, to_id), foreign key(from_id) references user (user_id), foreign key(to_id) references user (user_id))")
+        db!!.execSQL("CREATE TABLE follow (from_id VARCHAR(10) NOT NULL, to_id VARCHAR(10) NOT NULL, PRIMARY KEY (from_id, to_id), foreign key(from_id) references user (user_id), foreign key(to_id) references user (user_id))")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("drop Table if exists user")
         db!!.execSQL("drop Table if exists post")
-        db!!.execSQL("drop Table if exists friend")
+        db!!.execSQL("drop Table if exists follow")
     }
 
     fun insertUser(user_id: String, email: String, password: String): Boolean {
@@ -29,7 +29,7 @@ class DBManager(context: Context,
         contentValues.put("email", email)
         contentValues.put("password", password)
         contentValues.put("profile", "tmp")
-        contentValues.put("num_friend", 0)
+        contentValues.put("num_follow", 0)
         contentValues.put("intro", "")
         val result = db.insert("user", null, contentValues)
         db.close()

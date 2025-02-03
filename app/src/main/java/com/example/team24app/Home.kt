@@ -4,12 +4,8 @@ import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,17 +38,17 @@ class Home : AppCompatActivity() {
         val user_id = UserId.userId
         val itemlist = ArrayList<Post>()
 
-        var cursor_friend : Cursor
-        cursor_friend = sqlitedb.rawQuery("SELECT to_id FROM friend WHERE from_id = '${user_id}';", null)
+        var cursor_follow : Cursor
+        cursor_follow = sqlitedb.rawQuery("SELECT to_id FROM follow WHERE from_id = '${user_id}';", null)
         //유저의 친구 목록 가져옴
 
-        while(cursor_friend.moveToNext()){
+        while(cursor_follow.moveToNext()){
             //친구 목록 탐색
-            val friend_id = cursor_friend.getString((cursor_friend.getColumnIndexOrThrow("to_id"))).toString()
+            val follow_id = cursor_follow.getString((cursor_follow.getColumnIndexOrThrow("to_id"))).toString()
 
             var profile = ""
             var cursor_user : Cursor
-            cursor_user = sqlitedb.rawQuery("SELECT profile FROM user WHERE user_id = '${friend_id}';", null)
+            cursor_user = sqlitedb.rawQuery("SELECT profile FROM user WHERE user_id = '${follow_id}';", null)
             //프로필 먼저 추출
 
             if (cursor_user.moveToNext()){
@@ -61,7 +57,7 @@ class Home : AppCompatActivity() {
             cursor_user.close()
 
             var cursor_post : Cursor
-            cursor_post = sqlitedb.rawQuery("SELECT * FROM post WHERE user_id = '${friend_id}';", null)
+            cursor_post = sqlitedb.rawQuery("SELECT * FROM post WHERE user_id = '${follow_id}';", null)
 
             while (cursor_post.moveToNext()){
                 val post_id = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("post_id"))
@@ -72,13 +68,13 @@ class Home : AppCompatActivity() {
                 val hour = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("hour"))
                 val minute = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("minute"))
                 val second = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("second"))
-                val item = Post(profile, friend_id, post_id, picture, like, comment, date, hour, minute, second)
+                val item = Post(profile, follow_id, post_id, picture, like, comment, date, hour, minute, second)
                 itemlist.add(item)
                 //itemList에 친구의 피드 요소들을 더해 item을 늘림
             }
             cursor_post.close()
         }
-        cursor_friend.close()
+        cursor_follow.close()
 
         val rv_adapter = PostAdapter(itemlist, this)
         rv_adapter.notifyDataSetChanged()

@@ -131,7 +131,7 @@
                                             android:id="@+id/tvFriendLabel"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="친구"
+                                            android:text="팔로잉"
                                             android:textSize="15sp" />
 
                                         <TextView

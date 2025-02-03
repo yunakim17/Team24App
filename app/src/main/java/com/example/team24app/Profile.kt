@@ -5,7 +5,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class Profile : AppCompatActivity() {
     lateinit var tvName : TextView
     lateinit var ivProfile : ImageView
-    lateinit var friend : TextView
+    lateinit var tvFollow : TextView
     lateinit var tvDescrip : TextView
     lateinit var btnProfile : Button
     lateinit var btnUpload : Button
@@ -35,7 +34,7 @@ class Profile : AppCompatActivity() {
         //btnBack = findViewById(R.id.btnBack)
         tvName = findViewById(R.id.tvUserName)
         ivProfile = findViewById(R.id.ivProfileImage)
-        friend = findViewById(R.id.tvFriendCount)
+        tvFollow = findViewById(R.id.tvFriendCount)
         tvDescrip = findViewById(R.id.tvDescription)
         btnProfile = findViewById(R.id.btnEdtProfile)
         btnUpload = findViewById(R.id.btnPostUpload)
@@ -53,7 +52,7 @@ class Profile : AppCompatActivity() {
         tvName.text = user_id
 
         val cursor_user : Cursor
-        cursor_user = sqlitedb.rawQuery("SELECT profile, num_friend, intro FROM user WHERE user_id = '${user_id}';", null)
+        cursor_user = sqlitedb.rawQuery("SELECT profile, num_follow, intro FROM user WHERE user_id = '${user_id}';", null)
         //user_id로 프로필 데이터를 가져옴
 
         if(cursor_user.moveToNext()){
@@ -67,7 +66,7 @@ class Profile : AppCompatActivity() {
                 ivProfile.setImageResource(R.drawable.img)
             }
 
-            friend.text = "${cursor_user.getInt(cursor_user.getColumnIndexOrThrow("num_friend"))}"
+            tvFollow.text = "${cursor_user.getInt(cursor_user.getColumnIndexOrThrow("num_follow"))}"
             tvDescrip.text = cursor_user.getString(cursor_user.getColumnIndexOrThrow("intro"))
             //적용 완료
         }

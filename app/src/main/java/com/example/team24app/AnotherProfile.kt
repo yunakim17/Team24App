@@ -1,12 +1,10 @@
 package com.example.team24app
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -20,7 +18,7 @@ class AnotherProfile : AppCompatActivity() {
     lateinit var btnBack : ImageButton
     lateinit var name : TextView
     lateinit var profile : ImageView
-    lateinit var friend : TextView
+    lateinit var follow : TextView
     lateinit var description : TextView
     lateinit var btnAdd : Button
     lateinit var rvPost : RecyclerView
@@ -38,7 +36,7 @@ class AnotherProfile : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         name = findViewById(R.id.tvUserName)
         profile = findViewById(R.id.ivProfileImage)
-        friend = findViewById(R.id.tvFriendCount)
+        follow = findViewById(R.id.tvFriendCount)
         description = findViewById(R.id.tvDescription)
         btnAdd = findViewById(R.id.btnAddFriend)
         rvPost = findViewById(R.id.rvPosts)
@@ -51,14 +49,14 @@ class AnotherProfile : AppCompatActivity() {
 
         val itemlist = ArrayList<Feed_Square>()
         val user_id = UserId.userId
-        var num_friend = 0
+        var num_follow = 0
 
         val intent = intent
         val other_id = intent.getStringExtra("user_id")
         //다른 유저의 아이디 인텐트로 받아옴
 
         var cursor_user : Cursor
-        cursor_user = sqlitedb.rawQuery("SELECT profile, num_friend, intro FROM user WHERE user_id = '"+other_id+"';", null)
+        cursor_user = sqlitedb.rawQuery("SELECT profile, num_follow, intro FROM user WHERE user_id = '"+other_id+"';", null)
         //아이디를 이용해 해당 유저의 데이터 가져옴
 
         if(cursor_user.moveToNext()){
@@ -70,25 +68,25 @@ class AnotherProfile : AppCompatActivity() {
                 profile.setImageResource(R.drawable.img)
             }
 
-            num_friend = cursor_user.getInt(cursor_user.getColumnIndexOrThrow("num_friend"))
+            num_follow = cursor_user.getInt(cursor_user.getColumnIndexOrThrow("num_follow"))
 
             name.text = other_id
-            friend.text = "${num_friend}"
+            follow.text = "${num_follow}"
             description.text = cursor_user.getString(cursor_user.getColumnIndexOrThrow("intro"))
             //테이블에서 상대 프로필 정보를 끌고옴
         }
         cursor_user.close()
 
-        val cursor_friend : Cursor
-        cursor_friend = sqlitedb.rawQuery("SELECT * FROM friend WHERE from_id = '"+user_id+"' AND to_id = '"+other_id+"';", null)
+        val cursor_follow : Cursor
+        cursor_follow = sqlitedb.rawQuery("SELECT * FROM follow WHERE from_id = '"+user_id+"' AND to_id = '"+other_id+"';", null)
         //친구 관계 확인
 
-        if(cursor_friend.moveToNext()){
+        if(cursor_follow.moveToNext()){
             btnAdd.isEnabled=false
             btnAdd.text = getString(R.string.following)
             //친구 관계라면 버튼 비활성화
         }
-        cursor_friend.close()
+        cursor_follow.close()
 
         var cursor_feed : Cursor
         cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = '"+other_id+"';", null)
@@ -115,12 +113,12 @@ class AnotherProfile : AppCompatActivity() {
 
         btnAdd.setOnClickListener {
             //친구추가 버튼
-            num_friend++
-            friend.text = "${num_friend}"
+            num_follow++
+            follow.text = "${num_follow}"
             btnAdd.text = getString(R.string.following)
             btnAdd.isEnabled=false
-            sqlitedb.execSQL("INSERT INTO friend VALUES ('"+user_id+"', '"+other_id+"');")
-            sqlitedb.execSQL("UPDATE user SET num_friend = "+num_friend+" WHERE user_id = '"+other_id+"';")
+            sqlitedb.execSQL("INSERT INTO follow VALUES ('"+user_id+"', '"+other_id+"');")
+            sqlitedb.execSQL("UPDATE user SET num_follow = "+num_follow+" WHERE user_id = '"+other_id+"';")
         }
     }
 

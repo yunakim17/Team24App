@@ -142,8 +142,8 @@ class EditProfile : AppCompatActivity() {
 
             if(isChecked){
                 sqlitedb.execSQL("UPDATE post SET user_id = '"+change_id+"' WHERE user_id = '"+user_id+"';")
-                sqlitedb.execSQL("UPDATE friend SET from_id = '"+change_id+"' WHERE from_id = '"+user_id+"';")
-                sqlitedb.execSQL("UPDATE friend SET to_id = '"+change_id+"' WHERE to_id = '"+user_id+"';")
+                sqlitedb.execSQL("UPDATE follow SET from_id = '"+change_id+"' WHERE from_id = '"+user_id+"';")
+                sqlitedb.execSQL("UPDATE follow SET to_id = '"+change_id+"' WHERE to_id = '"+user_id+"';")
                 sqlitedb.execSQL("UPDATE user SET user_id = '"+change_id+"' WHERE user_id = '"+user_id+"';")
                 UserId.userId = change_id
             }
