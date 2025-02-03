@@ -13,5 +13,6 @@ data class Post(
     val date : String,
     val hour : Int,
     val minute : Int,
-    val second : Int
+    val second : Int,
+    val isClicked : Boolean
 ) : Serializable

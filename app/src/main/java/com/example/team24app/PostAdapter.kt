@@ -2,6 +2,7 @@ package com.example.team24app
 
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.view.LayoutInflater
@@ -35,10 +36,13 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
         }
 
         val uri_picture = Uri.fromFile(File(itemList[position].picture))
+        var like = itemList[position].like
+        var isClieked = itemList[position].isClicked
+        if (isClieked){ holder.btnLike.setBackgroundResource(R.drawable.like_filled) }
 
         holder.tvName.text = itemList[position].id
         holder.ivPicture.setImageURI(uri_picture)
-        holder.tvLike.text = "${itemList[position].like}"
+        holder.tvLike.text = "$like"
         holder.tvDescrip.text = itemList[position].comment
         holder.tvDate.text = itemList[position].date
         holder.tvHour.text = "${itemList[position].hour}"
@@ -49,10 +53,23 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
             val dbManager = DBManager(context, "appDB", null, 1)
             val sqlitedb = dbManager.writableDatabase
 
-            itemList[position].like++
-            sqlitedb.execSQL("UPDATE post SET num_like = ${itemList[position].like} WHERE post_id = ${itemList[position].post_id};")
-            holder.tvLike.text = "${itemList[position].like}"
-            holder.btnLike.isEnabled=false
+            val user_id = UserId.userId
+            val post_id = itemList[position].post_id
+
+            isClieked = !isClieked
+            if(isClieked){
+                like++
+                sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
+                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 1 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
+                holder.tvLike.text = "$like"
+                holder.btnLike.setBackgroundResource(R.drawable.like_filled)
+            }else{
+                like--
+                sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
+                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 0 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
+                holder.tvLike.text = "$like"
+                holder.btnLike.setBackgroundResource(R.drawable.like_btn)
+            }
 
             sqlitedb.close()
             dbManager.close()

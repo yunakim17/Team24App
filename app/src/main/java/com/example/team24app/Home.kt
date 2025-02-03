@@ -92,7 +92,19 @@ class Home : AppCompatActivity() {
                 val hour = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("hour"))
                 val minute = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("minute"))
                 val second = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("second"))
-                val item = Post(profile, follow_id, post_id, picture, like, comment, date, hour, minute, second)
+
+                var isClieked = false
+                val cursor_like : Cursor
+                cursor_like = sqlitedb.rawQuery("SELECT isClicked FROM clickLike WHERE user_id = '${user_id}' AND post_id = ${post_id}", null)
+                if(!cursor_like.moveToNext()){
+                    sqlitedb.execSQL("INSERT INTO clickLike VALUES ('${user_id}', ${post_id}, 0);")
+                }else{
+                    if(cursor_like.getInt(cursor_like.getColumnIndexOrThrow("isClicked"))==1){
+                        isClieked = true
+                    }
+                }
+
+                val item = Post(profile, follow_id, post_id, picture, like, comment, date, hour, minute, second, isClieked)
                 itemlist.add(item)
                 //itemList에 친구의 피드 요소들을 더해 item을 늘림
             }

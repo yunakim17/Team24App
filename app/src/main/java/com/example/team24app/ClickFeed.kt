@@ -118,12 +118,9 @@ class ClickFeed : AppCompatActivity() {
             }
         }
         cursor_like.close()
-        Log.d("확인", "create")
-
 
         btnLike.setOnClickListener {
             //좋아요 버튼
-            Toast.makeText(this, "${isClieked}", Toast.LENGTH_SHORT).show()
             isClieked = !isClieked
             if(isClieked){
                 like++
