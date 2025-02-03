@@ -4,11 +4,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -21,7 +21,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.io.File
-import java.io.FileOutputStream
 import java.io.InputStream
 
 class EditProfile : AppCompatActivity() {
@@ -167,14 +166,25 @@ class EditProfile : AppCompatActivity() {
 
     fun check(){
         val checkUsername = dbManager!!.checkUser(change_id)
-        if (!checkUsername) {
+        var lengthCheck = false
+        val length = change_id.length
+
+        if(length > 4 && length < 11) { lengthCheck = true }
+
+        if (!checkUsername && lengthCheck) {
+            val drawable = GradientDrawable()
+            drawable.shape = GradientDrawable.RECTANGLE
+            drawable.setColor(ContextCompat.getColor(this, R.color.disable_btn_color))
+            drawable.cornerRadius = 25F
+
+            btnID.background = drawable
             isChecked = true
             btnID.text = getString(R.string.end)
-            btnID.isEnabled=false
+
             Toast.makeText(this, "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show()
         }
+        else if(checkUsername){ Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show() }
+        else if(!lengthCheck){ Toast.makeText(this, "아이디를 5~10글자 내로 설정해주세요.", Toast.LENGTH_SHORT).show() }
     }
 
     private fun openGallery(){
