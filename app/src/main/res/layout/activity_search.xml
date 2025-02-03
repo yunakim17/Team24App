@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout2">
 
-        <!--user_item을 넣을 리싸이클러 뷰-->
+        <!--user_item을 넣을 리싸이클러 뷰 : 사용자 정보 출력 됨-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSearchUser"
             android:layout_width="match_parent"
@@ -43,6 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!--상단바-->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/bar"
             android:layout_width="match_parent"
@@ -71,7 +72,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray_text_color" />
 
-                <!--누르면 search 액티비티로 넘어가게 -->
+                <!--검색 버튼 : 누르면 search 액티비티로 넘어가게-->
                 <ImageButton
                     android:id="@+id/ivSearch"
                     android:layout_width="48dp"

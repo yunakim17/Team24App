@@ -10,7 +10,7 @@
     android:background="@drawable/edit_profile_bg">
 
 
-
+    <!--상단바-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <!--누르면 프로필 사진 수정가능 -->
+        <!-- 프로필 사진 뷰 -->
         <ImageView
             android:id="@+id/ivProfileImage"
             android:layout_width="135dp"
@@ -96,7 +96,7 @@
             android:gravity="center"
             android:layout_marginTop="20dp">
 
-            <!--프로필 사진 수정 버튼-->
+            <!--프로필 사진 수정 버튼 : 누르면 갤러리로 연결 -->
             <Button
                 android:id="@+id/btnEdtProfilePic"
                 android:layout_width="140dp"
@@ -109,7 +109,7 @@
                 android:textStyle="bold"
                 />
 
-            <!-- 아이디 변경 버튼 -->
+            <!-- 아이디 변경 버튼 : 누르면 edit text로 변경 가능 -->
             <Button
                 android:id="@+id/btnEdtUserId"
                 android:layout_width="140dp"
@@ -123,8 +123,8 @@
                 />
 
         </LinearLayout>
-        <!--바이오 수정-->
 
+        <!--소개 입력란-->
         <EditText
             android:id="@+id/edtDescription"
             android:layout_marginTop="80dp"
@@ -137,7 +137,7 @@
             android:textColor="@color/black"
             />
 
-        <!--프로필 수정 완료 버튼-->
+        <!--프로필 저장 버튼-->
         <Button
             android:id="@+id/btnSaveProfile"
             android:layout_width="140dp"

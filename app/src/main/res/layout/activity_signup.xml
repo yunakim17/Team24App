@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.71000004">
 
-
+        <!--메인 로고-->
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="130dp"
@@ -56,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <!--아이디 입력란-->
                 <EditText
                     android:id="@+id/edtSignupId"
                     android:layout_width="215dp"
@@ -68,6 +69,7 @@
                     tools:layout_editor_absoluteX="36dp"
                     tools:layout_editor_absoluteY="151dp" />
 
+                <!--아이디 중복확인 버튼-->
                 <Button
                     android:id="@+id/btnIdCheck"
                     android:layout_width="74dp"
@@ -100,6 +102,7 @@
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="58dp" />
 
+            <!--이메일 입력란-->
             <EditText
                 android:id="@+id/edtSignupEmail"
                 android:layout_width="299dp"
@@ -129,6 +132,7 @@
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="58dp" />
 
+            <!--비밀번호 입력란-->
             <EditText
                 android:id="@+id/edtSignupPwd"
                 android:layout_width="299dp"
@@ -162,6 +166,7 @@
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="58dp" />
 
+            <!--비밀번호 확인 입력란-->
             <EditText
                 android:id="@+id/edtPwdCheck"
                 android:layout_width="299dp"
@@ -173,6 +178,7 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray_text_color" />
 
+            <!--회원가입 완료 버튼-->
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="299dp"

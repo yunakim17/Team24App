@@ -8,6 +8,7 @@
     android:layout_marginBottom="5dp"
     android:background="@drawable/custom_edtbox">
 
+    <!--검색 결과 상대 프로필 사진-->
     <ImageView
         android:id="@+id/ivProfilePic"
         android:layout_width="42dp"
@@ -26,6 +27,7 @@
         android:orientation="vertical"
         android:layout_centerVertical="true">
 
+        <!--검색 결과 상대 아이디-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

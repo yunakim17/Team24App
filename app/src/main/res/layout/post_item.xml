@@ -161,6 +161,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <!--게시물 코멘트-->
         <TextView
             android:id="@+id/tvPostDescription"
             android:layout_width="wrap_content"

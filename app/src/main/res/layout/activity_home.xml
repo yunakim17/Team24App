@@ -55,6 +55,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <!--홈 로고-->
             <ImageView
                 android:layout_width="171dp"
                 android:layout_height="35dp"
@@ -80,7 +81,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray_text_color" />
 
-                <!--누르면 search 액티비티로 넘어가게 -->
+                <!--검색 버튼 : 누르면 search 액티비티로 넘어가게 -->
                 <ImageButton
                     android:id="@+id/ivSearch"
                     android:layout_width="48dp"

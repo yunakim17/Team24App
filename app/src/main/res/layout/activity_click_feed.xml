@@ -15,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!--상단바-->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/bar"
             android:layout_width="match_parent"
@@ -53,9 +54,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-
-
-
+        <!--스크롤 뷰-->
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -222,6 +221,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <!--게시물 코멘트-->
         <TextView
             android:id="@+id/tvPostDescription"
             android:layout_width="wrap_content"
@@ -237,12 +237,7 @@
     </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-
-
     </LinearLayout>
-
-
 
 
 

@@ -36,6 +36,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
+        <!--메인 로고-->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="273dp"
@@ -46,6 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--회원가입 버튼-->
         <Button
             android:id="@+id/btnSignup"
             android:layout_width="343dp"
@@ -61,6 +63,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnIdLogin" />
 
+
+        <!--로그인 버튼-->
         <Button
             android:id="@+id/btnIdLogin"
             android:layout_width="343dp"
