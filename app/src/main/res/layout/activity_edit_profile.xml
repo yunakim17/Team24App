@@ -60,6 +60,7 @@
             android:src="@color/gray_text_color"
             android:background="@drawable/circle_profile_pic"
             android:clipToOutline="true"
+            android:scaleType="centerCrop"
             >
         </ImageView>
 

@@ -24,6 +24,7 @@
                 android:src="@color/gray_text_color"
                 android:background="@drawable/circle_profile_pic"
                 android:clipToOutline="true"
+                android:scaleType="centerCrop"
                 />
 
             <!--사용자 id-->
@@ -127,6 +128,8 @@
             android:layout_gravity="center"
             android:background="@drawable/custom_feed_pic"
             android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground"
             />
 
         <LinearLayout
