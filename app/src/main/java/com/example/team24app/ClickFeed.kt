@@ -76,7 +76,7 @@ class ClickFeed : AppCompatActivity() {
                     val uri_profile = Uri.fromFile(File(profile))
                     ivProfile.setImageURI(uri_profile)
                 }else{
-                    ivProfile.setImageResource(R.drawable.img)
+                    ivProfile.setImageResource(R.drawable.default_profile)
                 }
             }
             cursor_user.close()
