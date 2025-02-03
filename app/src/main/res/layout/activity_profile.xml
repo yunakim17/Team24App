@@ -233,7 +233,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="280dp"
-            android:text="아직 게시물이 없어요."
+            android:text="아직 공부기록이 없어요."
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginTop="10dp"
