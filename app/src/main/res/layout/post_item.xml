@@ -137,7 +137,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="1dp"
-            android:padding="8dp">
+            android:paddingTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
 
             <!--좋아요 버튼-->
             <ImageButton
