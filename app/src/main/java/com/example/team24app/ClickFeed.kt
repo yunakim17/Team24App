@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 
@@ -112,7 +113,8 @@ class ClickFeed : AppCompatActivity() {
         }else{
             if(cursor_like.getInt(cursor_like.getColumnIndexOrThrow("isClicked"))==1){
                 isClieked = true
-                btnLike.setBackgroundResource(R.drawable.baseline_thumb_up_alt_24)
+                btnLike.setBackgroundResource(R.drawable.like_filled)
+
             }
         }
         cursor_like.close()
@@ -128,7 +130,7 @@ class ClickFeed : AppCompatActivity() {
                 sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
                 sqlitedb.execSQL("UPDATE clickLike SET isClicked = 1 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
                 tvLike.text = "$like"
-                btnLike.setBackgroundResource(R.drawable.baseline_thumb_up_alt_24)
+                btnLike.setBackgroundResource(R.drawable.like_filled)
             }else{
                 like--
                 sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
