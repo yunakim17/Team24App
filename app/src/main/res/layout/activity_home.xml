@@ -13,7 +13,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="103dp"
+        android:paddingTop="103dp"
+        android:paddingBottom="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -24,11 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
+
+            android:background="@color/white"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/white"
             tools:listitem="@layout/post_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
