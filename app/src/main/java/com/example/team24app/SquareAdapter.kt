@@ -10,18 +10,19 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
 
-class FeedAdapter(val itemList: ArrayList<Feed_Square>, val context : Context) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+//  그리드 리사이클러뷰 어댑터
+class SquareAdapter(val itemList: MutableList<Post_Square>, val context : Context) : RecyclerView.Adapter<SquareAdapter.ViewHolder>() {
+    // 뷰 생성
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FeedAdapter.ViewHolder {
-        //뷰 생성
+    ): SquareAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.feed_square_item, parent, false)
         return ViewHolder(view)
     }
 
+    // 내용 입력(리사이클 될때마다 입력됨)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //picture 적용
         val uri = Uri.fromFile(File(itemList[position].picture))
         holder.ivPicture.setImageURI(uri)
     }
@@ -34,9 +35,9 @@ class FeedAdapter(val itemList: ArrayList<Feed_Square>, val context : Context) :
         var ivPicture = itemView.findViewById<ImageView>(R.id.ivFeed)
 
         init {
-            //뷰 클릭 리스너(프로필 터치 시, 상대 프로필이 뜸)
+            //뷰 클릭 리스너(포스트 터치시 ClickPost로 이동)
             itemView.setOnClickListener {
-                val intent = Intent(context, ClickFeed::class.java)
+                val intent = Intent(context, ClickPost::class.java)
                 intent.putExtra("post_id", itemList[adapterPosition].post_id)
                 context.startActivity(intent)
             }

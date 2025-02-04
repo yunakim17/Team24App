@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.InputStream
 
+// 프로필을 변경하는 화면
 class EditProfile : AppCompatActivity() {
     lateinit var btnBack : ImageButton
     lateinit var ivProfile : ImageView
@@ -32,30 +33,27 @@ class EditProfile : AppCompatActivity() {
     lateinit var btnID : Button
     lateinit var edtDescrip : EditText
     lateinit var btnSave : Button
-    private var imageUri : Uri? = null
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
+    private var imageUri : Uri? = null
     lateinit var change_id : String
-    var isCliecked = false
+    var isClicked = false
     var isChecked = false
     val user_id = UserId.userId
+    var defaultIntro : String? = null
 
+    // 갤러리 접근 권한 재요청 변수
     private val requestPermissionLauncher : ActivityResultLauncher<String> =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                isGranted -> if (isGranted){
-            //권한 성공시 갤러리 오픈
-            openGallery()
-        }
-    }
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted -> if (isGranted) openGallery() }
 
+    // 갤러리에서 가져온 사진 이미지뷰에 적용 변수
     private val pickImageLauncher : ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                result -> if(result.resultCode == RESULT_OK){
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result -> if(result.resultCode == RESULT_OK){
             val data:Intent? = result.data
+
             data?.data?.let{
                 imageUri = it
                 ivProfile.setImageURI(imageUri)
-                //가져온 사진 보여주기
             }
         }
     }
@@ -63,6 +61,7 @@ class EditProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+
         btnBack = findViewById(R.id.btnBack)
         ivProfile = findViewById(R.id.ivProfileImage)
         edtName = findViewById(R.id.edtUserName)
@@ -82,7 +81,7 @@ class EditProfile : AppCompatActivity() {
         edtName.setText(user_id)
 
         val cursor : Cursor
-        cursor = sqlitedb.rawQuery("SELECT profile, intro FROM user WHERE user_id = '"+user_id+"';", null)
+        cursor = sqlitedb.rawQuery("SELECT profile, intro FROM user WHERE user_id = ?", arrayOf(user_id))
         //현재 유저의 프로필을 가져옴
 
         if (cursor.moveToNext()){
@@ -99,29 +98,25 @@ class EditProfile : AppCompatActivity() {
         }
         cursor.close()
 
+        //뒤로가기 버튼
         btnBack.setOnClickListener {
-            //뒤로가기 버튼
-            sqlitedb.close()
-            dbManager.close()
             onBackPressedDispatcher.onBackPressed()
         }
 
+        // 프로필 사진 변경 버튼
         btnProfile.setOnClickListener {
-            if(ContextCompat.checkSelfPermission(this, readImagePermission)== PackageManager.PERMISSION_GRANTED){
-                //권한 확인 성공시 갤러리 오픈
-                openGallery()
-            }else{
-                requestPermissionLauncher.launch(readImagePermission)
-                //권한 실패시 재시도
-            }
+            // 권한 확인 성공시 갤러리 오픈 / 실패시 재시도
+            if(ContextCompat.checkSelfPermission(this, readImagePermission)== PackageManager.PERMISSION_GRANTED) openGallery()
+            else requestPermissionLauncher.launch(readImagePermission)
         }
 
+        // ID 변경 버튼
         btnID.setOnClickListener {
-            //id변경 버튼
-            if(isCliecked == false){
+            // 변경 버튼을 누르면 중복 확인 버튼으로 변경
+            if(isClicked == false){
                 change()
-                isCliecked = true
-            }else if(isCliecked == true && isChecked == false){
+                isClicked = true
+            }else if(isClicked == true && isChecked == false){
                 change_id = edtName.text.toString()
                 if(change_id == user_id){
                     Toast.makeText(this, "아이디가 동일합니다.", Toast.LENGTH_SHORT).show()
@@ -131,48 +126,52 @@ class EditProfile : AppCompatActivity() {
             }
         }
 
+        // 변경 저장 버튼
         btnSave.setOnClickListener {
-            //변경 저장 버튼
             if(imageUri != null){
                 profile = saveImage(imageUri!!)
-                sqlitedb.execSQL("UPDATE user SET profile = '"+profile+"' WHERE user_id = '"+user_id+"';")
+                sqlitedb.execSQL("UPDATE user SET profile = ? WHERE user_id = ?", arrayOf(profile, user_id))
             }
 
             val intro = edtDescrip.text.toString()
             if(!intro.isNullOrBlank()){
-                sqlitedb.execSQL("UPDATE user SET intro = '"+intro+"' WHERE user_id = '"+user_id+"';")
+                sqlitedb.execSQL("UPDATE user SET intro = ? WHERE user_id = ?", arrayOf(intro, user_id))
             }
 
             if(isChecked){
-                sqlitedb.execSQL("UPDATE post SET user_id = '"+change_id+"' WHERE user_id = '"+user_id+"';")
-                sqlitedb.execSQL("UPDATE follow SET from_id = '"+change_id+"' WHERE from_id = '"+user_id+"';")
-                sqlitedb.execSQL("UPDATE follow SET to_id = '"+change_id+"' WHERE to_id = '"+user_id+"';")
-                sqlitedb.execSQL("UPDATE user SET user_id = '"+change_id+"' WHERE user_id = '"+user_id+"';")
+                sqlitedb.execSQL("UPDATE post SET user_id = ? WHERE user_id = ?", arrayOf(change_id, user_id))
+                sqlitedb.execSQL("UPDATE follow SET from_id = ? WHERE from_id = ?", arrayOf(change_id, user_id))
+                sqlitedb.execSQL("UPDATE follow SET to_id = ? WHERE to_id = ?", arrayOf(change_id, user_id))
+                sqlitedb.execSQL("UPDATE user SET user_id = ? WHERE user_id = ?", arrayOf(change_id, user_id))
                 UserId.userId = change_id
             }
             Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
             sqlitedb.close()
             dbManager.close()
+
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
         }
     }
 
+    // 아이디 뷰를 edittext로 전환
     fun change(){
         edtName.visibility = View.VISIBLE
         tvName.visibility = View.GONE
         btnID.text = getString(R.string.check)
     }
 
+    // 아이디 중복 체크/길이 체크
     fun check(){
-        val checkUsername = dbManager!!.checkUser(change_id)
-        var lengthCheck = false
-        val length = change_id.length
+        change_id = edtName.text.toString()
 
-        if(length > 4 && length < 11) { lengthCheck = true }
-
-        if (!checkUsername && lengthCheck) {
+        // 현재 아이디와 동일한지 검사 / 아이디 길이 검사 / 중복 검사를 마치고 버튼 비활성화
+        if(change_id == user_id) Toast.makeText(this, "아이디가 동일합니다.", Toast.LENGTH_SHORT).show()
+        else if(change_id.length < 5 || change_id.length > 10) Toast.makeText(this, "아이디를 5~10글자 내로 설정해주세요.", Toast.LENGTH_SHORT).show()
+        else if(dbManager.checkUser(change_id)) Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show()
+        else {
             val drawable = GradientDrawable()
+
             drawable.shape = GradientDrawable.RECTANGLE
             drawable.setColor(ContextCompat.getColor(this, R.color.disable_btn_color))
             drawable.cornerRadius = 25F
@@ -183,27 +182,26 @@ class EditProfile : AppCompatActivity() {
 
             Toast.makeText(this, "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show()
         }
-        else if(checkUsername){ Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show() }
-        else if(!lengthCheck){ Toast.makeText(this, "아이디를 5~10글자 내로 설정해주세요.", Toast.LENGTH_SHORT).show() }
     }
 
+    //갤러리 오픈 함수
     private fun openGallery(){
         val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         pickImageLauncher.launch(gallery)
-        //갤러리를 열기 위해 intent 생성, 갤러리 액티비티 실행
     }
 
+    // 이미지를 기기 내부 저장소에 저장하며 경로를 저장하는 함수
     fun saveImage(uri : Uri):String{
         val inputStream : InputStream? = contentResolver.openInputStream(uri)
         val file = File(filesDir, "${user_id}_profile_image.jpg")
 
+        //프로필 사진 내부 저장소에 저장
         file.outputStream().use{ fileOutput ->
             inputStream?.copyTo(fileOutput)
         }
-        //프로필 사진 내부 저장소에 저장
-
         inputStream?.close()
-        return file.absolutePath
+
         //내부 저장소의 절대경로 복사
+        return file.absolutePath
     }
 }

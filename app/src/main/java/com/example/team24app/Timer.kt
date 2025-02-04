@@ -13,84 +13,83 @@ import java.util.Date
 import java.util.Timer
 import kotlin.concurrent.timer
 
+// 타이머 화면
 class Timer : AppCompatActivity() {
-    lateinit var tvdate : TextView
-    lateinit var tvhour : TextView
-    lateinit var tvmin : TextView
-    lateinit var tvsec : TextView
-    lateinit var btnss : Button
+    lateinit var tvDate : TextView
+    lateinit var tvHour : TextView
+    lateinit var tvMin : TextView
+    lateinit var tvSec : TextView
+    lateinit var btnTimer : Button
     lateinit var btnReset : Button
-    lateinit var btnupload : ImageButton
+    lateinit var btnUpload : ImageButton
     lateinit var bottomNavigationView: BottomNavigationView
-    val time_format = DecimalFormat("00")
-
-    private var timerTask: Timer? = null
+    val timeFormat = DecimalFormat("00")
+    var timerTask: Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
 
-        tvdate = findViewById(R.id.tvDate)
-        tvhour = findViewById(R.id.tvHours)
-        tvmin = findViewById(R.id.tvMinutes)
-        tvsec = findViewById(R.id.tvSeconds)
-        btnss = findViewById(R.id.startStopButton)
+        tvDate = findViewById(R.id.tvDate)
+        tvHour = findViewById(R.id.tvHours)
+        tvMin = findViewById(R.id.tvMinutes)
+        tvSec = findViewById(R.id.tvSeconds)
+        btnTimer = findViewById(R.id.startStopButton)
         btnReset = findViewById(R.id.resetButton)
-        btnupload = findViewById(R.id.btnTimeShare)
+        btnUpload = findViewById(R.id.btnTimeShare)
 
+        // 네비게이션 바
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         setBottomNavigationView()
 
+        // 오늘의 날짜 설정
         val now = Date()
-        val timerFormat = SimpleDateFormat("yyyy년 MM월 dd일", java.util.Locale.KOREA)
-        tvdate.text = timerFormat.format(now)
-        //오늘의 날짜 설정
+        val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", java.util.Locale.KOREA)
+        tvDate.text = dateFormat.format(now)
 
+        // 타이머의 데이터가 남은채로 다른 화면으로 옮겼다면 기록을 받아옴
         if(Time.backRunning == true){
-            //타이머의 기록이 존재함
-            tvhour.text = time_format.format(Time.hour)
-            tvmin.text = time_format.format(Time.minute)
-            tvsec.text = time_format.format(Time.second)
+            tvHour.text = timeFormat.format(Time.hour)
+            tvMin.text = timeFormat.format(Time.minute)
+            tvSec.text = timeFormat.format(Time.second)
 
             if(Time.isRunning == true){
-                //타이머가 작동중이었음
+                // 타이머가 작동중이었다면 작동 중이던 시간을 받아와 다시 실행
                 Time.timerTask?.cancel()
                 Start()
             }
         }
 
-        btnss.setOnClickListener {
-            //버튼 클릭 시 타이머 시작/멈춤
+        // 버튼 클릭 시 타이머 시작/멈춤
+        btnTimer.setOnClickListener {
             Time.isRunning=!Time.isRunning
 
             if(Time.isRunning){
-                //시작
                 Start()
             }else{
-                //정지
                 Stop()
             }
         }
 
+        //시간 초기화
         btnReset.setOnClickListener {
-            //시간 초기화
             Stop()
             Time.isRunning=false
             Time.backRunning=false
-
             Time.time = 0
             Time.hour = 0
             Time.minute = 0
             Time.second = 0
-            tvhour.text="00"
-            tvmin.text="00"
-            tvsec.text="00"
+            tvHour.text="00"
+            tvMin.text="00"
+            tvSec.text="00"
         }
 
-        btnupload.setOnClickListener {
-            //업로드 화면 전환
+        // 업로드 화면 버튼
+        btnUpload.setOnClickListener {
             Stop()
             Time.isRunning=false
+
             val intent = Intent(this, UploadPost::class.java)
             startActivity(intent)
         }
@@ -106,12 +105,6 @@ class Timer : AppCompatActivity() {
                     true
                 }
 
-//                R.id.timer -> {
-////                    val intent = Intent(this, com.example.team24app.Timer::class.java)
-////                    startActivity(intent)
-//                    true
-//                }
-
                 R.id.profile -> {
                     val intent = Intent(this, Profile::class.java)
                     startActivity(intent)
@@ -119,43 +112,50 @@ class Timer : AppCompatActivity() {
                 }
 
                 else -> false
-
             }
 
         }
     }
+
+    // 타이머 시작
     fun Start() {
-        btnss.text = getString(R.string.stop)
+        btnTimer.text = getString(R.string.stop)
         timerTask = timer(period = 1000) {
-            //time++
             Time.time++
+
+            // 시분초 설정
             Time.hour = (Time.time / 60) / 60
             Time.minute = (Time.time / 60) % 60
             Time.second = Time.time % 60
-            //시분초 설정
 
+            // 화면 설정
             runOnUiThread {
-                tvhour.text = time_format.format(Time.hour)
-                tvmin.text = time_format.format(Time.minute)
-                tvsec.text = time_format.format(Time.second)
+                tvHour.text = timeFormat.format(Time.hour)
+                tvMin.text = timeFormat.format(Time.minute)
+                tvSec.text = timeFormat.format(Time.second)
 
             }
         }
     }
 
+    // 타이머 정지
     fun Stop(){
-        btnss.text=getString(R.string.start)
+        btnTimer.text=getString(R.string.start)
         timerTask?.cancel()
     }
 
+    // 화면을 옮겼을 때, 타이머의 상태 확인
     override fun onStop() {
         super.onStop()
+
+        // 타이머의 기록이 존재함(기록 백업)
         if(Time.time != 0){
             Time.backRunning = true
-            //Time.time = time
             Time.hour = (Time.time / 60) / 60
             Time.minute = (Time.time / 60) % 60
             Time.second = Time.time % 60
+
+            // 타이머가 작동 중이었음(백그라운드에서 시간이 흐르도록 설정)
             if(Time.isRunning == true){
                 timerTask?.cancel()
                 Time.timerTask = timer(period = 1000){

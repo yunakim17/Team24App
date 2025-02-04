@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 
+// 프로필 화면
 class Profile : AppCompatActivity() {
     lateinit var tvName : TextView
     lateinit var ivProfile : ImageView
@@ -22,15 +23,15 @@ class Profile : AppCompatActivity() {
     lateinit var tvDescrip : TextView
     lateinit var btnProfile : Button
     lateinit var btnUpload : Button
-    lateinit var rvPost : RecyclerView
+    lateinit var rvProfile : RecyclerView
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
 
-    //피드에 아이템이 없을 때 보이는 텍스트뷰/이미지뷰
+    // 피드에 아이템이 없을 때 보이는 텍스트뷰/이미지뷰
     lateinit var emptyViewPf: TextView
     lateinit var emptyImagePf: ImageView
 
-    //하단네비뷰
+    // 하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,25 +44,27 @@ class Profile : AppCompatActivity() {
         tvDescrip = findViewById(R.id.tvDescription)
         btnProfile = findViewById(R.id.btnEdtProfile)
         btnUpload = findViewById(R.id.btnPostUpload)
-        rvPost = findViewById(R.id.rvPosts)
+        rvProfile = findViewById(R.id.rvPosts)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.readableDatabase
 
-        //텍스트,이미지뷰 연결
+        // 텍스트,이미지뷰 연결
         emptyViewPf = findViewById(R.id.noItemText)
         emptyImagePf = findViewById(R.id.noItemImage)
 
-        //하단네비뷰 연결
+        // 하단네비뷰 연결
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         setBottomNavigationView()
 
-        val itemlist = ArrayList<Feed_Square>()
+
+
+        val itemList = ArrayList<Post_Square>()
 
         val user_id = UserId.userId
         tvName.text = user_id
 
         val cursor_user : Cursor
-        cursor_user = sqlitedb.rawQuery("SELECT profile, num_follow, intro FROM user WHERE user_id = '${user_id}';", null)
+        cursor_user = sqlitedb.rawQuery("SELECT profile, num_follow, intro FROM user WHERE user_id = ?", arrayOf(user_id))
         //user_id로 프로필 데이터를 가져옴
 
         if(cursor_user.moveToNext()){
@@ -82,44 +85,43 @@ class Profile : AppCompatActivity() {
         cursor_user.close()
 
         val cursor_feed : Cursor
-        cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = '${user_id}' ORDER BY post_id DESC;", null)
+        cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = ? ORDER BY post_id DESC;", arrayOf(user_id))
         //사각형 피드를 위한 데이터를 가져옴
 
         while (cursor_feed.moveToNext()){
             val post_id = cursor_feed.getInt(cursor_feed.getColumnIndexOrThrow("post_id"))
             val picture = cursor_feed.getString(cursor_feed.getColumnIndexOrThrow("picture"))
             //사각형 피드용 데이터 전송
-            val item = Feed_Square(post_id, picture)
-            itemlist.add(item)
+            val item = Post_Square(post_id, picture)
+            itemList.add(item)
             //itemlist에 추가완료
         }
         cursor_feed.close()
         sqlitedb.close()
         dbManager.close()
 
-        val rv_adapter = FeedAdapter(itemlist, this)
+        // 리사이클러뷰 어댑터 연결 완료
+        val rv_adapter = SquareAdapter(itemList, this)
         rv_adapter.notifyDataSetChanged()
-        rvPost.adapter=rv_adapter
-        rvPost.layoutManager= GridLayoutManager(this, 3)
-        //리사이클러뷰 어댑터 연결 완료
+        rvProfile.adapter=rv_adapter
+        rvProfile.layoutManager= GridLayoutManager(this, 3)
 
+        // 메서드 호출
         checkIfRecyclerViewIsEmpty(rv_adapter)
-        //메서드 호출
 
 
+
+        // 프로필 편집 버튼
         btnProfile.setOnClickListener {
-            //프로필 편집 화면으로 전환
             val intent = Intent(this, EditProfile::class.java)
             startActivity(intent)
         }
 
+        //업로드 버튼
         btnUpload.setOnClickListener {
-            //업로드 화면으로 전환
             val intent = Intent(this, UploadPost::class.java)
             startActivity(intent)
         }
-
-
     }
 
     //리사이클러뷰 아이템x 메서드
@@ -149,16 +151,8 @@ class Profile : AppCompatActivity() {
                     true
                 }
 
-//                R.id.profile -> {
-////                    val intent = Intent(this, Profile::class.java)
-////                    startActivity(intent)
-//                    true
-//                }
-
                 else -> false
-
             }
-
         }
     }
 }

@@ -11,9 +11,9 @@ import java.util.regex.Pattern
 class Signup : AppCompatActivity() {
 
     var DB: DBManager? = null
+    var IdCheck: Boolean = false
     lateinit var edtSignupId: EditText
     lateinit var btnIdCheck: Button
-    var IdCheck: Boolean = false
     lateinit var edtSignupEmail: EditText
     lateinit var edtSignupPwd: EditText
     lateinit var edtPwdCheck: EditText
@@ -75,7 +75,6 @@ class Signup : AppCompatActivity() {
                             val insert = DB!!.insertUser(user, email, pass)
                             if (insert) {
                                 Toast.makeText(this@Signup, "가입되었습니다.", Toast.LENGTH_SHORT).show()
-
                                 val intent = Intent(applicationContext, Login::class.java)
                                 startActivity(intent)
                                 finish()

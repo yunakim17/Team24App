@@ -2,7 +2,7 @@ package com.example.team24app
 
 import java.io.Serializable
 
-//data class 상속은 추천되지 않아 따로 작성
+// home의 리사이클러뷰를 위한 데이터 클래스
 data class Post(
     val profile : String,
     val id : String,

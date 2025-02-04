@@ -25,7 +25,7 @@
             android:name=".AnotherProfile"
             android:exported="false" />
         <activity
-            android:name=".ClickFeed"
+            android:name=".ClickPost"
             android:exported="false" />
         <activity
             android:name=".Profile"

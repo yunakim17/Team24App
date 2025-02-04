@@ -23,46 +23,43 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 
+// 포스트 업로드 화면
 class UploadPost : AppCompatActivity() {
     lateinit var btnBack : ImageButton
-    lateinit var ivPhoto : ImageView
-    lateinit var btnPhoto : ImageButton
+    lateinit var ivPicture : ImageView
+    lateinit var btnPicture : ImageButton
     lateinit var tvHour : TextView
     lateinit var tvMin : TextView
     lateinit var tvSec : TextView
     lateinit var edtComment : EditText
     lateinit var btnUpload : Button
-    private var imageUri : Uri? = null
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
+    private var imageUri : Uri? = null
     val user_id = UserId.userId
 
+    // 갤러리 접근 권한 재요청 변수
     private val requestPermissionLauncher : ActivityResultLauncher<String> =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                isGranted -> if (isGranted){
-            //권한 성공시 갤러리 오픈
-            openGallery()
-        }
-    }
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted -> if (isGranted) openGallery() }
 
+    // 갤러리에서 가져온 사진 이미지뷰에 적용 변수
     private val pickImageLauncher : ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                result -> if(result.resultCode == RESULT_OK){
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result -> if(result.resultCode == RESULT_OK){
             val data:Intent? = result.data
+
             data?.data?.let{
                 imageUri = it
-                ivPhoto.setImageURI(imageUri)
-                //가져온 사진 보여주기
+                ivPicture.setImageURI(imageUri)
             }
         }
-    }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_post)
         btnBack = findViewById(R.id.btnBack)
-        ivPhoto = findViewById(R.id.SelectedPhoto)
-        btnPhoto = findViewById(R.id.btnPhoto)
+        ivPicture = findViewById(R.id.SelectedPhoto)
+        btnPicture = findViewById(R.id.btnPhoto)
         tvHour = findViewById(R.id.tvHours)
         tvMin = findViewById(R.id.tvMinutes)
         tvSec = findViewById(R.id.tvSeconds)
@@ -73,46 +70,37 @@ class UploadPost : AppCompatActivity() {
 
         val readImagePermission = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) android.Manifest.permission.READ_MEDIA_IMAGES
         else android.Manifest.permission.READ_EXTERNAL_STORAGE
-        //권한 습득
 
-        val hour = Time.hour
-        val minute = Time.minute
-        val second = Time.second
-        tvHour.text = "$hour"
-        tvMin.text = "$minute"
-        tvSec.text = "$second"
-        //타이머에서 설정한 시간/날짜 설정
+        // 타이머에서 설정한 시간/날짜 설정
+        tvHour.text = "${Time.hour}"
+        tvMin.text = "${Time.minute}"
+        tvSec.text = "${Time.second}"
 
+        // 뒤로가기 버튼
         btnBack.setOnClickListener {
-            //뒤로가기 버튼
-            sqlitedb.close()
-            dbManager.close()
             onBackPressedDispatcher.onBackPressed()
         }
 
-        btnPhoto.setOnClickListener {
-            //사진 업로드
-            if(ContextCompat.checkSelfPermission(this, readImagePermission)==PackageManager.PERMISSION_GRANTED){
-                //권한 확인 성공시 갤러리 오픈
-                openGallery()
-            }else{
-                requestPermissionLauncher.launch(readImagePermission)
-                //권한 실패시 재시도
-            }
+        // 사진 업로드
+        btnPicture.setOnClickListener {
+            // 권한 확인 성공시 갤러리 오픈 / 실패시 재시도
+            if(ContextCompat.checkSelfPermission(this, readImagePermission)== PackageManager.PERMISSION_GRANTED) openGallery()
+            else requestPermissionLauncher.launch(readImagePermission)
         }
 
+        // 업로드 버튼
         btnUpload.setOnClickListener {
-            //업로드 버튼
+            // 사진이 비었는지 확인
             if(imageUri == null){
                 //사진이 비었는지 확인
                 Toast.makeText(this, "사진이 설정되지 않았습니다.\n사진을 설정해주세요.",Toast.LENGTH_SHORT).show()
-            }else{
+            }else {
                 var num = 0
-                val cursor_num : Cursor
+                val cursor_num: Cursor
                 cursor_num = sqlitedb.rawQuery("SELECT count(*) as cnt FROM post;", null)
                 //post_id 설정
 
-                if (cursor_num.moveToNext()){
+                if (cursor_num.moveToNext()) {
                     num = cursor_num.getInt(cursor_num.getColumnIndexOrThrow("cnt")) + 1
                 }
                 cursor_num.close()
@@ -120,10 +108,10 @@ class UploadPost : AppCompatActivity() {
                 val picture = saveImage(imageUri!!, num)
                 val comment = edtComment.text.toString()
                 val now = Date()
-                val dateFormat= SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
+                val dateFormat = SimpleDateFormat("yyyy/MM/dd", java.util.Locale.KOREA)
                 val date = dateFormat.format(now)
 
-                sqlitedb.execSQL("INSERT INTO post VALUES ("+num+", '"+user_id+"', '"+picture+"', 0, '"+comment+"', '"+date+"', "+hour+", "+minute+", "+second+");")
+                sqlitedb.execSQL("INSERT INTO post VALUES (?, ?, ?, 0, ?, ?, ?, ?, ?)", arrayOf(num, user_id, picture, comment, date, Time.hour, Time.minute, Time.second))
                 sqlitedb.close()
                 dbManager.close()
 
@@ -133,23 +121,24 @@ class UploadPost : AppCompatActivity() {
         }
     }
 
+    //갤러리 오픈 함수
     private fun openGallery(){
-        val gallery = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         pickImageLauncher.launch(gallery)
-        //갤러리를 열기 위해 intent 생성, 갤러리 액티비티 실행
     }
 
+    // 이미지를 기기 내부 저장소에 저장하며 경로를 저장하는 함수
     fun saveImage(uri : Uri, num : Int):String{
         val inputStream : InputStream? = contentResolver.openInputStream(uri)
         val file = File(filesDir, "${user_id}_post_image_${num}.jpg")
 
+        //프로필 사진 내부 저장소에 저장
         file.outputStream().use{ fileOutput ->
             inputStream?.copyTo(fileOutput)
         }
-        //프로필 사진 내부 저장소에 저장
-
         inputStream?.close()
-        return file.absolutePath
+
         //내부 저장소의 절대경로 복사
+        return file.absolutePath
     }
 }

@@ -5,21 +5,19 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 
-class ClickFeed : AppCompatActivity() {
+// 포스트를 보는 화면
+class ClickPost : AppCompatActivity() {
     lateinit var btnBack : ImageButton
     lateinit var ivProfile : ImageView
     lateinit var tvName : TextView
-    lateinit var ivPost : ImageView
+    lateinit var ivPicture : ImageView
     lateinit var btnLike : ImageButton
     lateinit var tvLike : TextView
     lateinit var tvDescrip : TextView
@@ -30,17 +28,17 @@ class ClickFeed : AppCompatActivity() {
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
 
-    //하단네비뷰
+    // 하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_click_feed)
+        setContentView(R.layout.activity_click_post)
 
         btnBack = findViewById(R.id.btnBack)
         ivProfile = findViewById(R.id.ivProfilePic)
         tvName = findViewById(R.id.tvUserName)
-        ivPost = findViewById(R.id.ivPostImg)
+        ivPicture = findViewById(R.id.ivPostImg)
         btnLike = findViewById(R.id.btnLike)
         tvLike = findViewById(R.id.tvLikes)
         tvDescrip = findViewById(R.id.tvPostDescription)
@@ -55,13 +53,14 @@ class ClickFeed : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         setBottomNavigationView()
 
+
+        // 인텐트로 post_id 전달
         val intent = intent
         val post_id = intent.getIntExtra("post_id", 0)
         var like = 0
-        //인텐트로 포스트id 가져옴
 
         val cursor_post : Cursor
-        cursor_post = sqlitedb.rawQuery("SELECT * FROM post WHERE post_id = '"+post_id+"';", null)
+        cursor_post = sqlitedb.rawQuery("SELECT * FROM post WHERE post_id = ?", arrayOf(post_id.toString()))
         //post_id로 포스트 값 가져옴
 
         if(cursor_post.moveToNext()){
@@ -70,7 +69,7 @@ class ClickFeed : AppCompatActivity() {
             //user_id 별도로 먼저 추출
 
             val cursor_user : Cursor
-            cursor_user = sqlitedb.rawQuery("SELECT profile FROM user WHERE user_id = '"+ owner_id +"';", null)
+            cursor_user = sqlitedb.rawQuery("SELECT profile FROM user WHERE user_id = ?", arrayOf(owner_id))
             //user_id로 프로필 가져옴
 
             if (cursor_user.moveToNext()){
@@ -88,7 +87,7 @@ class ClickFeed : AppCompatActivity() {
             val uri_picture = Uri.fromFile(File(picture))
             like = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("num_like"))
 
-            ivPost.setImageURI(uri_picture)
+            ivProfile.setImageURI(uri_picture)
             tvLike.text = "$like"
             tvDescrip.text = cursor_post.getString(cursor_post.getColumnIndexOrThrow("comment"))
             tvDate.text = cursor_post.getString(cursor_post.getColumnIndexOrThrow("date"))
@@ -99,45 +98,51 @@ class ClickFeed : AppCompatActivity() {
         }
         cursor_post.close()
 
-        btnBack.setOnClickListener {
-            //뒤로가기 버튼
-            onBackPressedDispatcher.onBackPressed()
-        }
-
         val user_id = UserId.userId
-        var isClieked = false
+        var isClicked = false
         val cursor_like : Cursor
-        cursor_like = sqlitedb.rawQuery("SELECT isClicked FROM clickLike WHERE user_id = '${user_id}' AND post_id = ${post_id}", null)
+        cursor_like = sqlitedb.rawQuery("SELECT isClicked FROM clickLike WHERE user_id = ? AND post_id = ?", arrayOf(user_id, post_id.toString()))
         if(!cursor_like.moveToNext()){
-            sqlitedb.execSQL("INSERT INTO clickLike VALUES ('${user_id}', ${post_id}, 0);")
+            sqlitedb.execSQL("INSERT INTO clickLike VALUES (?, ?, 0)", arrayOf(user_id, post_id))
         }else{
             if(cursor_like.getInt(cursor_like.getColumnIndexOrThrow("isClicked"))==1){
-                isClieked = true
+                isClicked = true
                 btnLike.setBackgroundResource(R.drawable.like_filled)
 
             }
         }
         cursor_like.close()
 
+        // 좋아요 버튼
         btnLike.setOnClickListener {
-            //좋아요 버튼
-            isClieked = !isClieked
-            if(isClieked){
+            isClicked = !isClicked
+            if(isClicked){
                 like++
-                sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
-                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 1 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
+                sqlitedb.execSQL("UPDATE post SET num_like = ? WHERE post_id = ?", arrayOf(like, post_id))
+                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 1 WHERE user_id = ? AND post_id = ?", arrayOf(user_id, post_id))
                 tvLike.text = "$like"
                 btnLike.setBackgroundResource(R.drawable.like_filled)
             }else{
                 like--
-                sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
-                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 0 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
+                sqlitedb.execSQL("UPDATE post SET num_like = ? WHERE post_id = ?", arrayOf(like, post_id))
+                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 0 WHERE user_id = ? AND post_id = ?", arrayOf(user_id, post_id))
                 tvLike.text = "$like"
                 btnLike.setBackgroundResource(R.drawable.like_btn)
             }
         }
+
+        // 뒤로가기 버튼
+        btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
+    // 피드에서 나갈 때, DB 종료
+    override fun onStop() {
+        super.onStop()
+        sqlitedb.close()
+        dbManager.close()
+    }
 
     //하단 네비게이션바 기능 추가
     fun setBottomNavigationView() {
@@ -162,15 +167,7 @@ class ClickFeed : AppCompatActivity() {
                 }
 
                 else -> false
-
             }
-
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sqlitedb.close()
-        dbManager.close()
     }
 }

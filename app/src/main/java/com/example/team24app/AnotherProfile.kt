@@ -10,31 +10,30 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 
+// 다른 사용자의 프로필 화면
 class AnotherProfile : AppCompatActivity() {
     lateinit var btnBack : ImageButton
     lateinit var tvName : TextView
     lateinit var ivProfile : ImageView
     lateinit var tvFollow : TextView
-    lateinit var tvDesc : TextView
-    lateinit var btnAdd : Button
-    lateinit var rvPost : RecyclerView
+    lateinit var tvDescrip : TextView
+    lateinit var btnFollow : Button
+    lateinit var rvProfile : RecyclerView
     lateinit var dbManager: DBManager
     lateinit var sqlitedb: SQLiteDatabase
 
-    //피드에 아이템이 없을 때 보이는 텍스트뷰/이미지뷰
+    // 피드에 아이템이 없을 때 보이는 텍스트뷰/이미지뷰
     lateinit var emptyViewAp: TextView
     lateinit var emptyImageAp: ImageView
 
-    //하단네비뷰
+    // 하단네비뷰
     lateinit var bottomNavigationView: BottomNavigationView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +43,9 @@ class AnotherProfile : AppCompatActivity() {
         tvName = findViewById(R.id.tvUserName)
         ivProfile = findViewById(R.id.ivProfileImage)
         tvFollow = findViewById(R.id.tvFollowCount)
-        tvDesc = findViewById(R.id.tvDescription)
-        btnAdd = findViewById(R.id.btnAddFollow)
-        rvPost = findViewById(R.id.rvPosts)
+        tvDescrip = findViewById(R.id.tvDescription)
+        btnFollow = findViewById(R.id.btnAddFollow)
+        rvProfile = findViewById(R.id.rvPosts)
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.writableDatabase
 
@@ -58,16 +57,16 @@ class AnotherProfile : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         setBottomNavigationView()
 
-        val itemlist = ArrayList<Feed_Square>()
-        val user_id = UserId.userId
-        var num_follow = 0
 
+
+        //다른 유저의 아이디 인텐트로 받아옴
         val intent = intent
         val other_id = intent.getStringExtra("user_id")
-        //다른 유저의 아이디 인텐트로 받아옴
+        val user_id = UserId.userId
+        var num_follow = 0
+        val itemList = ArrayList<Post_Square>()
 
-        var cursor_user : Cursor
-        cursor_user = sqlitedb.rawQuery("SELECT profile, num_follow, intro FROM user WHERE user_id = '"+other_id+"';", null)
+        var cursor_user = sqlitedb.rawQuery("SELECT profile, num_follow, intro FROM user WHERE user_id = ?", arrayOf(other_id))
         //아이디를 이용해 해당 유저의 데이터 가져옴
 
         if(cursor_user.moveToNext()){
@@ -83,75 +82,77 @@ class AnotherProfile : AppCompatActivity() {
 
             tvName.text = other_id
             tvFollow.text = "${num_follow}"
-            tvDesc.text = cursor_user.getString(cursor_user.getColumnIndexOrThrow("intro"))
+            tvDescrip.text = cursor_user.getString(cursor_user.getColumnIndexOrThrow("intro"))
             //테이블에서 상대 프로필 정보를 끌고옴
         }
         cursor_user.close()
 
-        var cursor_feed : Cursor
-        cursor_feed = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = '"+other_id+"' ORDER BY post_id DESC;", null)
+        var cursor_post : Cursor
+        cursor_post = sqlitedb.rawQuery("SELECT post_id, picture FROM post WHERE user_id = ? ORDER BY post_id DESC", arrayOf(other_id))
         //사각형 피드 데이터 가져옴
 
-        while (cursor_feed.moveToNext()){
-            val post_id = cursor_feed.getInt(cursor_feed.getColumnIndexOrThrow("post_id"))
-            val picture = cursor_feed.getString(cursor_feed.getColumnIndexOrThrow("picture"))
-            val item = Feed_Square(post_id, picture)
-            itemlist.add(item)
+        while (cursor_post.moveToNext()){
+            val post_id = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("post_id"))
+            val picture = cursor_post.getString(cursor_post.getColumnIndexOrThrow("picture"))
+            val item = Post_Square(post_id, picture)
+            itemList.add(item)
         }
-        cursor_feed.close()
+        cursor_post.close()
 
-        val rv_adapter = FeedAdapter(itemlist, this)
+        // 리사이클러뷰 어댑터 연결 완료
+        val rv_adapter = SquareAdapter(itemList, this)
         rv_adapter.notifyDataSetChanged()
-        rvPost.adapter=rv_adapter
-        rvPost.layoutManager= GridLayoutManager(this, 3)
-        //리사이클러뷰 적용
+        rvProfile.adapter=rv_adapter
+        rvProfile.layoutManager= GridLayoutManager(this, 3)
 
+        // 메서드 호출
         checkIfRecyclerViewIsEmpty(rv_adapter)
-        //메서드 호출
 
-        btnBack.setOnClickListener {
-            //뒤로가기 버튼
-            onBackPressedDispatcher.onBackPressed()
-        }
 
+        // 팔로우 관계 확인
         var isFollow = false
         val cursor_follow : Cursor
-        cursor_follow = sqlitedb.rawQuery("SELECT * FROM follow WHERE from_id = '"+user_id+"' AND to_id = '"+other_id+"';", null)
+        cursor_follow = sqlitedb.rawQuery("SELECT * FROM follow WHERE from_id = ? AND to_id = ?", arrayOf(user_id, other_id))
         if(cursor_follow.moveToNext()){
             isFollow = true
-            btnAdd.text=getString(R.string.cancel)
+            btnFollow.text=getString(R.string.cancel)
         }
-        //팔로우 관계 확인
-        cursor_follow.close()
 
-        btnAdd.setOnClickListener {
+        // 팔로우 버튼
+        btnFollow.setOnClickListener {
             isFollow = !isFollow
             //팔로우 버튼
             if(isFollow){
                 //팔로우가 아닐때
                 num_follow++
                 tvFollow.text = "${num_follow}"
-                btnAdd.text = getString(R.string.cancel)
-                sqlitedb.execSQL("INSERT INTO follow VALUES ('"+user_id+"', '"+other_id+"');")
-                sqlitedb.execSQL("UPDATE user SET num_follow = "+num_follow+" WHERE user_id = '"+other_id+"';")
+                btnFollow.text = getString(R.string.cancel)
+                sqlitedb.execSQL("INSERT INTO follow VALUES (?, ?)", arrayOf(user_id, other_id))
+                sqlitedb.execSQL("UPDATE user SET num_follow = ? WHERE user_id = ?", arrayOf(num_follow, other_id))
             }else{
                 //팔로우일 때
                 num_follow--
                 tvFollow.text = "${num_follow}"
-                btnAdd.text = getString(R.string.follow)
-                sqlitedb.execSQL("DELETE FROM follow WHERE from_id = '${user_id}' AND to_id = '${other_id}';")
-                sqlitedb.execSQL("UPDATE user SET num_follow = "+num_follow+" WHERE user_id = '"+other_id+"';")
+                btnFollow.text = getString(R.string.follow)
+                sqlitedb.execSQL("DELETE FROM follow WHERE from_id = ? AND to_id = ?", arrayOf(user_id, other_id))
+                sqlitedb.execSQL("UPDATE user SET num_follow = ? WHERE user_id = ?", arrayOf(num_follow, other_id))
             }
+        }
+
+        // 뒤로가기 버튼
+        btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
+    // 화면을 벗어날 시 db 종료
     override fun onStop() {
         super.onStop()
         sqlitedb.close()
         dbManager.close()
     }
 
-    //리사이클러뷰 아이템x 메서드
+    // 리사이클러뷰 아이템x 메서드
     private fun checkIfRecyclerViewIsEmpty(adapter: RecyclerView.Adapter<*>){
         if(adapter.itemCount == 0){
             emptyViewAp.visibility = View.VISIBLE
@@ -162,7 +163,7 @@ class AnotherProfile : AppCompatActivity() {
         }
     }
 
-    //하단 네비게이션바 기능 추가
+    // 하단 네비게이션바 기능 추가
     fun setBottomNavigationView() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -185,9 +186,7 @@ class AnotherProfile : AppCompatActivity() {
                 }
 
                 else -> false
-
             }
-
         }
     }
 }

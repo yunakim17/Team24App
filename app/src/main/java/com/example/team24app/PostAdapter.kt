@@ -2,8 +2,6 @@ package com.example.team24app
 
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -14,17 +12,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
 
-//Feed라는 이름의 data class타입의 arrayList 사용
-class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : RecyclerView.Adapter<PostAdapter.ViewHolder>(){
+// home의 리사이클러뷰 어댑터
+class PostAdapter(val itemList: MutableList<Post>, val context : Context) : RecyclerView.Adapter<PostAdapter.ViewHolder>(){
+    //  뷰 생성
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): PostAdapter.ViewHolder {
-        //뷰 생성
         val view = LayoutInflater.from(parent.context).inflate(R.layout.post_item, parent, false)
         return ViewHolder(view)
     }
 
+    // 내용 입력(리사이클 될때마다 입력됨)
     override fun onBindViewHolder(holder: PostAdapter.ViewHolder, position: Int) {
         // 뷰에 내용 입력(리사이클 될때마다 입력됨)
 
@@ -59,14 +58,14 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
             isClieked = !isClieked
             if(isClieked){
                 like++
-                sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
-                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 1 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
+                sqlitedb.execSQL("UPDATE post SET num_like = ? WHERE post_id = ?", arrayOf(like, post_id))
+                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 1 WHERE user_id = ? AND post_id = ?", arrayOf(user_id, post_id))
                 holder.tvLike.text = "$like"
                 holder.btnLike.setBackgroundResource(R.drawable.like_filled)
             }else{
                 like--
-                sqlitedb.execSQL("UPDATE post SET num_like = ${like} WHERE post_id = ${post_id};")
-                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 0 WHERE user_id = '${user_id}' AND post_id = ${post_id};")
+                sqlitedb.execSQL("UPDATE post SET num_like = ? WHERE post_id = ?", arrayOf(like, post_id))
+                sqlitedb.execSQL("UPDATE clickLike SET isClicked = 0 WHERE user_id = ? AND ?", arrayOf(user_id, post_id))
                 holder.tvLike.text = "$like"
                 holder.btnLike.setBackgroundResource(R.drawable.like_btn)
             }
@@ -80,6 +79,7 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
         return itemList.count()
     }
 
+    // 리사이클러뷰의 위젯 선언 및 연결
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var ivProfile = itemView.findViewById<ImageView>(R.id.ivProfilePic)
         var tvName = itemView.findViewById<TextView>(R.id.tvUserName)
@@ -93,9 +93,9 @@ class PostAdapter(val itemList: ArrayList<Post>, val context : Context) : Recycl
         var btnLike = itemView.findViewById<ImageButton>(R.id.btnLike)
 
         init {
-            //뷰 클릭 리스너
+            // 포스트를 클릭하면 해당 clickPost로 이동
             itemView.setOnClickListener {
-                val intent = Intent(context, ClickFeed::class.java)
+                val intent = Intent(context, ClickPost::class.java)
                 intent.putExtra("post_id", itemList[adapterPosition].post_id)
                 context.startActivity(intent)
             }
