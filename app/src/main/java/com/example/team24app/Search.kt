@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,20 +51,21 @@ class Search : AppCompatActivity() {
     private fun reSearch(){
         dbManager = DBManager(this, "appDB", null, 1)
         sqlitedb = dbManager.readableDatabase
+
         val search_id = edtSearch.text.toString()
-        val itemList = ArrayList<User>()
+        val itemlist = ArrayList<User>()
 
         if(search_id.isNotBlank()){
             var cursor : Cursor
             val user_id = UserId.userId
-            cursor = sqlitedb.rawQuery("SELECT user_id, profile FROM user WHERE user_id like ? AND user_id != ?", arrayOf(search_id, user_id))
+            cursor = sqlitedb.rawQuery("SELECT user_id, profile FROM user WHERE user_id like '%${search_id}%' AND user_id != ?", arrayOf(user_id))
             //검색한 문자열을 포함하고 있는 아이디를 추출
 
             while(cursor.moveToNext()){
                 val user_id = cursor.getString(cursor.getColumnIndexOrThrow("user_id"))
                 val profile = cursor.getString(cursor.getColumnIndexOrThrow("profile"))
                 val item = User(profile, user_id)
-                itemList.add(item)
+                itemlist.add(item)
             }
             cursor.close()
         }
@@ -71,11 +73,11 @@ class Search : AppCompatActivity() {
         dbManager.close()
         //테이블에서 아이디를 검색해 itemlist에 내용을 넣음
 
-        // 리사이클러뷰 적용
-        val rv_adapter = ProfileAdpater(itemList, this)
+        val rv_adapter = ProfileAdpater(itemlist, this)
         rv_adapter.notifyDataSetChanged()
         rvProfile.adapter = rv_adapter
         rvProfile.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        //리사이클러뷰 적용
     }
 
     // 하단 네비게이션바 기능 추가

@@ -48,7 +48,7 @@ class Home : AppCompatActivity() {
             edtSearch.setText("")
 
             val intent = Intent(this, Search::class.java)
-            intent.putExtra("search_id", edtSearch.text.toString())
+            intent.putExtra("search_id", search_id)
             startActivity(intent)
         }
     }

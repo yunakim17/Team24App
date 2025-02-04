@@ -87,7 +87,7 @@ class ClickPost : AppCompatActivity() {
             val uri_picture = Uri.fromFile(File(picture))
             like = cursor_post.getInt(cursor_post.getColumnIndexOrThrow("num_like"))
 
-            ivProfile.setImageURI(uri_picture)
+            ivPicture.setImageURI(uri_picture)
             tvLike.text = "$like"
             tvDescrip.text = cursor_post.getString(cursor_post.getColumnIndexOrThrow("comment"))
             tvDate.text = cursor_post.getString(cursor_post.getColumnIndexOrThrow("date"))
